@@ -30,7 +30,7 @@ public class MiPanel extends JPanel {
                 datos2.add(new JTextField(30));
                 
                 Box datos3 = Box.createHorizontalBox();
-                JLabel tituloLabel3 = new JLabel("Fecha de Nacimiento");
+                JLabel tituloLabel3 = new JLabel("Edad");
                 datos3.add(tituloLabel3);
                 datos3.add(Box.createHorizontalStrut(10));
                 datos3.add(new JTextField(30));
@@ -42,7 +42,7 @@ public class MiPanel extends JPanel {
                 datos4.add(new JTextField(30));
                 
                 Box datos5 = Box.createHorizontalBox();
-                JLabel tituloLabel5 = new JLabel("NO SE QUE DATO FALTA XD");
+                JLabel tituloLabel5 = new JLabel("Sexo");
                 datos5.add(tituloLabel5);
                 datos5.add(Box.createHorizontalStrut(10));
                 datos5.add(new JTextField(30));
