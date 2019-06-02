@@ -1,4 +1,4 @@
-package basico.jdbc;
+package basico.jdbc.Basics;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -11,11 +11,15 @@ public class DBManager {
 	private static final String DB_URL = "jdbc:hsqldb:file:sql/testdb;shutdown=true;hsqldb.default_table_type=cached";
 	private static final String DB_USERNAME = "sa";
 	private static final String DB_PASSWORD = "";
+	private static DBManager instance;
+	
+	private DBManager()
+	{}
 
 	public static Connection connect() {
 		Connection c = null;
 			//Class.forName(DB_DRIVER);
-		try {
+		try {  
 			c = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
 			c.setAutoCommit(false);
 		} catch (SQLException e) {
@@ -25,8 +29,17 @@ public class DBManager {
 
 		return c;
 	}
+	
+	public static DBManager getInstance()
+	{
+		if(instance == null)
+		{
+			instance = new DBManager();
+		}
+		return instance;
+	}
 
-	public static void shutdown() throws Exception {
+	public void shutdown() throws Exception {
 		Connection c = connect();
 		Statement s = c.createStatement();
 		s.execute("SHUTDOWN");

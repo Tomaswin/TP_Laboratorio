@@ -5,6 +5,7 @@ package basico.jdbc;
 import java.awt.BorderLayout;
  
 import javax.swing.Box;
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -19,7 +20,6 @@ public class MiPanelEditar extends JPanel {
  
         private void initUI(String titulo) {
                 setLayout(new BorderLayout());
-        
                 
                 Box datos1 = Box.createHorizontalBox();
                 JLabel tituloLabel = new JLabel("Usuario:");
@@ -34,7 +34,7 @@ public class MiPanelEditar extends JPanel {
                 datos2.add(new JTextField(30));
                 
                 Box datos3 = Box.createHorizontalBox();
-                JLabel tituloLabel3 = new JLabel("Edad");
+                JLabel tituloLabel3 = new JLabel("EDAD");
                 datos3.add(tituloLabel3);
                 datos3.add(Box.createHorizontalStrut(10));
                 datos3.add(new JTextField(30));
@@ -46,7 +46,7 @@ public class MiPanelEditar extends JPanel {
                 datos4.add(new JTextField(30));
                 
                 Box datos5 = Box.createHorizontalBox();
-                JLabel tituloLabel5 = new JLabel("Sexo");
+                JLabel tituloLabel5 = new JLabel("SEXO");
                 datos5.add(tituloLabel5);
                 datos5.add(Box.createHorizontalStrut(10));
                 datos5.add(new JTextField(30));
