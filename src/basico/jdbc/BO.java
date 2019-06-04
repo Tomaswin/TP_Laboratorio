@@ -28,7 +28,7 @@ public class BO {
 	public void eliminarUsuario(Usuarios user)
 	{
 		if(validarUsuario(user)) {
-			userDao.eliminarUsuario(user);
+			userDao.eliminarUsuario(user.getUser());
 		} else {
 			//Mostrar error ya que esta intentado borrar un usuario que no existe
 		}

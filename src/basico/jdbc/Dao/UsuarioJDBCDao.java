@@ -63,12 +63,12 @@ public class UsuarioJDBCDao implements UsuarioDao {
 	}
 
 	@Override
-	public void eliminarUsuario(Usuarios user) {
+	public void eliminarUsuario(String user) {
 		Connection c = DBManager.getInstance().connect();
 
 		try {
 			Statement s = c.createStatement();
-			String sql = "DELETE FROM usuarios WHERE user = '" + user.getUser() + "'";
+			String sql = "DELETE FROM usuarios WHERE user = '" + user + "'";
 			s.executeUpdate(sql);
 			c.commit();
 		} catch (SQLException e) {
@@ -98,10 +98,7 @@ public class UsuarioJDBCDao implements UsuarioDao {
 			ResultSet rs = s.executeQuery(sql);
 			
 			while(rs.next()) {
-				Usuarios user = new Usuarios();
-				user.setUser(rs.getString("user"));
-				user.setUser(rs.getString("email"));
-				user.setUser(rs.getString("pass"));
+				Usuarios user = new Usuarios(rs.getString("user"), rs.getString("email"), rs.getString("pass"));
 				listUser.add(user);
 			}
 		} catch (SQLException e) {

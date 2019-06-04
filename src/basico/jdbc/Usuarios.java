@@ -5,6 +5,12 @@ public class Usuarios
     private String user;
     private String email;
     private String password;
+    
+    public Usuarios(String user, String email, String password) {
+    	this.user = user;
+    	this.email = email;
+    	this.password = password;
+    }
 
     public String getUser()
     {
