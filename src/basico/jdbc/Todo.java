@@ -27,9 +27,7 @@ public class Todo extends JPanel implements ActionListener {
         private void initUI(String titulo) {
                 setLayout(new BorderLayout());
                 
-                String[] columnNames = {"Nombre", "Apellido", "Email", "Password","DNI", "Sexo"}; 
-                Object [][] data = {{"Completar",   "Completar", "Completar","Completar" ,"Completar","Completar"}};
-                JTable tabla = new JTable(data, columnNames);             
+                    
                 
                 Box datos1 = Box.createHorizontalBox();
                 JLabel tituloLabel = new JLabel("Nombre");
