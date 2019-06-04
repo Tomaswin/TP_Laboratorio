@@ -1,7 +1,6 @@
 package basico.jdbc;
-
-import basico.jdbc.Basics.TableManager;
-import basico.jdbc.Dao.UsuarioJDBCDao;
+import basico.jdbc.Dao.*;
+import basico.jdbc.Basics.*;
 
 public class Main {
 
@@ -13,18 +12,46 @@ public class Main {
 		
 		UsuarioJDBCDao dm = new UsuarioJDBCDao();
 		
-		String username = "Test";
-		String email = "Test@test.com";
-		String pass = "test123";
+		String user = "user1";
+		String email = "email1";
+		String pass = "pass1";
 		
-		Usuarios user = new Usuarios();
-		user.setUser(username);
-		user.setEmail(email);
-		user.setPassword(pass);
+		Usuarios usuario = new Usuarios(user,email,pass);
 		
-		dm.crearUsuario(user);
+		dm.crearUsuario(usuario);
 		
-		//Si desactivo el dropUser probar si usuario existente funciona
+		String userx = "userx";
+		String emailx = "emailx";
+		String passx = "passx";
+		
+		Usuarios usuarioX = new Usuarios(userx,emailx,passx);
+		
+		dm.crearUsuario(usuarioX);
+		
+		System.out.println("Ahora voy a mostrar el usuario recien cargado");
+		String unUser = "user1";
+		dm.m(unUser);
+		System.out.println("---------");
+		
+		System.out.println("Voy a modificar un usuario");
+		String user2 = "user2";
+		String email2 = "email2";
+		String pass2 = "pass2";
+		dm.actualizaUsuario(user2, email2, pass2);
+		
+		System.out.println("Tengo estos usuarios:");
+		dm.muestraTodosLosusuarios();
+		System.out.println("------");
+		
+		
+		System.out.println("Voy a borrar un usuario segun su username");
+		String user3 = "use2";
+		dm.eliminarUsuario(user3);
+		
+		System.out.println("Tengo estos usuarios:");
+		dm.traerTodosUsuarios();
+		System.out.println("------");
+		
 		tm.dropUserTable();
 		
 	}
