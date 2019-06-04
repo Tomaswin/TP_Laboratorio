@@ -22,40 +22,59 @@ public class MiPanelEditar extends JPanel {
         
                 
                 Box datos1 = Box.createHorizontalBox();
-                JLabel tituloLabel = new JLabel("Usuario:");
+                JLabel tituloLabel = new JLabel("Nombre:");
                 datos1.add(tituloLabel);
                 datos1.add(Box.createHorizontalStrut(10));
-                datos1.add(new JTextField(30));
+                JTextField nombre = new JTextField (30);
+                datos1.add(nombre);
+               
                
                 Box datos2 = Box.createHorizontalBox();
                 JLabel tituloLabel2 = new JLabel("Apellido");
                 datos2.add(tituloLabel2);
                 datos2.add(Box.createHorizontalStrut(10));
-                datos2.add(new JTextField(30));
+                JTextField apellido = new JTextField (30);
+                datos2.add(apellido);
+               
                 
                 Box datos3 = Box.createHorizontalBox();
-                JLabel tituloLabel3 = new JLabel("Edad");
+                JLabel tituloLabel3 = new JLabel("Email");
                 datos3.add(tituloLabel3);
                 datos3.add(Box.createHorizontalStrut(10));
-                datos3.add(new JTextField(30));
+                JTextField email = new JTextField (30);
+                datos3.add(email);
                 
                 Box datos4 = Box.createHorizontalBox();
-                JLabel tituloLabel4 = new JLabel("DNI");
+                JLabel tituloLabel4 = new JLabel("password");
                 datos4.add(tituloLabel4);
                 datos4.add(Box.createHorizontalStrut(10));
-                datos4.add(new JTextField(30));
+                JTextField password = new JTextField (30);
+                datos4.add(password);
+               
                 
                 Box datos5 = Box.createHorizontalBox();
-                JLabel tituloLabel5 = new JLabel("Sexo");
+                JLabel tituloLabel5 = new JLabel("DNI");
                 datos5.add(tituloLabel5);
                 datos5.add(Box.createHorizontalStrut(10));
-                datos5.add(new JTextField(30));
+                JTextField dni = new JTextField (30);
+                datos5.add(dni);
+               
+                
+                Box datos6 = Box.createHorizontalBox();
+                JLabel tituloLabel6 = new JLabel("Sexo");
+                datos6.add(tituloLabel6);
+                datos6.add(Box.createHorizontalStrut(10));
+                JTextField sexo = new JTextField (30);
+                datos6.add(sexo);
+                
                
                 Box botonera = Box.createHorizontalBox();
                 botonera.add(Box.createHorizontalGlue());
-                botonera.add(new JButton("OK"));
+                JButton btnok = new JButton("Ok");
+                botonera.add(btnok);
                 botonera.add(Box.createHorizontalStrut(10));
-                botonera.add(new JButton("Cancel"));
+                JButton btncncl = new JButton("Cancel");
+                botonera.add(btncncl);
                
                 Box vertical = Box.createVerticalBox();
                 vertical.add(Box.createVerticalStrut(20)); 
@@ -68,6 +87,8 @@ public class MiPanelEditar extends JPanel {
                 vertical.add(datos4);
                 vertical.add(Box.createVerticalStrut(20));
                 vertical.add(datos5);
+                vertical.add(Box.createVerticalStrut(50));
+                vertical.add(datos6);
                 vertical.add(Box.createVerticalStrut(50));
                 vertical.add(botonera);
                

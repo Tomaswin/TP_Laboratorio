@@ -57,7 +57,7 @@ public class PrincipalFrame extends JFrame{
 		opcion3.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				System.out.println("FALTA!");
+				handler.mostrarEliminarUsuario();
 			}
 		});
 		nombreBarra.add(opcion3);

@@ -16,12 +16,17 @@ public class Handler {
 	}
 
 	public void mostrarAltaUsuario() {
-		frame.cambiarPanel(new MiPanel("Por qu� le pongo titulo? :P"));
+		frame.cambiarPanel(new MiPanel(""));
 		frame.setVisible(true);
 	}
 	
 	public void mostrarEditarUsuario() {
-		frame.cambiarPanel(new MiPanelEditar("Por qu� le pongo titulo? :P"));
+		frame.cambiarPanel(new MiPanelEditar(""));
+		frame.setVisible(true);
+	}
+	
+	public void mostrarEliminarUsuario() {
+		frame.cambiarPanel(new MiPanelEliminar(""));
 		frame.setVisible(true);
 	}
 
