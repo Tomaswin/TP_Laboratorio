@@ -7,12 +7,17 @@ import basico.jdbc.Dao.*;
 public class BO {
 	UsuarioJDBCDao userJDBC = new UsuarioJDBCDao();
 	
-	public void crearUsuario(Usuarios user)
+	public int crearUsuario(Usuarios user)
 	{
-		if(!validarUsuario(user)) {
-			userJDBC.crearUsuario(user);
-		} else {
-			//Mostrar error porque los ingresos de datos son iguales a otro usuario existente	
+		if(camposCompletos(user)) {
+			if(!validarUsuario(user)) {
+				userJDBC.crearUsuario(user);
+				return 0;
+			} else {
+				return 1;
+			}
+		}else {
+			return 2;
 		}
 	}
 	
@@ -45,6 +50,35 @@ public class BO {
 	{
 		boolean correcto;
 		correcto = userJDBC.usuarioExistente(user);
+		
+		return correcto;
+	}
+	
+	public boolean camposCompletos(Usuarios user) {
+		boolean correcto = true;
+		if(user.getNombre().toString().equals("")) {
+			correcto = false;
+		}
+		
+		if(user.getApellido().toString().equals("")) {
+			correcto = false;
+		}
+		
+		if(user.getPassword().toString().equals("")) {
+			correcto = false;
+		}
+		
+		if(user.getEmail().toString().equals("")) {
+			correcto = false;
+		}
+		
+		if(user.getDni().toString().equals("")) {
+			correcto = false;
+		}
+		
+		if(user.getSexo().toString().equals("")) {
+			correcto = false;
+		}
 		
 		return correcto;
 	}

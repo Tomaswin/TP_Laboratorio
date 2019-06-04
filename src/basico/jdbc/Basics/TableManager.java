@@ -5,7 +5,7 @@ import java.sql.Statement;
 
 public class TableManager {
 
-	public void createUserTable() {
+	public static void createUserTable() {
 
 		Connection c = DBManager.connect();
 		
