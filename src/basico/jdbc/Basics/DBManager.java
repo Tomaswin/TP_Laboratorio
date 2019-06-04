@@ -11,39 +11,32 @@ public class DBManager {
 	private static final String DB_URL = "jdbc:hsqldb:file:sql/testdb;shutdown=true;hsqldb.default_table_type=cached";
 	private static final String DB_USERNAME = "sa";
 	private static final String DB_PASSWORD = "";
-	private static DBManager instance;
 	
-	private DBManager()
-	{}
-
 	public static Connection connect() {
 		Connection c = null;
-			//Class.forName(DB_DRIVER);
-		try {  
-			c = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
+		try {
+			Class.forName(DB_DRIVER);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			System.exit(0);
+		}
+		try {
+			c =  DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
 			c.setAutoCommit(false);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.exit(0);
 		}
-
+		
+		
 		return c;
 	}
 	
-	public static DBManager getInstance()
-	{
-		if(instance == null)
-		{
-			instance = new DBManager();
-		}
-		return instance;
-	}
-
-	public void shutdown() throws Exception {
+	public static void shutdown() throws Exception {
 		Connection c = connect();
 		Statement s = c.createStatement();
 		s.execute("SHUTDOWN");
 		c.close();
 	}
-
+	
 }

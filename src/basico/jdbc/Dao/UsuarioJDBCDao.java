@@ -13,7 +13,7 @@ public class UsuarioJDBCDao implements UsuarioDao {
 
 	@Override
 	public void crearUsuario(Usuarios user) {
-		Connection c = DBManager.getInstance().connect();
+		Connection c = DBManager.connect();
 
 		try {
 			Statement s = c.createStatement();
@@ -39,7 +39,7 @@ public class UsuarioJDBCDao implements UsuarioDao {
 
 	@Override
 	public void modificarUsuario(Usuarios user) {
-		Connection c = DBManager.getInstance().connect();
+		Connection c = DBManager.connect();
 		try {
 			Statement s = c.createStatement();
 			String sql = "UPDATE usuarios set nombre = '" + user.getNombre() + "', apellido = '" + user.getApellido() + "', email = '" + user.getEmail() + "', password = '" + user.getPassword() + "', dni = '" + user.getDni() + "', sexo = '" + user.getSexo() + "' WHERE user = '" + user.getEmail() + "'";
@@ -64,7 +64,7 @@ public class UsuarioJDBCDao implements UsuarioDao {
 
 	@Override
 	public void eliminarUsuario(String email) {
-		Connection c = DBManager.getInstance().connect();
+		Connection c = DBManager.connect();
 
 		try {
 			Statement s = c.createStatement();
@@ -90,7 +90,7 @@ public class UsuarioJDBCDao implements UsuarioDao {
 
 	@Override
 	public ArrayList<Usuarios> traerTodosUsuarios() {
-		Connection c = DBManager.getInstance().connect();
+		Connection c = DBManager.connect();
 		ArrayList<Usuarios> listUser = new ArrayList<Usuarios>();
 		try {
 			Statement s = c.createStatement();
@@ -119,14 +119,14 @@ public class UsuarioJDBCDao implements UsuarioDao {
 
 @Override
 public boolean usuarioExistente(Usuarios user) {
-	Connection c = DBManager.getInstance().connect();
+	Connection c = DBManager.connect();
 	Boolean exists = false;
 	try {
 		Statement s = c.createStatement();
-		String sql = "SELECT * FROM usuarios WHERE email = '" + user.getEmail() + "'";
+		String sql = "SELECT * FROM usuarios WHERE email = '" + user.getEmail().toString() + "'";
 		ResultSet rs = s.executeQuery(sql);
 		
-		if(rs.getFetchSize() == 1)
+		if(rs.next())
 		{
 			exists = true;
 		}

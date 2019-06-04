@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
  
@@ -18,6 +19,7 @@ public class MiPanel extends JPanel implements ActionListener {
 	JTextField password;
 	JTextField dni;
 	JTextField sexo;
+	int creacion;
 	
 	public MiPanel(String titulo) {
                 initUI(titulo);
@@ -70,11 +72,11 @@ public class MiPanel extends JPanel implements ActionListener {
                               
                 Box botonera = Box.createHorizontalBox();
                 botonera.add(Box.createHorizontalGlue());
-                JButton ok = new JButton("ok");
+                JButton ok = new JButton("Create");
                 ok.addActionListener(this);
                 botonera.add(ok);
                 botonera.add(Box.createHorizontalStrut(10));
-                JButton cancel = new JButton("cancel");
+                JButton cancel = new JButton("Cancel");
                 cancel.addActionListener(this);
                 botonera.add(cancel);
                
@@ -98,9 +100,28 @@ public class MiPanel extends JPanel implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-            Usuarios user = new Usuarios(nombre.getText(),apellido.getText(), email.getText(), password.getText(), dni.getText(), sexo.getText());
-			BO businnesObject = new BO();
-			businnesObject.crearUsuario(user);
+			if(e.getActionCommand().equals("Create")) {
+				Usuarios user = new Usuarios(nombre.getText(),apellido.getText(), email.getText(), password.getText(), dni.getText(), sexo.getText());
+				BO businnesObject = new BO();
+				creacion = businnesObject.crearUsuario(user);
+				if(creacion == 0) {
+					JOptionPane.showMessageDialog(null, "El usuario fue creado correctamente", "Alert", JOptionPane.INFORMATION_MESSAGE);
+				} else if(creacion == 1) {
+					JOptionPane.showMessageDialog(null, "El usuario esta repetido por lo que no lo agregamos", "Alert", JOptionPane.ERROR_MESSAGE);
+				} else {
+					JOptionPane.showMessageDialog(null, "Revise los datos ingresados", "Alert", JOptionPane.ERROR_MESSAGE);
+				}
+				nombre.setText("");
+				apellido.setText("");
+				email.setText("");
+				password.setText("");
+				dni.setText("");
+				sexo.setText("");
+			} else {
+				setVisible(false); //you can't see me!
+				//System.exit(0);
+			}
+            
 		}
        
 }
