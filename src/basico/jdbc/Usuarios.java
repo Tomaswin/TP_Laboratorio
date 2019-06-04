@@ -2,24 +2,40 @@ package basico.jdbc;
 
 public class Usuarios
  {
-    private String user;
+    private String nombre;
+    private String apellido;
     private String email;
     private String password;
+    private String dni;
+    private String sexo;
     
-    public Usuarios(String user, String email, String password) {
-    	this.user = user;
+    public Usuarios(String nombre, String apellido, String email, String password, String dni, String sexo) {
+    	this.nombre = nombre;
+    	this.apellido = apellido;
     	this.email = email;
     	this.password = password;
+    	this.dni = dni;
+    	this.sexo = sexo;
     }
 
-    public String getUser()
+    public String getNombre()
     {
-        return user;
+        return nombre;
     }
 
-    public void setUser(String user)
+    public void setNombre(String nombre)
     {
-        this.user = user;
+        this.nombre = nombre;
+    }
+    
+    public String getApellido()
+    {
+        return nombre;
+    }
+
+    public void setApellido(String apellido)
+    {
+        this.apellido = apellido;
     }
 
     public String getEmail()
@@ -41,10 +57,31 @@ public class Usuarios
     {
         this.password = password;
     }
+    
+    public String getDni()
+    {
+        return dni;
+    }
+
+    public void setDni(String dni)
+    {
+        this.dni = dni;
+    }
+    
+    public String getSexo()
+    {
+        return sexo;
+    }
+
+    public void setSexo(String sexo)
+    {
+        this.sexo = sexo;
+    }
 
     public String toString()
     {
-        return "Usuario: " + this.user + " Email: " + this.email + " Password: " + this.password;
+        return "Nombre: " + this.nombre + "Apellido: " + this.apellido + " Email: " + this.email + " Password: " + this.password + " Dni: "
+        		+ this.dni + " Sexo: " + this.sexo;
     }
 
  }

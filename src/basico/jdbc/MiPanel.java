@@ -1,15 +1,18 @@
 package basico.jdbc;
  
 import java.awt.BorderLayout;
- 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
  
-public class MiPanel extends JPanel {
+public class MiPanel extends JPanel implements ActionListener {
  //ESTE ES EL ALTA USUARIO
+	Usuarios user;
         public MiPanel(String titulo) {
                 initUI(titulo);
         }
@@ -21,37 +24,55 @@ public class MiPanel extends JPanel {
                 JLabel tituloLabel = new JLabel("Nombre");
                 datos1.add(tituloLabel);
                 datos1.add(Box.createHorizontalStrut(10));
-                datos1.add(new JTextField(30));
+                JTextField nombre = new JTextField(30);
+                datos1.add(nombre);
                
                 Box datos2 = Box.createHorizontalBox();
                 JLabel tituloLabel2 = new JLabel("Apellido");
                 datos2.add(tituloLabel2);
                 datos2.add(Box.createHorizontalStrut(10));
-                datos2.add(new JTextField(30));
+                JTextField apellido = new JTextField(30);
+                datos2.add(apellido);
                 
                 Box datos3 = Box.createHorizontalBox();
-                JLabel tituloLabel3 = new JLabel("Edad");
+                JLabel tituloLabel3 = new JLabel("Email");
                 datos3.add(tituloLabel3);
                 datos3.add(Box.createHorizontalStrut(10));
-                datos3.add(new JTextField(30));
+                JTextField email = new JTextField(30);
+                datos3.add(email);
+                
+                Box datos6 = Box.createHorizontalBox();
+                JLabel tituloLabel6 = new JLabel("Email");
+                datos3.add(tituloLabel3);
+                datos3.add(Box.createHorizontalStrut(10));
+                JTextField password = new JTextField(30);
+                datos3.add(password);
                 
                 Box datos4 = Box.createHorizontalBox();
                 JLabel tituloLabel4 = new JLabel("DNI");
                 datos4.add(tituloLabel4);
                 datos4.add(Box.createHorizontalStrut(10));
-                datos4.add(new JTextField(30));
+                JTextField dni = new JTextField(30);
+                datos4.add(dni);
                 
                 Box datos5 = Box.createHorizontalBox();
                 JLabel tituloLabel5 = new JLabel("Sexo");
                 datos5.add(tituloLabel5);
                 datos5.add(Box.createHorizontalStrut(10));
-                datos5.add(new JTextField(30));
+                JTextField sexo = new JTextField(30);
+                datos5.add(sexo);
                
+                user = new Usuarios(nombre.getText(),apellido.getText(), email.getText(), password.getText(), dni.getText(), sexo.getText());
+                
                 Box botonera = Box.createHorizontalBox();
                 botonera.add(Box.createHorizontalGlue());
-                botonera.add(new JButton("OK"));
+                JButton ok = new JButton("ok");
+                ok.addActionListener(this);
+                botonera.add(ok);
                 botonera.add(Box.createHorizontalStrut(10));
-                botonera.add(new JButton("Cancel"));
+                JButton cancel = new JButton("cancel");
+                cancel.addActionListener(this);
+                botonera.add(cancel);
                
                 Box vertical = Box.createVerticalBox();
                 vertical.add(datos1);
@@ -70,5 +91,11 @@ public class MiPanel extends JPanel {
                
                                                             
         }
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			BO businnesObject = new BO();
+			businnesObject.crearUsuario(user);
+		}
        
 }

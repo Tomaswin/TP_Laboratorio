@@ -17,7 +17,7 @@ public class UsuarioJDBCDao implements UsuarioDao {
 
 		try {
 			Statement s = c.createStatement();
-			String sql = "INSERT INTO usuarios (user, email, pass) VALUES ('" + user.getUser() + "', '" + user.getEmail() + "', '" + user.getPassword() + "')";
+			String sql = "INSERT INTO usuarios (nombre, apellido, email, password, dni, sexo) VALUES ('" + user.getNombre() + "', '" + user.getApellido() + "', '" + user.getEmail() + "', '" + user.getPassword() + "', '" + user.getDni() + "', '" + user.getSexo() + "')";
 			s.executeUpdate(sql);
 			c.commit();
 		} catch (SQLException e) {
@@ -42,7 +42,7 @@ public class UsuarioJDBCDao implements UsuarioDao {
 		Connection c = DBManager.getInstance().connect();
 		try {
 			Statement s = c.createStatement();
-			String sql = "UPDATE usuarios set email = '" + user.getEmail() + "', pass = '" + user.getPassword() + "' WHERE user = '" + user.getUser() + "'";
+			String sql = "UPDATE usuarios set nombre = '" + user.getNombre() + "', apellido = '" + user.getApellido() + "', email = '" + user.getEmail() + "', password = '" + user.getPassword() + "', dni = '" + user.getDni() + "', sexo = '" + user.getSexo() + "' WHERE user = '" + user.getEmail() + "'";
 			s.executeUpdate(sql);
 			c.commit();
 		} catch (SQLException e) {
@@ -63,12 +63,12 @@ public class UsuarioJDBCDao implements UsuarioDao {
 	}
 
 	@Override
-	public void eliminarUsuario(String user) {
+	public void eliminarUsuario(String email) {
 		Connection c = DBManager.getInstance().connect();
 
 		try {
 			Statement s = c.createStatement();
-			String sql = "DELETE FROM usuarios WHERE user = '" + user + "'";
+			String sql = "DELETE FROM usuarios WHERE email = '" + email + "'";
 			s.executeUpdate(sql);
 			c.commit();
 		} catch (SQLException e) {
@@ -98,7 +98,7 @@ public class UsuarioJDBCDao implements UsuarioDao {
 			ResultSet rs = s.executeQuery(sql);
 			
 			while(rs.next()) {
-				Usuarios user = new Usuarios(rs.getString("user"), rs.getString("email"), rs.getString("pass"));
+				Usuarios user = new Usuarios(rs.getString("nombre"), rs.getString("apellido"), rs.getString("email"), rs.getString("password"), rs.getString("dni"), rs.getString("sexo"));
 				listUser.add(user);
 			}
 		} catch (SQLException e) {
@@ -123,7 +123,7 @@ public boolean usuarioExistente(Usuarios user) {
 	Boolean exists = false;
 	try {
 		Statement s = c.createStatement();
-		String sql = "SELECT * FROM usuarios WHERE user = '" + user.getUser() + "', pass = '" + user.getPassword() + "'";
+		String sql = "SELECT * FROM usuarios WHERE email = '" + user.getEmail() + "'";
 		ResultSet rs = s.executeQuery(sql);
 		
 		if(rs.getFetchSize() == 1)
