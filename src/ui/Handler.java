@@ -1,6 +1,6 @@
 package ui;
 
-import basico.jdbc.MiPanel;
+import basico.jdbc.*;
 import basico.jdbc.PrincipalFrame;
 
 public class Handler {
@@ -16,7 +16,13 @@ public class Handler {
 	}
 
 	public void mostrarAltaUsuario() {
-		frame.cambiarPanel(new MiPanel("Por qué le pongo titulo? :P"));
+		frame.cambiarPanel(new MiPanel("Por quï¿½ le pongo titulo? :P"));
+		frame.setVisible(true);
+	}
+	
+	public void mostrarEditarUsuario() {
+		frame.cambiarPanel(new MiPanelEditar("Por quï¿½ le pongo titulo? :P"));
+		frame.setVisible(true);
 	}
 
 }

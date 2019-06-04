@@ -49,7 +49,7 @@ public class PrincipalFrame extends JFrame{
 		opcion2.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				System.out.println("FALTA!");
+				handler.mostrarEditarUsuario();
 			}
 		});
 		nombreBarra.add(opcion2);
