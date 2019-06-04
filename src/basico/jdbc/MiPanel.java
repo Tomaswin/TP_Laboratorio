@@ -90,6 +90,8 @@ public class MiPanel extends JPanel implements ActionListener {
                 vertical.add(datos4);
                 vertical.add(Box.createVerticalStrut(20));
                 vertical.add(datos5);
+                vertical.add(Box.createVerticalStrut(20));
+                vertical.add(datos6);
                 vertical.add(Box.createVerticalStrut(50));
                 vertical.add(botonera);
                
@@ -119,7 +121,6 @@ public class MiPanel extends JPanel implements ActionListener {
 				sexo.setText("");
 			} else {
 				setVisible(false); //you can't see me!
-				//System.exit(0);
 			}
             
 		}

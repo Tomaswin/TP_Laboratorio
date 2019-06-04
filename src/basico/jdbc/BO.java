@@ -21,12 +21,17 @@ public class BO {
 		}
 	}
 	
-	public void modificarUsuario(Usuarios user)
+	public int modificarUsuario(Usuarios user)
 	{
-		if(validarUsuario(user)) {
-			userJDBC.modificarUsuario(user);
-		} else {
-			//Mostrar error ya que esta intentando modificar un usuario que no existe, ofrecemos crearlo?
+		if(camposCompletos(user)) {
+			if(validarUsuario(user)) {
+				userJDBC.modificarUsuario(user);
+				return 0;
+			} else {
+				return 1;
+			}
+		}else {
+			return 2;
 		}
 	}
 	
