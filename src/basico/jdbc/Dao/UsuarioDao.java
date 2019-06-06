@@ -9,6 +9,6 @@ public interface UsuarioDao {
 	public void crearUsuario(Usuarios user);
 	public void modificarUsuario(Usuarios user);
 	public void eliminarUsuario(String email);
-	public ArrayList<Usuarios> traerTodosUsuarios();
-	public boolean usuarioExistente(Usuarios user);
+	public void traerTodosUsuarios(ArrayList<Usuarios> user);
+	public boolean usuarioExistente(String email);
 }

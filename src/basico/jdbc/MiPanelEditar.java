@@ -3,16 +3,26 @@ package basico.jdbc;
 
 
 import java.awt.BorderLayout;
- 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
  
-public class MiPanelEditar extends JPanel {
+public class MiPanelEditar extends JPanel  implements ActionListener {
  //ESTE ES EL EDITAR USUARIO
+	JTextField nombre;
+	JTextField apellido;
+	JTextField email;
+	JTextField password;
+	JTextField dni;
+	JTextField sexo;
+	int modificacion;
         public MiPanelEditar(String titulo) {
                 initUI(titulo);
         }
@@ -25,7 +35,7 @@ public class MiPanelEditar extends JPanel {
                 JLabel tituloLabel = new JLabel("Nombre:");
                 datos1.add(tituloLabel);
                 datos1.add(Box.createHorizontalStrut(10));
-                JTextField nombre = new JTextField (30);
+                nombre = new JTextField (30);
                 datos1.add(nombre);
                
                
@@ -33,7 +43,7 @@ public class MiPanelEditar extends JPanel {
                 JLabel tituloLabel2 = new JLabel("Apellido");
                 datos2.add(tituloLabel2);
                 datos2.add(Box.createHorizontalStrut(10));
-                JTextField apellido = new JTextField (30);
+                apellido = new JTextField (30);
                 datos2.add(apellido);
                
                 
@@ -41,14 +51,14 @@ public class MiPanelEditar extends JPanel {
                 JLabel tituloLabel3 = new JLabel("Email");
                 datos3.add(tituloLabel3);
                 datos3.add(Box.createHorizontalStrut(10));
-                JTextField email = new JTextField (30);
+                email = new JTextField (30);
                 datos3.add(email);
                 
                 Box datos4 = Box.createHorizontalBox();
                 JLabel tituloLabel4 = new JLabel("password");
                 datos4.add(tituloLabel4);
                 datos4.add(Box.createHorizontalStrut(10));
-                JTextField password = new JTextField (30);
+                password = new JTextField (30);
                 datos4.add(password);
                
                 
@@ -56,7 +66,7 @@ public class MiPanelEditar extends JPanel {
                 JLabel tituloLabel5 = new JLabel("DNI");
                 datos5.add(tituloLabel5);
                 datos5.add(Box.createHorizontalStrut(10));
-                JTextField dni = new JTextField (30);
+                dni = new JTextField (30);
                 datos5.add(dni);
                
                 
@@ -64,16 +74,18 @@ public class MiPanelEditar extends JPanel {
                 JLabel tituloLabel6 = new JLabel("Sexo");
                 datos6.add(tituloLabel6);
                 datos6.add(Box.createHorizontalStrut(10));
-                JTextField sexo = new JTextField (30);
+                sexo = new JTextField (30);
                 datos6.add(sexo);
                 
                
                 Box botonera = Box.createHorizontalBox();
                 botonera.add(Box.createHorizontalGlue());
-                JButton btnok = new JButton("Ok");
+                JButton btnok = new JButton("Modify");
+                btnok.addActionListener(this);
                 botonera.add(btnok);
                 botonera.add(Box.createHorizontalStrut(10));
                 JButton btncncl = new JButton("Cancel");
+                btncncl.addActionListener(this);
                 botonera.add(btncncl);
                
                 Box vertical = Box.createVerticalBox();
@@ -96,5 +108,30 @@ public class MiPanelEditar extends JPanel {
                
                                                             
         }
+        
+        @Override
+		public void actionPerformed(ActionEvent e) {
+			if(e.getActionCommand().equals("Modify")) {
+				Usuarios user = new Usuarios(nombre.getText(),apellido.getText(), email.getText(), password.getText(), dni.getText(), sexo.getText());
+				BO businnesObject = new BO();
+				modificacion = businnesObject.modificarUsuario(user);
+				if(modificacion == 0) {
+					JOptionPane.showMessageDialog(null, "El usuario fue modificado correctamente", "Alert", JOptionPane.INFORMATION_MESSAGE);
+				} else if(modificacion == 1) {
+					JOptionPane.showMessageDialog(null, "El usuario no existe", "Alert", JOptionPane.ERROR_MESSAGE);
+				} else {
+					JOptionPane.showMessageDialog(null, "Revise los datos ingresados", "Alert", JOptionPane.ERROR_MESSAGE);
+				}
+				nombre.setText("");
+				apellido.setText("");
+				email.setText("");
+				password.setText("");
+				dni.setText("");
+				sexo.setText("");
+			} else {
+				setVisible(false); //you can't see me!
+			}
+            
+		}
        
 }

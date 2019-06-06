@@ -31,7 +31,7 @@ public class Handler {
 	}
 	
 	public void mostrarTodo() {
-		frame.cambiarPanel(new Todo(""));
+		frame.cambiarPanel(new MiPanelTodos(""));
 		frame.setVisible(true);
 	}
 

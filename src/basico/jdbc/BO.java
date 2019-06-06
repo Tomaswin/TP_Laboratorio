@@ -10,7 +10,7 @@ public class BO {
 	public int crearUsuario(Usuarios user)
 	{
 		if(camposCompletos(user)) {
-			if(!validarUsuario(user)) {
+			if(!validarUsuario(user.getEmail().toString())) {
 				userJDBC.crearUsuario(user);
 				return 0;
 			} else {
@@ -24,7 +24,7 @@ public class BO {
 	public int modificarUsuario(Usuarios user)
 	{
 		if(camposCompletos(user)) {
-			if(validarUsuario(user)) {
+			if(validarUsuario(user.getEmail().toString())) {
 				userJDBC.modificarUsuario(user);
 				return 0;
 			} else {
@@ -35,26 +35,24 @@ public class BO {
 		}
 	}
 	
-	public void eliminarUsuario(Usuarios user)
+	public int eliminarUsuario(String email)
 	{
-		if(validarUsuario(user)) {
-			userJDBC.eliminarUsuario(user.getEmail());
+		if(validarUsuario(email)) {
+			userJDBC.eliminarUsuario(email.toString());
+			return 0;
 		} else {
-			//Mostrar error ya que esta intentado borrar un usuario que no existe
+			return 1;
 		}
 	}
 	
-	public ArrayList<Usuarios> traerTodos(Usuarios user) {
-		ArrayList<Usuarios> allUsers;
-		allUsers = userJDBC.traerTodosUsuarios();
-		
-		return allUsers;
+	public void traerTodos(ArrayList<Usuarios> user) {
+		userJDBC.traerTodosUsuarios(user);
 	}
 	
-	public boolean validarUsuario(Usuarios user)
+	public boolean validarUsuario(String email)
 	{
 		boolean correcto;
-		correcto = userJDBC.usuarioExistente(user);
+		correcto = userJDBC.usuarioExistente(email);
 		
 		return correcto;
 	}
