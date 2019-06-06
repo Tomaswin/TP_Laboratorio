@@ -33,7 +33,7 @@ public class TableManager {
 
 	}
 	
-	public void dropUserTable() {
+	public static void dropUserTable() {
 
 		Connection c = DBManager.connect();
 		

@@ -103,7 +103,7 @@ public class MiPanel extends JPanel implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if(e.getActionCommand().equals("Create")) {
-				Usuarios user = new Usuarios(nombre.getText(),apellido.getText(), email.getText(), password.getText(), dni.getText(), sexo.getText());
+				Usuarios user = new Usuarios(nombre.getText(),apellido.getText(), email.getText(), password.getText(),Integer.valueOf(dni.getText()), sexo.getText());
 				BO businnesObject = new BO();
 				creacion = businnesObject.crearUsuario(user);
 				if(creacion == 0) {

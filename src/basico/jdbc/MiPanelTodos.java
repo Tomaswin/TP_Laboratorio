@@ -41,7 +41,7 @@ public class MiPanelTodos extends JPanel implements ActionListener {
                 
                 for(int i=0; i < usuarios.size(); i++) {
                 	Object[] data = { usuarios.get(i).getNombre().toString(), usuarios.get(i).getApellido().toString(), usuarios.get(i).getEmail().toString(),
-                			usuarios.get(i).getPassword().toString(), usuarios.get(i).getDni().toString(), usuarios.get(i).getSexo().toString()};
+                			usuarios.get(i).getPassword().toString(), usuarios.get(i).getDni(), usuarios.get(i).getSexo().toString()};
                 	
                     tableModel.addRow(data);
                 }

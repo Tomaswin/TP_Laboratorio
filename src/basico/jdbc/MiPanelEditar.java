@@ -112,7 +112,7 @@ public class MiPanelEditar extends JPanel  implements ActionListener {
         @Override
 		public void actionPerformed(ActionEvent e) {
 			if(e.getActionCommand().equals("Modify")) {
-				Usuarios user = new Usuarios(nombre.getText(),apellido.getText(), email.getText(), password.getText(), dni.getText(), sexo.getText());
+				Usuarios user = new Usuarios(nombre.getText(),apellido.getText(), email.getText(), password.getText(), Integer.valueOf(dni.getText()), sexo.getText());
 				BO businnesObject = new BO();
 				modificacion = businnesObject.modificarUsuario(user);
 				if(modificacion == 0) {

@@ -6,10 +6,10 @@ public class Usuarios
     private String apellido;
     private String email;
     private String password;
-    private String dni;
+    private int dni;
     private String sexo;
     
-    public Usuarios(String nombre, String apellido, String email, String password, String dni, String sexo) {
+    public Usuarios(String nombre, String apellido, String email, String password, int dni, String sexo) {
     	this.nombre = nombre;
     	this.apellido = apellido;
     	this.email = email;
@@ -58,12 +58,12 @@ public class Usuarios
         this.password = password;
     }
     
-    public String getDni()
+    public int getDni()
     {
         return dni;
     }
 
-    public void setDni(String dni)
+    public void setDni(int dni)
     {
         this.dni = dni;
     }

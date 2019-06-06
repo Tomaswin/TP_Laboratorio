@@ -75,7 +75,7 @@ public class BO {
 			correcto = false;
 		}
 		
-		if(user.getDni().toString().equals("")) {
+		if(user.getDni() == 0) {
 			correcto = false;
 		}
 		
