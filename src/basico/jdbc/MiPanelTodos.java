@@ -39,14 +39,37 @@ public class MiPanelTodos extends JPanel implements ActionListener {
                 Object[] dataTitle = {"Nombre", "Apellido", "Email", "Password", "DNI", "Sexo"};
                 tableModel.addRow(dataTitle);
                 
+                Box datos1 = Box.createHorizontalBox();
+                datos1.add(Box.createHorizontalGlue());
+                JLabel tituloLabel = new JLabel("Nombre");
+                datos1.add(tituloLabel);
+                datos1.add(Box.createHorizontalGlue());
+                JLabel tituloLabe2 = new JLabel("Apellido");
+                datos1.add(tituloLabe2);
+                datos1.add(Box.createHorizontalGlue());
+                JLabel tituloLabe3 = new JLabel("Email");
+                datos1.add(tituloLabe3);
+                datos1.add(Box.createHorizontalGlue());
+                JLabel tituloLabe4 = new JLabel("Password");
+                datos1.add(tituloLabe4);
+                datos1.add(Box.createHorizontalGlue());
+                JLabel tituloLabe5 = new JLabel("DNI");
+                datos1.add(tituloLabe5);
+                datos1.add(Box.createHorizontalGlue());
+                JLabel tituloLabe6 = new JLabel("Sexo");
+                datos1.add(tituloLabe6);
+               
+                
+   
+               
+                
                 for(int i=0; i < usuarios.size(); i++) {
                 	Object[] data = { usuarios.get(i).getNombre().toString(), usuarios.get(i).getApellido().toString(), usuarios.get(i).getEmail().toString(),
                 			usuarios.get(i).getPassword().toString(), usuarios.get(i).getDni().toString(), usuarios.get(i).getSexo().toString()};
                 	
                     tableModel.addRow(data);
                 }
-                
-                
+                         
                 Box botonera = Box.createHorizontalBox();
                 botonera.add(Box.createHorizontalGlue());
                 botonera.add(Box.createHorizontalStrut(10));
@@ -56,6 +79,7 @@ public class MiPanelTodos extends JPanel implements ActionListener {
                
                 Box vertical = Box.createVerticalBox();
                 vertical.add(Box.createVerticalStrut(50));
+                vertical.add(datos1);
                 vertical.add(tableLayout);
                 vertical.add(botonera);
                
