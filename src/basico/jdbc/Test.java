@@ -11,6 +11,7 @@ import ui.*;
 public class Test{
 	
         public static void main(String[] args) {
+        	TableManager.dropUserTable();
         	TableManager.createUserTable();
         	Handler handler = new Handler();
         	PrincipalFrame x = new PrincipalFrame(handler);

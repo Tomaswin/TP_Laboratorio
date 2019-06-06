@@ -102,23 +102,30 @@ public class MiPanel extends JPanel implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			int dniField;
 			if(e.getActionCommand().equals("Create")) {
-				Usuarios user = new Usuarios(nombre.getText(),apellido.getText(), email.getText(), password.getText(), dni.getText(), sexo.getText());
-				BO businnesObject = new BO();
-				creacion = businnesObject.crearUsuario(user);
-				if(creacion == 0) {
-					JOptionPane.showMessageDialog(null, "El usuario fue creado correctamente", "Alert", JOptionPane.INFORMATION_MESSAGE);
-				} else if(creacion == 1) {
-					JOptionPane.showMessageDialog(null, "El usuario esta repetido por lo que no lo agregamos", "Alert", JOptionPane.ERROR_MESSAGE);
-				} else {
-					JOptionPane.showMessageDialog(null, "Revise los datos ingresados", "Alert", JOptionPane.ERROR_MESSAGE);
+				try {// if is number
+					dniField = Integer.valueOf(dni.getText());
+					Usuarios user = new Usuarios(nombre.getText(),apellido.getText(), email.getText(), password.getText(),dniField, sexo.getText());
+					BO businnesObject = new BO();
+					creacion = businnesObject.crearUsuario(user);
+					if(creacion == 0) {
+						JOptionPane.showMessageDialog(null, "El usuario fue creado correctamente", "Alert", JOptionPane.INFORMATION_MESSAGE);
+					} else if(creacion == 1) {
+						JOptionPane.showMessageDialog(null, "El usuario esta repetido por lo que no lo agregamos", "Alert", JOptionPane.ERROR_MESSAGE);
+					} else {
+						JOptionPane.showMessageDialog(null, "Revise los datos ingresados", "Alert", JOptionPane.ERROR_MESSAGE);
+					}
+					nombre.setText("");
+					apellido.setText("");
+					email.setText("");
+					password.setText("");
+					dni.setText("");
+					sexo.setText("");
+				
+				} catch (NumberFormatException ee) {
+					JOptionPane.showMessageDialog(null, "El dato DNI tiene que ser un numero", "Alert", JOptionPane.ERROR_MESSAGE);
 				}
-				nombre.setText("");
-				apellido.setText("");
-				email.setText("");
-				password.setText("");
-				dni.setText("");
-				sexo.setText("");
 			} else {
 				setVisible(false); //you can't see me!
 			}
