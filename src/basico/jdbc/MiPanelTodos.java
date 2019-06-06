@@ -36,8 +36,7 @@ public class MiPanelTodos extends JPanel implements ActionListener {
                 JTable table = new JTable(tableModel);
                 tableLayout.add(table);
                 
-                Object[] dataTitle = {"Nombre", "Apellido", "Email", "Password", "DNI", "Sexo"};
-                tableModel.addRow(dataTitle);
+               
                 
                 Box datos1 = Box.createHorizontalBox();
                 datos1.add(Box.createHorizontalGlue());
