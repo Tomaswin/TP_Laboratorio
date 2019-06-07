@@ -1,6 +1,6 @@
 package basico.jdbc;
 
-public class Usuarios
+public class Usuario
  {
     private String nombre;
     private String apellido;
@@ -9,13 +9,17 @@ public class Usuarios
     private int dni;
     private String sexo;
     
-    public Usuarios(String nombre, String apellido, String email, String password, int dni, String sexo) {
+    public Usuario(String nombre, String apellido, String email, String password, int dni, String sexo) {
     	this.nombre = nombre;
     	this.apellido = apellido;
     	this.email = email;
     	this.password = password;
     	this.dni = dni;
     	this.sexo = sexo;
+    }
+    
+    public Usuario(String email) {
+    	this.email = email;
     }
 
     public String getNombre()

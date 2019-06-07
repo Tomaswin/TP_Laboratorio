@@ -4,15 +4,18 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 
-import basico.jdbc.Usuarios;
+import basico.jdbc.Usuario;
 import basico.jdbc.Basics.DBManager;
 
 
 public class UsuarioJDBCDao implements UsuarioDao {
 
+	
 	@Override
-	public void crearUsuario(Usuarios user) {
+	public void crearUsuario(Usuario user) {
+		DBManager.getInstance();
 		Connection c = DBManager.connect();
 
 		try {
@@ -38,7 +41,8 @@ public class UsuarioJDBCDao implements UsuarioDao {
 
 
 	@Override
-	public void modificarUsuario(Usuarios user) {
+	public void modificarUsuario(Usuario user) {
+		DBManager.getInstance();
 		Connection c = DBManager.connect();
 		try {
 			Statement s = c.createStatement();
@@ -63,12 +67,13 @@ public class UsuarioJDBCDao implements UsuarioDao {
 	}
 
 	@Override
-	public void eliminarUsuario(String email) {
+	public void eliminarUsuario(Usuario user) {
+		DBManager.getInstance();
 		Connection c = DBManager.connect();
 
 		try {
 			Statement s = c.createStatement();
-			String sql = "DELETE FROM usuarios WHERE email = '" + email + "'";
+			String sql = "DELETE FROM usuarios WHERE email = '" + user.getEmail() + "'";
 			s.executeUpdate(sql);
 			c.commit();
 		} catch (SQLException e) {
@@ -89,7 +94,9 @@ public class UsuarioJDBCDao implements UsuarioDao {
 	}
 
 	@Override
-	public void traerTodosUsuarios(ArrayList<Usuarios> listaUsuarios) {
+	public List<Usuario> traerTodosUsuarios() {
+		List<Usuario> listaUsuarios = new ArrayList<Usuario>(); //subtyping
+		DBManager.getInstance();
 		Connection c = DBManager.connect();
 		try {
 			Statement s = c.createStatement();
@@ -97,7 +104,7 @@ public class UsuarioJDBCDao implements UsuarioDao {
 			ResultSet rs = s.executeQuery(sql);
 			
 			while(rs.next()) {
-				Usuarios user = new Usuarios(rs.getString("nombre"), rs.getString("apellido"), rs.getString("email"), rs.getString("password"), rs.getInt("dni"), rs.getString("sexo"));
+				Usuario user = new Usuario(rs.getString("nombre"), rs.getString("apellido"), rs.getString("email"), rs.getString("password"), rs.getInt("dni"), rs.getString("sexo"));
 				listaUsuarios.add(user);
 			}
 		} catch (SQLException e) {
@@ -113,15 +120,18 @@ public class UsuarioJDBCDao implements UsuarioDao {
 				//no hago nada
 			}
 		}
+		
+		return listaUsuarios;
 	}
 
 @Override
-public boolean usuarioExistente(String email) {
+public boolean usuarioExistente(Usuario user) {
+	DBManager.getInstance();
 	Connection c = DBManager.connect();
 	Boolean exists = false;
 	try {
 		Statement s = c.createStatement();
-		String sql = "SELECT * FROM usuarios WHERE email = '" + email.toString() + "'";
+		String sql = "SELECT * FROM usuarios WHERE email = '" + user.getEmail().toString() + "'";
 		ResultSet rs = s.executeQuery(sql);
 		
 		if(rs.next())

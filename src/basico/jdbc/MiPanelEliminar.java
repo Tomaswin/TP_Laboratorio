@@ -12,12 +12,15 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import ui.Handler;
  
 public class MiPanelEliminar extends JPanel implements ActionListener {
  //ESTE ES EL ELIMINAR USUARIO
 	JTextField email;
-	int eliminacion;
-        public MiPanelEliminar(String titulo) {
+	Handler handler;
+        public MiPanelEliminar(String titulo, Handler handler) {
+        		this.handler = handler;
                 initUI(titulo);
         }
  
@@ -55,13 +58,8 @@ public class MiPanelEliminar extends JPanel implements ActionListener {
         @Override
 		public void actionPerformed(ActionEvent e) {
 			if(e.getActionCommand().equals("Eliminate")) {
-				BO businnesObject = new BO();
-				eliminacion = businnesObject.eliminarUsuario(email.getText());
-				if(eliminacion == 0) {
-					JOptionPane.showMessageDialog(null, "El usuario fue eliminado correctamente", "Alert", JOptionPane.INFORMATION_MESSAGE);
-				} else {
-					JOptionPane.showMessageDialog(null, "El usuario no existe", "Alert", JOptionPane.ERROR_MESSAGE);
-				}
+				Usuario user = new Usuario(email.getText());
+				handler.eliminarUsuario(user);
 				email.setText("");
 			} else {
 				setVisible(false); //you can't see me!

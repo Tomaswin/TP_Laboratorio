@@ -1,63 +1,65 @@
 package basico.jdbc;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import Exceptions.Excepciones;
 import basico.jdbc.Dao.*;
 
 public class BO {
 	UsuarioJDBCDao userJDBC = new UsuarioJDBCDao();
 	
-	public int crearUsuario(Usuarios user)
+	public void crearUsuario(Usuario user) throws Excepciones
 	{
 		if(camposCompletos(user)) {
-			if(!validarUsuario(user.getEmail().toString())) {
+			if(!validarUsuario(user)) {
 				userJDBC.crearUsuario(user);
-				return 0;
-			} else {
-				return 1;
-			}
-		}else {
-			return 2;
+				} else {
+				throw new Excepciones("Usuario Existente");
+				}
+		} else {
+			throw new Excepciones("Campos Incompletos");
 		}
 	}
 	
-	public int modificarUsuario(Usuarios user)
+	public void modificarUsuario(Usuario user) throws Excepciones
 	{
 		if(camposCompletos(user)) {
-			if(validarUsuario(user.getEmail().toString())) {
+			if(validarUsuario(user)) {
 				userJDBC.modificarUsuario(user);
-				return 0;
 			} else {
-				return 1;
+				throw new Excepciones("Usuario Inexistente");
 			}
 		}else {
-			return 2;
+			throw new Excepciones("Campos Incompletos");
 		}
 	}
 	
-	public int eliminarUsuario(String email)
+	public void eliminarUsuario(Usuario user) throws Excepciones
 	{
-		if(validarUsuario(email)) {
-			userJDBC.eliminarUsuario(email.toString());
-			return 0;
+		if(validarUsuario(user)) {
+			userJDBC.eliminarUsuario(user);
 		} else {
-			return 1;
+			throw new Excepciones("Usuario Inexistente");
 		}
 	}
 	
-	public void traerTodos(ArrayList<Usuarios> user) {
-		userJDBC.traerTodosUsuarios(user);
+	public List<Usuario> traerTodos() {
+		List<Usuario> listaUsuarios = new ArrayList<Usuario>();
+		listaUsuarios = userJDBC.traerTodosUsuarios();
+		
+		return listaUsuarios;
 	}
 	
-	public boolean validarUsuario(String email)
+	public boolean validarUsuario(Usuario user)
 	{
 		boolean correcto;
-		correcto = userJDBC.usuarioExistente(email);
+		correcto = userJDBC.usuarioExistente(user);
 		
 		return correcto;
 	}
 	
-	public boolean camposCompletos(Usuarios user) {
+	public boolean camposCompletos(Usuario user) {
 		boolean correcto = true;
 		if(user.getNombre().toString().equals("")) {
 			correcto = false;

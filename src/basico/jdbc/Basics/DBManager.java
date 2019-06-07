@@ -12,6 +12,8 @@ public class DBManager {
 	private static final String DB_USERNAME = "sa";
 	private static final String DB_PASSWORD = "";
 	
+	public static DBManager instance;
+	
 	public static Connection connect() {
 		Connection c = null;
 		try {
@@ -30,6 +32,13 @@ public class DBManager {
 		
 		
 		return c;
+	}
+	
+	public static DBManager getInstance(){
+        if (instance == null) {
+           instance = new DBManager();
+        }
+        return instance;
 	}
 	
 	public static void shutdown() throws Exception {

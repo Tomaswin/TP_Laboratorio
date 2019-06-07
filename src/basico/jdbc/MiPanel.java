@@ -10,6 +10,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import ui.Handler;
  
 public class MiPanel extends JPanel implements ActionListener {
  //ESTE ES EL ALTA USUARIO
@@ -20,9 +22,11 @@ public class MiPanel extends JPanel implements ActionListener {
 	JTextField dni;
 	JTextField sexo;
 	int creacion;
+	Handler handler;
 	
-	public MiPanel(String titulo) {
-                initUI(titulo);
+	public MiPanel(String titulo, Handler handler) {
+			this.handler = handler;
+			initUI(titulo);
         }
  
         private void initUI(String titulo) {
@@ -106,16 +110,9 @@ public class MiPanel extends JPanel implements ActionListener {
 			if(e.getActionCommand().equals("Create")) {
 				try {// if is number
 					dniField = Integer.valueOf(dni.getText());
-					Usuarios user = new Usuarios(nombre.getText(),apellido.getText(), email.getText(), password.getText(),dniField, sexo.getText());
-					BO businnesObject = new BO();
-					creacion = businnesObject.crearUsuario(user);
-					if(creacion == 0) {
-						JOptionPane.showMessageDialog(null, "El usuario fue creado correctamente", "Alert", JOptionPane.INFORMATION_MESSAGE);
-					} else if(creacion == 1) {
-						JOptionPane.showMessageDialog(null, "El usuario esta repetido por lo que no lo agregamos", "Alert", JOptionPane.ERROR_MESSAGE);
-					} else {
-						JOptionPane.showMessageDialog(null, "Revise los datos ingresados", "Alert", JOptionPane.ERROR_MESSAGE);
-					}
+					Usuario user = new Usuario(nombre.getText(),apellido.getText(), email.getText(), password.getText(),dniField, sexo.getText());
+					handler.crearUsuario(user);
+					
 					nombre.setText("");
 					apellido.setText("");
 					email.setText("");

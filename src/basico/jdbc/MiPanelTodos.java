@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.JButton;
@@ -22,10 +23,10 @@ public class MiPanelTodos extends JPanel implements ActionListener {
  
         private void initUI(String titulo) {
                 setLayout(new BorderLayout());
-                ArrayList<Usuarios> usuarios = new ArrayList<Usuarios>();
+                List<Usuario> usuarios = new ArrayList<Usuario>();
                
                 BO businessObject = new BO();
-                businessObject.traerTodos(usuarios);
+                usuarios = businessObject.traerTodos();
                 
                 Box tableLayout = Box.createHorizontalBox();
                 
@@ -36,39 +37,27 @@ public class MiPanelTodos extends JPanel implements ActionListener {
                 JTable table = new JTable(tableModel);
                 tableLayout.add(table);
                 
-               
-                
-                Box datos1 = Box.createHorizontalBox();
-                datos1.add(Box.createHorizontalGlue());
-                JLabel tituloLabel = new JLabel("Nombre");
-                datos1.add(tituloLabel);
-                datos1.add(Box.createHorizontalGlue());
-                JLabel tituloLabe2 = new JLabel("Apellido");
-                datos1.add(tituloLabe2);
-                datos1.add(Box.createHorizontalGlue());
-                JLabel tituloLabe3 = new JLabel("Email");
-                datos1.add(tituloLabe3);
-                datos1.add(Box.createHorizontalGlue());
-                JLabel tituloLabe4 = new JLabel("Password");
-                datos1.add(tituloLabe4);
-                datos1.add(Box.createHorizontalGlue());
-                JLabel tituloLabe5 = new JLabel("DNI");
-                datos1.add(tituloLabe5);
-                datos1.add(Box.createHorizontalGlue());
-                JLabel tituloLabe6 = new JLabel("Sexo");
-                datos1.add(tituloLabe6);
-               
-                
-   
-               
-                
                 for(int i=0; i < usuarios.size(); i++) {
                 	Object[] data = { usuarios.get(i).getNombre().toString(), usuarios.get(i).getApellido().toString(), usuarios.get(i).getEmail().toString(),
                 			usuarios.get(i).getPassword().toString(), usuarios.get(i).getDni(), usuarios.get(i).getSexo().toString()};
                 	
                     tableModel.addRow(data);
                 }
-                         
+               
+                Box datos1 = Box.createHorizontalBox();
+                JLabel tituloLabel = new JLabel("Nombre");
+                datos1.add(tituloLabel);
+                JLabel tituloLabe2 = new JLabel("Apellido");
+                datos1.add(tituloLabe2);
+                JLabel tituloLabe3 = new JLabel("Email");
+                datos1.add(tituloLabe3);
+                JLabel tituloLabe4 = new JLabel("Password");
+                datos1.add(tituloLabe4);
+                JLabel tituloLabe5 = new JLabel("DNI");
+                datos1.add(tituloLabe5);
+                JLabel tituloLabe6 = new JLabel("Sexo");
+                datos1.add(tituloLabe6);
+     
                 Box botonera = Box.createHorizontalBox();
                 botonera.add(Box.createHorizontalGlue());
                 botonera.add(Box.createHorizontalStrut(10));

@@ -13,6 +13,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
+
+import ui.Handler;
  
 public class MiPanelEditar extends JPanel  implements ActionListener {
  //ESTE ES EL EDITAR USUARIO
@@ -23,7 +25,8 @@ public class MiPanelEditar extends JPanel  implements ActionListener {
 	JTextField dni;
 	JTextField sexo;
 	int modificacion;
-        public MiPanelEditar(String titulo) {
+	Handler handler;
+        public MiPanelEditar(String titulo, Handler handler) {
                 initUI(titulo);
         }
  
@@ -115,16 +118,9 @@ public class MiPanelEditar extends JPanel  implements ActionListener {
 			if(e.getActionCommand().equals("Modify")) {
 				try {// if is number
 					dniField = Integer.valueOf(dni.getText());
-					Usuarios user = new Usuarios(nombre.getText(),apellido.getText(), email.getText(), password.getText(), Integer.valueOf(dni.getText()), sexo.getText());
-					BO businnesObject = new BO();
-					modificacion = businnesObject.modificarUsuario(user);
-					if(modificacion == 0) {
-						JOptionPane.showMessageDialog(null, "El usuario fue modificado correctamente", "Alert", JOptionPane.INFORMATION_MESSAGE);
-					} else if(modificacion == 1) {
-						JOptionPane.showMessageDialog(null, "El usuario no existe", "Alert", JOptionPane.ERROR_MESSAGE);
-					} else {
-						JOptionPane.showMessageDialog(null, "Revise los datos ingresados", "Alert", JOptionPane.ERROR_MESSAGE);
-					}
+					Usuario user = new Usuario(nombre.getText(),apellido.getText(), email.getText(), password.getText(),dniField, sexo.getText());
+					handler.editarUsuario(user);
+					
 					nombre.setText("");
 					apellido.setText("");
 					email.setText("");
