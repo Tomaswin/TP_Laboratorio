@@ -6,15 +6,16 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import Exceptions.Excepciones;
 import basico.jdbc.Usuario;
 import basico.jdbc.Basics.DBManager;
 
 
 public class UsuarioJDBCDao implements UsuarioDao {
-
+//Exceptiones en SQL para que el usuario este al tanto de lo que sucede
 	
 	@Override
-	public void crearUsuario(Usuario user) {
+	public void crearUsuario(Usuario user) throws Excepciones{
 		DBManager.getInstance();
 		Connection c = DBManager.connect();
 
@@ -26,22 +27,22 @@ public class UsuarioJDBCDao implements UsuarioDao {
 		} catch (SQLException e) {
 			try {
 				c.rollback();
-				e.printStackTrace();
+				throw new Excepciones("Problema con SQL, volviendo atras...");
 			} catch (SQLException e1) {
-				e1.printStackTrace();
+				throw new Excepciones("Problema con SQL, no se pudo volver atras");
 			}
 		} finally {
 			try {
 				c.close();
 			} catch (SQLException e1) {
-				e1.printStackTrace();
+				throw new Excepciones("Problema con SQL");
 			}
 		}
 	}
 
 
 	@Override
-	public void modificarUsuario(Usuario user) {
+	public void modificarUsuario(Usuario user) throws Excepciones{
 		DBManager.getInstance();
 		Connection c = DBManager.connect();
 		try {
@@ -52,22 +53,22 @@ public class UsuarioJDBCDao implements UsuarioDao {
 		} catch (SQLException e) {
 			try {
 				c.rollback();
-				e.printStackTrace();
+				throw new Excepciones("Problema con SQL, volviendo atras...");
 			} catch (SQLException e1) {
-				e1.printStackTrace();
+				throw new Excepciones("Problema con SQL, no se pudo volver atras");
 			}
 		} finally {
 			try {
 				c.close();
 			} catch (SQLException e1) {
-				e1.printStackTrace();
+				throw new Excepciones("Problema con SQL");
 			}
 		}
 		
 	}
 
 	@Override
-	public void eliminarUsuario(Usuario user) {
+	public void eliminarUsuario(Usuario user) throws Excepciones{
 		DBManager.getInstance();
 		Connection c = DBManager.connect();
 
@@ -79,22 +80,22 @@ public class UsuarioJDBCDao implements UsuarioDao {
 		} catch (SQLException e) {
 			try {
 				c.rollback();
-				e.printStackTrace();
+				throw new Excepciones("Problema con SQL, volviendo atras...");
 			} catch (SQLException e1) {
-				//no hago nada
+				throw new Excepciones("Problema con SQL, no se pudo volver atras");
 			}
 		} finally {
 			try {
 				c.close();
 			} catch (SQLException e1) {
-				//no hago nada
+				throw new Excepciones("Problema con SQL");
 			}
 		}
 		
 	}
 
 	@Override
-	public List<Usuario> traerTodosUsuarios() {
+	public List<Usuario> traerTodosUsuarios() throws Excepciones{
 		List<Usuario> listaUsuarios = new ArrayList<Usuario>(); //subtyping
 		DBManager.getInstance();
 		Connection c = DBManager.connect();
@@ -110,14 +111,15 @@ public class UsuarioJDBCDao implements UsuarioDao {
 		} catch (SQLException e) {
 			try {
 				c.rollback();
+				throw new Excepciones("Problema con SQL, volviendo atras...");
 			} catch (SQLException e1) {
-				//no hago nada
+				throw new Excepciones("Problema con SQL, no se pudo volver atras");
 			}
 		} finally {
 			try {
 				c.close();
 			} catch (SQLException e1) {
-				//no hago nada
+				throw new Excepciones("Problema con SQL");
 			}
 		}
 		
@@ -125,7 +127,7 @@ public class UsuarioJDBCDao implements UsuarioDao {
 	}
 
 @Override
-public boolean usuarioExistente(Usuario user) {
+public boolean usuarioExistente(Usuario user) throws Excepciones{
 	DBManager.getInstance();
 	Connection c = DBManager.connect();
 	Boolean exists = false;
@@ -142,14 +144,15 @@ public boolean usuarioExistente(Usuario user) {
 	} catch (SQLException e) {
 		try {
 			c.rollback();
+			throw new Excepciones("Problema con SQL, volviendo atras...");
 		} catch (SQLException e1) {
-			//asegurarnos de que mostremos un error o evitemos que se rompa
+			throw new Excepciones("Problema con SQL, no se pudo volver atras");
 		}
 	} finally {
 		try {
 			c.close();
 		} catch (SQLException e1) {
-			//asegurarnos de que mostremos un error o evitemos que se rompa
+			throw new Excepciones("Problema con SQL");
 		}
 	}
 	return exists;

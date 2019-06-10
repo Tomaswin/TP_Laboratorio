@@ -8,7 +8,7 @@ import basico.jdbc.Dao.*;
 
 public class BO {
 	UsuarioJDBCDao userJDBC = new UsuarioJDBCDao();
-	
+	//con otro throw levanto las de sql al handler
 	public void crearUsuario(Usuario user) throws Excepciones
 	{
 		if(camposCompletos(user)) {
