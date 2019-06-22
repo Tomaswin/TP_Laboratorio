@@ -1,20 +1,13 @@
 package basico.jdbc;
  
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.JFrame;
-
 import basico.jdbc.Basics.TableManager;
-import ui.*;
+import ui.Handler;
  
 public class Test{
 	
         public static void main(String[] args) {
         	TableManager.dropUserTable();
         	TableManager.createUserTable();
-        	Handler handler = new Handler();
-        	PrincipalFrame x = new PrincipalFrame(handler);
-        	x.setVisible(true);
+        	new Handler().init();
       }
 }

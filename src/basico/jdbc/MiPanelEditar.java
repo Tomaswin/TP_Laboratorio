@@ -24,7 +24,6 @@ public class MiPanelEditar extends JPanel  implements ActionListener {
 	JTextField password;
 	JTextField dni;
 	JTextField sexo;
-	int modificacion;
 	Handler handler;
         public MiPanelEditar(String titulo, Handler handler) {
                 initUI(titulo);

@@ -6,7 +6,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import Exceptions.Excepciones;
+import Exceptions.BancoException;
 import basico.jdbc.Usuario;
 import basico.jdbc.Basics.DBManager;
 
@@ -15,7 +15,7 @@ public class UsuarioJDBCDao implements UsuarioDao {
 //Exceptiones en SQL para que el usuario este al tanto de lo que sucede
 	
 	@Override
-	public void crearUsuario(Usuario user) throws Excepciones{
+	public void crearUsuario(Usuario user) throws BancoException{
 		DBManager.getInstance();
 		Connection c = DBManager.connect();
 
@@ -27,22 +27,22 @@ public class UsuarioJDBCDao implements UsuarioDao {
 		} catch (SQLException e) {
 			try {
 				c.rollback();
-				throw new Excepciones("Problema con SQL, volviendo atras...");
 			} catch (SQLException e1) {
-				throw new Excepciones("Problema con SQL, no se pudo volver atras");
+				throw new BancoException("Problema al crear un usuario nuevo, no se pudo volver atras");
 			}
+			throw new BancoException("Problema al crear un usuario nuevo, volviendo atras...");
 		} finally {
 			try {
 				c.close();
 			} catch (SQLException e1) {
-				throw new Excepciones("Problema con SQL");
+				throw new BancoException("Problema con SQL");
 			}
 		}
 	}
 
 
 	@Override
-	public void modificarUsuario(Usuario user) throws Excepciones{
+	public void modificarUsuario(Usuario user) throws BancoException{
 		DBManager.getInstance();
 		Connection c = DBManager.connect();
 		try {
@@ -53,22 +53,22 @@ public class UsuarioJDBCDao implements UsuarioDao {
 		} catch (SQLException e) {
 			try {
 				c.rollback();
-				throw new Excepciones("Problema con SQL, volviendo atras...");
+				throw new BancoException("Problema al modificar el usuario, volviendo atras...");
 			} catch (SQLException e1) {
-				throw new Excepciones("Problema con SQL, no se pudo volver atras");
+				throw new BancoException("Problema al modificar el usuario, no se pudo volver atras");
 			}
 		} finally {
 			try {
 				c.close();
 			} catch (SQLException e1) {
-				throw new Excepciones("Problema con SQL");
+				throw new BancoException("Problema con SQL");
 			}
 		}
 		
 	}
 
 	@Override
-	public void eliminarUsuario(Usuario user) throws Excepciones{
+	public void eliminarUsuario(Usuario user) throws BancoException{
 		DBManager.getInstance();
 		Connection c = DBManager.connect();
 
@@ -80,22 +80,22 @@ public class UsuarioJDBCDao implements UsuarioDao {
 		} catch (SQLException e) {
 			try {
 				c.rollback();
-				throw new Excepciones("Problema con SQL, volviendo atras...");
+				throw new BancoException("Problema al eliminar el usuario, volviendo atras...");
 			} catch (SQLException e1) {
-				throw new Excepciones("Problema con SQL, no se pudo volver atras");
+				throw new BancoException("Problema al eliminar el usuario, no se pudo volver atras");
 			}
 		} finally {
 			try {
 				c.close();
 			} catch (SQLException e1) {
-				throw new Excepciones("Problema con SQL");
+				throw new BancoException("Problema con SQL");
 			}
 		}
 		
 	}
 
 	@Override
-	public List<Usuario> traerTodosUsuarios() throws Excepciones{
+	public List<Usuario> traerTodosUsuarios() throws BancoException{
 		List<Usuario> listaUsuarios = new ArrayList<Usuario>(); //subtyping
 		DBManager.getInstance();
 		Connection c = DBManager.connect();
@@ -111,15 +111,15 @@ public class UsuarioJDBCDao implements UsuarioDao {
 		} catch (SQLException e) {
 			try {
 				c.rollback();
-				throw new Excepciones("Problema con SQL, volviendo atras...");
+				throw new BancoException("Problema al obtener todos los usuarios, volviendo atras...");
 			} catch (SQLException e1) {
-				throw new Excepciones("Problema con SQL, no se pudo volver atras");
+				throw new BancoException("Problema al obtener todos los usuarios, no se pudo volver atras");
 			}
 		} finally {
 			try {
 				c.close();
 			} catch (SQLException e1) {
-				throw new Excepciones("Problema con SQL");
+				throw new BancoException("Problema con SQL");
 			}
 		}
 		
@@ -127,7 +127,7 @@ public class UsuarioJDBCDao implements UsuarioDao {
 	}
 
 @Override
-public boolean usuarioExistente(Usuario user) throws Excepciones{
+public boolean usuarioExistente(Usuario user) throws BancoException{
 	DBManager.getInstance();
 	Connection c = DBManager.connect();
 	Boolean exists = false;
@@ -144,15 +144,15 @@ public boolean usuarioExistente(Usuario user) throws Excepciones{
 	} catch (SQLException e) {
 		try {
 			c.rollback();
-			throw new Excepciones("Problema con SQL, volviendo atras...");
+			throw new BancoException("Problema con SQL, volviendo atras...");
 		} catch (SQLException e1) {
-			throw new Excepciones("Problema con SQL, no se pudo volver atras");
+			throw new BancoException("Problema con SQL, no se pudo volver atras");
 		}
 	} finally {
 		try {
 			c.close();
 		} catch (SQLException e1) {
-			throw new Excepciones("Problema con SQL");
+			throw new BancoException("Problema con SQL");
 		}
 	}
 	return exists;
