@@ -38,6 +38,7 @@ public class UsuarioJDBCDao implements UsuarioDao {
 				throw new BancoException("Problema con SQL");
 			}
 		}
+		throw new BancoException("Usuario Creado correctamente");
 	}
 
 
@@ -64,6 +65,7 @@ public class UsuarioJDBCDao implements UsuarioDao {
 				throw new BancoException("Problema con SQL");
 			}
 		}
+		throw new BancoException("Usuario modificado correctamente");
 		
 	}
 
@@ -91,6 +93,7 @@ public class UsuarioJDBCDao implements UsuarioDao {
 				throw new BancoException("Problema con SQL");
 			}
 		}
+		throw new BancoException("Usuario eliminado correctamente");
 		
 	}
 

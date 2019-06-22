@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -17,16 +18,15 @@ import ui.Handler;
 public class MiPanelGenerico extends JPanel implements ActionListener{
 	Handler handler;
 	ArrayList<JTextField> field = new ArrayList<JTextField>();
-	ArrayList<JButton> button = new ArrayList<JButton>();
 	
-	public MiPanelGenerico(String[] arrayField, String[] arrayButton, Handler handler) {
+	public MiPanelGenerico(String[] arrayField, Handler handler) {
 		this.handler = handler;
-		initUI(arrayField, arrayButton);
+		generateLayout(arrayField);
     }
 
-    private void initUI(String[] arrayField, String[] arrayButton) {
-            setLayout(new BorderLayout());
-            Box vertical = Box.createVerticalBox();
+    private void generateLayout(String[] arrayField) {
+    		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+    		Box vertical = Box.createVerticalBox();
            
             for(int i = 0; i < arrayField.length; i++)
             {
@@ -44,21 +44,26 @@ public class MiPanelGenerico extends JPanel implements ActionListener{
             vertical.add(Box.createVerticalStrut(50));
         	Box botonera = Box.createHorizontalBox();
             botonera.add(Box.createHorizontalGlue());
-            
-            for(int i = 0; i < arrayButton.length; i++)
-            {
-                button.add(new JButton(arrayButton[i]));
-                button.get(i).addActionListener(this);
-                botonera.add(button.get(i));
-            }
+            JButton cancelButton = new JButton("Cancel");
+            cancelButton.addActionListener(this);
+            botonera.add(cancelButton);
             vertical.add(botonera);
-            add(vertical);
-           
-                                                        
+            add(vertical);                              
     }
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		JOptionPane.showMessageDialog(null, e.getActionCommand(), "Alert", JOptionPane.ERROR_MESSAGE);
+		setVisible(false);
+	}
+	
+	protected boolean nonEmptyField() {
+		 for(int i = 0; i < field.size(); i++)
+         {
+			 if(field.get(i).getText().equals("")) {
+				 return false;
+			 }
+         }
+		
+		return true;
 	}
 }
