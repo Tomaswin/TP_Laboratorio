@@ -21,7 +21,6 @@ public class MiPanel extends JPanel implements ActionListener {
 	JTextField password;
 	JTextField dni;
 	JTextField sexo;
-	int creacion;
 	Handler handler;
 	
 	public MiPanel(String titulo, Handler handler) {
@@ -100,8 +99,6 @@ public class MiPanel extends JPanel implements ActionListener {
                 vertical.add(botonera);
                
                 add(vertical);
-               
-                                                            
         }
 
 		@Override
@@ -124,7 +121,7 @@ public class MiPanel extends JPanel implements ActionListener {
 					JOptionPane.showMessageDialog(null, "El dato DNI tiene que ser un numero", "Alert", JOptionPane.ERROR_MESSAGE);
 				}
 			} else {
-				setVisible(false); //you can't see me!
+				//setVisible(false); //you can't see me!
 			}
             
 		}

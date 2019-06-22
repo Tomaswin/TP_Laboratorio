@@ -13,21 +13,19 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+
+import Exceptions.BancoException;
  
 public class MiPanelTodos extends JPanel implements ActionListener {
  //ESTE ES EL ALTA USUARIO
 	
-	public MiPanelTodos(String titulo) {
-                initUI(titulo);
+	public MiPanelTodos(String titulo, List<Usuario> usuarios) throws BancoException {
+                initUI(titulo, usuarios);
         }
  
-        private void initUI(String titulo) {
+        private void initUI(String titulo, List<Usuario> usuarios) throws BancoException {
                 setLayout(new BorderLayout());
-                List<Usuario> usuarios = new ArrayList<Usuario>();
                
-                BO businessObject = new BO();
-                usuarios = businessObject.traerTodos();
-                
                 Box tableLayout = Box.createHorizontalBox();
                 
                 String col[] = {"Nombre","Apellido","Email", "Password", "DNI", "Sexo"};

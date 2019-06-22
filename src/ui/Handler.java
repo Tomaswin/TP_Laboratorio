@@ -1,19 +1,23 @@
 package ui;
 
+import java.util.List;
+
 import javax.swing.JOptionPane;
 
-import Exceptions.Excepciones;
+import Exceptions.BancoException;
 import basico.jdbc.*;
 import basico.jdbc.PrincipalFrame;
+import basico.jdbc.Dao.UsuarioJDBCDao;
 
 public class Handler {
 
-	BO bo = new BO();
-
+	private UsuarioBO bo;
 	private PrincipalFrame frame;
 
 	public Handler() {
 		frame = new PrincipalFrame(this);
+		bo = new UsuarioBO();
+		bo.setUserJDBC(new UsuarioJDBCDao());
 	}
 
 	public void init() {
@@ -22,28 +26,31 @@ public class Handler {
 
 	public void mostrarAltaUsuario() {
 		frame.cambiarPanel(new MiPanel("", this));
-		frame.setVisible(true);
 	}
 	
 	public void mostrarEditarUsuario() {
 		frame.cambiarPanel(new MiPanelEditar("", this));
-		frame.setVisible(true);
 	}
 	
 	public void mostrarEliminarUsuario() {
 		frame.cambiarPanel(new MiPanelEliminar("", this));
-		frame.setVisible(true);
 	}
 	
-	public void mostrarTodo() {
-		frame.cambiarPanel(new MiPanelTodos(""));
-		frame.setVisible(true);
+	public void mostrarTodo(){
+		try {
+			List<Usuario> usuarios = bo.traerTodos();
+            
+			frame.cambiarPanel(new MiPanelTodos("", usuarios));
+		} catch (BancoException e) {
+			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+		}
 	}
 	
 	public void crearUsuario(Usuario user) {
 		try {
 			bo.crearUsuario(user);
-		} catch (Excepciones e) {
+		} catch (BancoException e) {
 			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 			e.printStackTrace();
 		}
@@ -52,7 +59,7 @@ public class Handler {
 	public void editarUsuario(Usuario user) {
 		try {
 			bo.modificarUsuario(user);
-		} catch (Excepciones e) {
+		} catch (BancoException e) {
 			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 			e.printStackTrace();
 		}
@@ -61,7 +68,7 @@ public class Handler {
 	public void eliminarUsuario(Usuario user) {
 		try {
 			bo.eliminarUsuario(user);
-		} catch (Excepciones e) {
+		} catch (BancoException e) {
 			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 			e.printStackTrace();
 		}
