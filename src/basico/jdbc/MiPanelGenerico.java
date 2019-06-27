@@ -1,41 +1,42 @@
 package basico.jdbc;
 
-import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import ui.Handler;
 
-public class MiPanelGenerico extends JPanel implements ActionListener{
+public abstract class MiPanelGenerico extends JPanel implements ActionListener{
 	Handler handler;
-	ArrayList<JTextField> field = new ArrayList<JTextField>();
+	List<JTextField> field = new ArrayList<JTextField>();
 	
-	public MiPanelGenerico(String[] arrayField, Handler handler) {
+	public MiPanelGenerico(Handler handler) {
 		this.handler = handler;
-		generateLayout(arrayField);
+		generateLayout();
     }
 
-    private void generateLayout(String[] arrayField) {
+    private void generateLayout() {
+    		List<String> arrayField = getField();
+    		ArrayList<String> arrayButton = getButton();
     		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
     		Box vertical = Box.createVerticalBox();
            
-            for(int i = 0; i < arrayField.length; i++)
+            for(int i = 0; i < arrayField.size(); i++)
             {
             	Box dato = Box.createHorizontalBox();
-                JLabel tituloLabel = new JLabel(arrayField[i]);
+                JLabel tituloLabel = new JLabel(arrayField.get(i));
                 dato.add(tituloLabel);
                 dato.add(Box.createHorizontalStrut(10));
-                if (arrayField[i].equals("Password"))
+                if (arrayField.get(i).equals("Password"))
                 {
                 	 field.add(new JPasswordField(30));
                      dato.add(field.get(i));
@@ -57,9 +58,29 @@ public class MiPanelGenerico extends JPanel implements ActionListener{
             JButton cancelButton = new JButton("Cancel");
             cancelButton.addActionListener(this);
             botonera.add(cancelButton);
+            
+            for(int i = 0; i < arrayButton.size(); i++)
+            {                
+                JButton button = new JButton(arrayButton.get(i));
+        		button.addActionListener(new ActionListener() {
+        			@Override
+        			public void actionPerformed(ActionEvent e) {
+        					actionClick();
+        				}
+        			});
+        		botonera.add(button);
+                
+            }
+       
             vertical.add(botonera);
             add(vertical);                              
     }
+
+	protected abstract ArrayList<String> getButton();
+
+	protected abstract ArrayList<String> getField();
+
+	protected abstract void actionClick();
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
