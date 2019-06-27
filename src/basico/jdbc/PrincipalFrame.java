@@ -27,7 +27,6 @@ public class PrincipalFrame extends JFrame implements ActionListener{
 	}
 	
 	private void initUI(String titulo) {
-		addMenuBar();
 		setSize(800, 400);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
@@ -36,6 +35,10 @@ public class PrincipalFrame extends JFrame implements ActionListener{
 		getContentPane().removeAll();
 		getContentPane().add(panel);
 		getContentPane().validate();
+	}
+	
+	public void loginSuccess() {
+		addMenuBar();
 	}
 
 	

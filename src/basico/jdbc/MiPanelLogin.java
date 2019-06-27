@@ -19,7 +19,7 @@ public class MiPanelLogin extends MiPanelGenerico {
 	static String[] fieldName = {"Email","Password"};
 	public MiPanelLogin(String titulo, Handler handler) {
 		super(fieldName, handler);
-		agregar = new JButton("Crear");
+		agregar = new JButton("Ingresar");
 		agregar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

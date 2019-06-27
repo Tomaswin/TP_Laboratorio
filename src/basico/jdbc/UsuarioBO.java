@@ -9,28 +9,19 @@ import basico.jdbc.Dao.*;
 public class UsuarioBO {
 	private UsuarioJDBCDao userJDBC;
 
-	// con otro throw levanto las de sql al handler
 	public void crearUsuario(Usuario user) throws BancoException {
-		if (camposCompletos(user)) {
-			if (!validarUsuario(user)) {
-				userJDBC.crearUsuario(user);
-			} else {
-				throw new BancoException("Usuario Existente");
-			}
+		if (!validarUsuario(user)) {
+			userJDBC.crearUsuario(user);
 		} else {
-			throw new BancoException("Campos Incompletos");
+			throw new BancoException("Usuario Existente");
 		}
 	}
 
 	public void modificarUsuario(Usuario user) throws BancoException {
-		if (camposCompletos(user)) {
-			if (validarUsuario(user)) {
-				userJDBC.modificarUsuario(user);
-			} else {
-				throw new BancoException("Usuario Inexistente");
-			}
+		if (validarUsuario(user)) {
+			userJDBC.modificarUsuario(user);
 		} else {
-			throw new BancoException("Campos Incompletos");
+			throw new BancoException("Usuario Inexistente");
 		}
 	}
 
@@ -57,46 +48,10 @@ public class UsuarioBO {
 	}
 	
 	public void login(Usuario user) throws BancoException {
-		if (camposCompletos(user)) {
-			if (validarUsuario(user)) {
-				
-			} else {
-				throw new BancoException("Usuario Inexistente");
-			}
+		if (validarUsuario(user)) {		
 		} else {
-			throw new BancoException("Campos Incompletos");
+			throw new BancoException("Usuario Inexistente");
 		}
-	}
-	
-	
-
-	public boolean camposCompletos(Usuario user) {
-		boolean correcto = true;
-		if (user.getNombre() != null && user.getNombre().equals("")) {
-			correcto = false;
-		}
-
-		if (user.getApellido() != null && user.getApellido().equals("")) {
-			correcto = false;
-		}
-
-		if (user.getPassword() != null && user.getPassword().equals("")) {
-			correcto = false;
-		}
-
-		if (user.getEmail() != null && user.getEmail().equals("")) {
-			correcto = false;
-		}
-
-		if (user.getDni() == 0) {
-			correcto = false;
-		}
-
-		if (user.getSexo() != null && user.getSexo().equals("")) {
-			correcto = false;
-		}
-
-		return correcto;
 	}
 
 	public void setUserJDBC(UsuarioJDBCDao userJDBC) {
