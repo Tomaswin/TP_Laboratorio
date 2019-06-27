@@ -22,6 +22,8 @@ public class Handler {
 
 	public void init() {
 		frame.setVisible(true);
+		frame.cambiarPanel(new MiPanelLogin("", this));
+
 	}
 
 	public void mostrarAltaUsuario() {
@@ -34,10 +36,6 @@ public class Handler {
 	
 	public void mostrarEliminarUsuario() {
 		frame.cambiarPanel(new MiPanelEliminar("", this));
-	}
-	
-	public void mostrarLogin() {
-		frame.cambiarPanel(new MiPanelLogin("", this));
 	}
 	
 	public void mostrarTodo(){

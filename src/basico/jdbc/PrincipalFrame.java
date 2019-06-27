@@ -77,15 +77,6 @@ public class PrincipalFrame extends JFrame implements ActionListener{
 			}
 		});
 		nombreBarra.add(opcion4);
-		JMenuItem opcion5 = new JMenuItem("Login");
-		opcion5.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				handler.mostrarLogin();
-			}
-		});
-		nombreBarra.add(opcion5);
-
 		setJMenuBar(barra);
 	}
 
