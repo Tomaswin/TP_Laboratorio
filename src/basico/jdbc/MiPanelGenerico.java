@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import ui.Handler;
@@ -34,10 +35,20 @@ public class MiPanelGenerico extends JPanel implements ActionListener{
                 JLabel tituloLabel = new JLabel(arrayField[i]);
                 dato.add(tituloLabel);
                 dato.add(Box.createHorizontalStrut(10));
-                field.add(new JTextField(30));
-                dato.add(field.get(i));
-                vertical.add(dato);
-                vertical.add(Box.createVerticalStrut(20));
+                if (arrayField[i].equals("Password"))
+                {
+                	 field.add(new JPasswordField(30));
+                     dato.add(field.get(i));
+                     vertical.add(dato);
+                     vertical.add(Box.createVerticalStrut(20));
+                }else {
+                	 field.add(new JTextField(30));
+                     dato.add(field.get(i));
+                     vertical.add(dato);
+                     vertical.add(Box.createVerticalStrut(20));
+                }
+                
+               
             }
             
             vertical.add(Box.createVerticalStrut(50));
