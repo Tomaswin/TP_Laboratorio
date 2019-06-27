@@ -36,7 +36,6 @@ public class MiPanelGenerico extends JPanel implements ActionListener{
                 dato.add(Box.createHorizontalStrut(10));
                 field.add(new JTextField(30));
                 dato.add(field.get(i));
-                
                 vertical.add(dato);
                 vertical.add(Box.createVerticalStrut(20));
             }

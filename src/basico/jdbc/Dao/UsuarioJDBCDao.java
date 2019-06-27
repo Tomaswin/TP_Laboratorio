@@ -96,6 +96,35 @@ public class UsuarioJDBCDao implements UsuarioDao {
 		throw new BancoException("Usuario eliminado correctamente");
 		
 	}
+	
+	public void login(Usuario user) throws BancoException{
+		DBManager.getInstance();
+		Connection c = DBManager.connect();
+
+		try {
+			Statement s = c.createStatement();
+		//	String sql = "DELETE FROM usuarios WHERE email = '" + user.getEmail() + "'";
+		//	s.executeUpdate(sql);
+	//		c.commit();
+		} catch (SQLException e) {
+			try {
+				c.rollback();
+				throw new BancoException("Problema al ingresar, volviendo atras...");
+			} catch (SQLException e1) {
+				throw new BancoException("Problema al ingresar, no se pudo volver atras");
+			}
+		} finally {
+			try {
+				c.close();
+			} catch (SQLException e1) {
+				throw new BancoException("Problema con SQL");
+			}
+		}
+		throw new BancoException("Has ingresado correctamente");
+		
+	}
+	
+
 
 	@Override
 	public List<Usuario> traerTodosUsuarios() throws BancoException{

@@ -55,6 +55,20 @@ public class UsuarioBO {
 
 		return correcto;
 	}
+	
+	public void login(Usuario user) throws BancoException {
+		if (camposCompletos(user)) {
+			if (validarUsuario(user)) {
+				userJDBC.login(user);
+			} else {
+				throw new BancoException("Usuario Inexistente");
+			}
+		} else {
+			throw new BancoException("Campos Incompletos");
+		}
+	}
+	
+	
 
 	public boolean camposCompletos(Usuario user) {
 		boolean correcto = true;

@@ -21,6 +21,12 @@ public class Usuario
     public Usuario(String email) {
     	this.email = email;
     }
+ 
+    
+    public Usuario(String email,String password) {
+    	this.email = email;
+    	this.password = password;
+    }
 
     public String getNombre()
     {

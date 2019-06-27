@@ -3,15 +3,21 @@ package basico.jdbc;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.Box;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 
 import ui.Handler;
 
-public class PrincipalFrame extends JFrame{
+public class PrincipalFrame extends JFrame implements ActionListener{
 
 	private Handler handler;
 
@@ -32,6 +38,8 @@ public class PrincipalFrame extends JFrame{
 		getContentPane().validate();
 	}
 
+	
+	
 	private void addMenuBar() {
 		JMenuBar barra = new JMenuBar();
 
@@ -69,9 +77,24 @@ public class PrincipalFrame extends JFrame{
 			}
 		});
 		nombreBarra.add(opcion4);
+		JMenuItem opcion5 = new JMenuItem("Login");
+		opcion5.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				handler.mostrarLogin();
+			}
+		});
+		nombreBarra.add(opcion5);
 
 		setJMenuBar(barra);
 	}
 
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		setVisible(false);
+	}
+	
+	
+	
 
 }
