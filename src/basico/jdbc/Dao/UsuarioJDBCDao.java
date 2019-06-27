@@ -1,5 +1,6 @@
 package basico.jdbc.Dao;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -96,34 +97,6 @@ public class UsuarioJDBCDao implements UsuarioDao {
 		throw new BancoException("Usuario eliminado correctamente");
 		
 	}
-	
-	public void login(Usuario user) throws BancoException{
-		DBManager.getInstance();
-		Connection c = DBManager.connect();
-
-		try {
-			Statement s = c.createStatement();
-		//	String sql = "DELETE FROM usuarios WHERE email = '" + user.getEmail() + "'";
-		//	s.executeUpdate(sql);
-	//		c.commit();
-		} catch (SQLException e) {
-			try {
-				c.rollback();
-				throw new BancoException("Problema al ingresar, volviendo atras...");
-			} catch (SQLException e1) {
-				throw new BancoException("Problema al ingresar, no se pudo volver atras");
-			}
-		} finally {
-			try {
-				c.close();
-			} catch (SQLException e1) {
-				throw new BancoException("Problema con SQL");
-			}
-		}
-		throw new BancoException("Has ingresado correctamente");
-		
-	}
-	
 
 
 	@Override
@@ -165,8 +138,12 @@ public boolean usuarioExistente(Usuario user) throws BancoException{
 	Boolean exists = false;
 	try {
 		Statement s = c.createStatement();
-		String sql = "SELECT * FROM usuarios WHERE email = '" + user.getEmail().toString() + "'";
-		ResultSet rs = s.executeQuery(sql);
+		PreparedStatement ps = c.prepareStatement("SELECT * FROM usuarios WHERE email = ? and password = ?");
+	    ps.setString(1, user.getEmail());
+	    ps.setString(2, user.getPassword());
+
+	    // process the results
+	    ResultSet rs = ps.executeQuery();
 		
 		if(rs.next())
 		{

@@ -24,18 +24,11 @@ public class MiPanelLogin extends MiPanelGenerico {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 					if(nonEmptyField()) {
-						try {// if is number
-							Usuario usuario	= new Usuario(field.get(0).getText(),field.get(1).getText());
-							handler.login(usuario);
-							field.get(0).setText("");
-							field.get(1).setText("");
+						Usuario usuario	= new Usuario(field.get(0).getText(),field.get(1).getText());
+						handler.login(usuario);
+						field.get(0).setText("");
+						field.get(1).setText("");
 							
-							
-							
-							
-						} catch (NumberFormatException ee) {
-							JOptionPane.showMessageDialog(null, "Email Incorrecto", "Error", JOptionPane.ERROR_MESSAGE);
-						}
 					}else {
 						JOptionPane.showMessageDialog(null, "Campos incompletos", "Error", JOptionPane.ERROR_MESSAGE);
 					}

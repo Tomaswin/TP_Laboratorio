@@ -59,7 +59,7 @@ public class UsuarioBO {
 	public void login(Usuario user) throws BancoException {
 		if (camposCompletos(user)) {
 			if (validarUsuario(user)) {
-				userJDBC.login(user);
+				
 			} else {
 				throw new BancoException("Usuario Inexistente");
 			}
@@ -72,19 +72,19 @@ public class UsuarioBO {
 
 	public boolean camposCompletos(Usuario user) {
 		boolean correcto = true;
-		if (user.getNombre().equals("")) {
+		if (user.getNombre() != null && user.getNombre().equals("")) {
 			correcto = false;
 		}
 
-		if (user.getApellido().equals("")) {
+		if (user.getApellido() != null && user.getApellido().equals("")) {
 			correcto = false;
 		}
 
-		if (user.getPassword().equals("")) {
+		if (user.getPassword() != null && user.getPassword().equals("")) {
 			correcto = false;
 		}
 
-		if (user.getEmail().equals("")) {
+		if (user.getEmail() != null && user.getEmail().equals("")) {
 			correcto = false;
 		}
 
@@ -92,7 +92,7 @@ public class UsuarioBO {
 			correcto = false;
 		}
 
-		if (user.getSexo().equals("")) {
+		if (user.getSexo() != null && user.getSexo().equals("")) {
 			correcto = false;
 		}
 

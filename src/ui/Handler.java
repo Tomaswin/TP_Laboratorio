@@ -83,6 +83,7 @@ public class Handler {
 	public void login(Usuario user) {
 		try {
 			bo.login(user);
+			frame.cambiarPanel(new MiPanel("", this));
 		} catch (BancoException e) {
 			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 			e.printStackTrace();
