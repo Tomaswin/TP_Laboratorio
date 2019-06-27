@@ -21,10 +21,17 @@ public class UsuarioJDBCDao implements UsuarioDao {
 		Connection c = DBManager.connect();
 
 		try {
-			Statement s = c.createStatement();
-			String sql = "INSERT INTO usuarios (nombre, apellido, email, password, dni, sexo) VALUES ('" + user.getNombre().toString() + "', '" + user.getApellido().toString() + "', '" + user.getEmail().toString() + "', '" + user.getPassword().toString() + "', '" + user.getDni() + "', '" + user.getSexo().toString() + "')";
-			s.executeUpdate(sql);
+			PreparedStatement ps = c.prepareStatement("INSERT INTO usuarios (nombre, apellido, email, password, dni, sexo) VALUES (?,?,?,?,?,?)");
+			ps.setString(1, user.getNombre());
+			ps.setString(2, user.getApellido());
+			ps.setString(3, user.getEmail());
+			ps.setString(4, user.getPassword());
+			ps.setInt(5, user.getDni());
+			ps.setString(6, user.getSexo());
+
+		    ps.executeUpdate();
 			c.commit();
+			
 		} catch (SQLException e) {
 			try {
 				c.rollback();
@@ -48,9 +55,16 @@ public class UsuarioJDBCDao implements UsuarioDao {
 		DBManager.getInstance();
 		Connection c = DBManager.connect();
 		try {
-			Statement s = c.createStatement();
-			String sql = "UPDATE usuarios set nombre = '" + user.getNombre().toString() + "', apellido = '" + user.getApellido().toString() + "', email = '" + user.getEmail().toString() + "', password = '" + user.getPassword().toString() + "', dni = '" + user.getDni() + "', sexo = '" + user.getSexo().toString() + "' WHERE email = '" + user.getEmail().toString() + "'";
-			s.executeUpdate(sql);
+			PreparedStatement ps = c.prepareStatement("UPDATE usuarios set nombre = ? , apellido = ? , email = ? , password = ? , dni = ? , sexo = ? WHERE email = ?");
+			ps.setString(1, user.getNombre());
+			ps.setString(2, user.getApellido());
+			ps.setString(3, user.getEmail());
+			ps.setString(4, user.getPassword());
+			ps.setInt(5, user.getDni());
+			ps.setString(6, user.getSexo());
+		    ps.setString(7, user.getEmail());
+
+		    ps.executeUpdate();
 			c.commit();
 		} catch (SQLException e) {
 			try {
@@ -76,9 +90,10 @@ public class UsuarioJDBCDao implements UsuarioDao {
 		Connection c = DBManager.connect();
 
 		try {
-			Statement s = c.createStatement();
-			String sql = "DELETE FROM usuarios WHERE email = '" + user.getEmail() + "'";
-			s.executeUpdate(sql);
+			PreparedStatement ps = c.prepareStatement("DELETE FROM usuarios WHERE email = ?");
+		    ps.setString(1, user.getEmail());
+
+		    ps.executeUpdate();
 			c.commit();
 		} catch (SQLException e) {
 			try {
@@ -105,9 +120,10 @@ public class UsuarioJDBCDao implements UsuarioDao {
 		DBManager.getInstance();
 		Connection c = DBManager.connect();
 		try {
-			Statement s = c.createStatement();
-			String sql = "SELECT * FROM usuarios";
-			ResultSet rs = s.executeQuery(sql);
+			PreparedStatement ps = c.prepareStatement("SELECT * FROM usuarios");
+
+		    // process the results
+		    ResultSet rs = ps.executeQuery();
 			
 			while(rs.next()) {
 				Usuario user = new Usuario(rs.getString("nombre"), rs.getString("apellido"), rs.getString("email"), rs.getString("password"), rs.getInt("dni"), rs.getString("sexo"));
@@ -137,7 +153,6 @@ public boolean usuarioExistente(Usuario user) throws BancoException{
 	Connection c = DBManager.connect();
 	Boolean exists = false;
 	try {
-		Statement s = c.createStatement();
 		PreparedStatement ps = c.prepareStatement("SELECT * FROM usuarios WHERE email = ? and password = ?");
 	    ps.setString(1, user.getEmail());
 	    ps.setString(2, user.getPassword());

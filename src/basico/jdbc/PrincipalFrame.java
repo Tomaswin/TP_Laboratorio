@@ -38,6 +38,7 @@ public class PrincipalFrame extends JFrame implements ActionListener{
 	}
 	
 	public void loginSuccess() {
+		setSize(800, 500);
 		addMenuBar();
 	}
 

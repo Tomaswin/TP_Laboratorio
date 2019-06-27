@@ -48,7 +48,7 @@ public class UsuarioBO {
 	}
 	
 	public void login(Usuario user) throws BancoException {
-		if (validarUsuario(user)) {		
+		if (validarUsuario(user)) {
 		} else {
 			throw new BancoException("Usuario Inexistente");
 		}
