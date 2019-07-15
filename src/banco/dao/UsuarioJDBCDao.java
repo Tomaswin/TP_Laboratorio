@@ -1,4 +1,4 @@
-package basico.jdbc.Dao;
+package banco.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -7,9 +7,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import Exceptions.BancoException;
-import basico.jdbc.Usuario;
-import basico.jdbc.Basics.DBManager;
+import banco.database.DBManager;
+import banco.entidades.Usuario;
+import banco.exceptions.BancoException;
 
 
 public class UsuarioJDBCDao implements UsuarioDao {

@@ -1,4 +1,4 @@
-package basico.jdbc.Basics;
+package banco.database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

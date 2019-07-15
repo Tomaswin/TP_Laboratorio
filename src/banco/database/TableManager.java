@@ -1,4 +1,4 @@
-package basico.jdbc.Basics;
+package banco.database;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -29,21 +29,12 @@ public class TableManager {
 
 		Connection c = DBManager.connect();
 		
-<<<<<<< HEAD
 		String sql = "DROP TABLE usuarios";
 		
 		try {
 			Statement s = c.createStatement();
 			s.execute(sql);
 			c.commit();
-=======
-		String usuarioSql = "CREATE TABLE usuarios ( id INTEGER IDENTITY, DNI INTEGER, nombre VARCHAR(256), apellido VARCHAR(10), password VARCHAR(256))";
-
-		
-		try {
-			Statement s = c.createStatement();
-			s.execute(usuarioSql);
->>>>>>> 12390ee3c43295f6006e6ef7dd00bcf83f0febb0
 		} catch (SQLException e) {
 			try {
 				c.rollback();

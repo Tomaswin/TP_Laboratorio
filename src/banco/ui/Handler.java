@@ -1,13 +1,13 @@
-package ui;
+package banco.ui;
 
 import java.util.List;
 
 import javax.swing.JOptionPane;
 
-import Exceptions.BancoException;
-import basico.jdbc.*;
-import basico.jdbc.PrincipalFrame;
-import basico.jdbc.Dao.UsuarioJDBCDao;
+import banco.dao.UsuarioJDBCDao;
+import banco.entidades.Usuario;
+import banco.exceptions.BancoException;
+import banco.paneles.*;
 
 public class Handler {
 
@@ -41,20 +41,11 @@ public class Handler {
 		try {
 			List<Usuario> usuarios = bo.traerTodos();
 			frame.cambiarPanel(new MiPanelLogin("", this, usuarios));
-<<<<<<< HEAD
 		} catch (BancoException e) {
 			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 			e.printStackTrace();
 		}
 	}
-=======
-			} catch (BancoException e) {
-				JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-				e.printStackTrace();
-			}
-		}
-		
->>>>>>> 12390ee3c43295f6006e6ef7dd00bcf83f0febb0
 	
 	public void crearUsuario(Usuario user) {
 		try {

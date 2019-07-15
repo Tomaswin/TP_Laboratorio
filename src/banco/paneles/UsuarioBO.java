@@ -1,10 +1,11 @@
-package basico.jdbc;
+package banco.paneles;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import Exceptions.BancoException;
-import basico.jdbc.Dao.*;
+import banco.dao.*;
+import banco.entidades.Usuario;
+import banco.exceptions.BancoException;
 
 public class UsuarioBO {
 	private UsuarioJDBCDao userJDBC;

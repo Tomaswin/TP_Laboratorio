@@ -1,4 +1,4 @@
-package basico.jdbc;
+package banco.entidades;
 
 public class Usuario
  {

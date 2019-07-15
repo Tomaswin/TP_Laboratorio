@@ -1,9 +1,9 @@
-package basico.jdbc.Dao;
+package banco.dao;
 
 import java.util.List;
 
-import Exceptions.BancoException;
-import basico.jdbc.Usuario;
+import banco.entidades.Usuario;
+import banco.exceptions.BancoException;
 
 public interface UsuarioDao {
 	

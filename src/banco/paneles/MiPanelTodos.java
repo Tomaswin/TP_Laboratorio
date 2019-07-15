@@ -1,4 +1,4 @@
-package basico.jdbc;
+package banco.paneles;
  
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
@@ -14,7 +14,8 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
-import Exceptions.BancoException;
+import banco.entidades.Usuario;
+import banco.exceptions.BancoException;
  
 public class MiPanelTodos extends JPanel implements ActionListener {
  //ESTE ES EL ALTA USUARIO

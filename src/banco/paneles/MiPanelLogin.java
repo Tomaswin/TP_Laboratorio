@@ -1,4 +1,4 @@
-package basico.jdbc;
+package banco.paneles;
  
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,7 +11,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import ui.Handler;
+import banco.entidades.Usuario;
+import banco.ui.Handler;
  
 public class MiPanelLogin extends MiPanelGenerico {
 	JButton agregar;
@@ -48,12 +49,7 @@ public class MiPanelLogin extends MiPanelGenerico {
 		return fieldName;
 	}
 	
-<<<<<<< HEAD
 	void showUsers(List<Usuario> usuario) {
-=======
-	void showUsers(	List<Usuario> usuario ) {
-	
->>>>>>> 12390ee3c43295f6006e6ef7dd00bcf83f0febb0
 		Box tableLayout = Box.createHorizontalBox();
           
 		String col[] = {"DNI", "Password"};

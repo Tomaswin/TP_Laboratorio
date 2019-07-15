@@ -1,4 +1,4 @@
-package basico.jdbc;
+package banco.paneles;
  
 import javax.swing.JFrame;
  

@@ -1,4 +1,4 @@
-package basico.jdbc;
+package banco.paneles;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import ui.Handler;
+import banco.ui.Handler;
 
 public abstract class MiPanelGenerico extends JPanel implements ActionListener{
 	Handler handler;

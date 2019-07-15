@@ -1,7 +1,5 @@
-package basico.jdbc;
-
-
-
+package banco.paneles;
+ 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,39 +12,54 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import ui.Handler;
+import banco.entidades.Usuario;
+import banco.ui.Handler;
  
-	
-public class MiPanelEliminar extends MiPanelGenerico {
+
+public class MiPanel extends MiPanelGenerico {
 	JButton agregar;
 	
-	public MiPanelEliminar(String titulo, Handler handler) {
+	public MiPanel(String titulo, Handler handler) {
 		super(handler);
 	}
 	
 	public void actionClick() {
 		if(nonEmptyField()) {
-			Usuario usuario	= new Usuario(Integer.parseInt(field.get(0).getText()) );
-			handler.eliminarUsuario(usuario);
+			int dniField = Integer.valueOf(field.get(4).getText());
+			Usuario usuario	= new Usuario(field.get(0).getText(), field.get(1).getText(), field.get(2).getText(), dniField);
+			handler.crearUsuario(usuario);
+			
 			field.get(0).setText("");
+			field.get(1).setText("");
+			field.get(2).setText("");
+			field.get(3).setText("");
 				
 		}else {
 			JOptionPane.showMessageDialog(null, "Campos incompletos", "Error", JOptionPane.ERROR_MESSAGE);
+			}
 		}
-	}
 
 	@Override
 	protected ArrayList<String> getButton() {
 		ArrayList<String> fieldName = new ArrayList<String>();
-		fieldName.add("Eliminar");
+		fieldName.add("Crear");
 		return fieldName;
 	}
 
 	@Override
 	protected ArrayList<String> getField() {
 		ArrayList<String> fieldName = new ArrayList<String>();
-		fieldName.add("Email");
+		fieldName.add("Nombre");
+		fieldName.add("Apellido");
+		fieldName.add("Password");
+		fieldName.add("DNI");
 		return fieldName;
-		}
-	
+	}
 }
+
+
+
+
+
+
+
