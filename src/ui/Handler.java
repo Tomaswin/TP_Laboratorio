@@ -22,8 +22,7 @@ public class Handler {
 
 	public void init() {
 		frame.setVisible(true);
-		frame.cambiarPanel(new MiPanelLogin("", this));
-
+		mostrarLoginUsuario();
 	}
 
 	public void mostrarAltaUsuario() {
@@ -38,11 +37,10 @@ public class Handler {
 		frame.cambiarPanel(new MiPanelEliminar("", this));
 	}
 	
-	public void mostrarTodo(){
+	public void mostrarLoginUsuario(){
 		try {
 			List<Usuario> usuarios = bo.traerTodos();
-            
-			frame.cambiarPanel(new MiPanelTodos("", usuarios));
+			frame.cambiarPanel(new MiPanelLogin("", this, usuarios));
 		} catch (BancoException e) {
 			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 			e.printStackTrace();

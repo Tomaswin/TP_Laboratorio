@@ -13,7 +13,7 @@ import ui.Handler;
 public class MiPanelLogin extends MiPanelGenerico {
 	JButton agregar;
 	
-	public MiPanelLogin(String titulo, Handler handler) {
+	public MiPanelLogin(String titulo, Handler handler, List<Usuario> usuario) {
 		super(handler);
 	}
 	
