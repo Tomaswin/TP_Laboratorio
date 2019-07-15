@@ -18,7 +18,7 @@ public class MiPanelLogin extends MiPanelGenerico {
 	
 	public MiPanelLogin(String titulo, Handler handler, List<Usuario> usuario) {
 		super(handler);
-		showUsers();
+		showUsers(usuario);
 	}
 	
 	public void actionClick() {
@@ -48,8 +48,7 @@ public class MiPanelLogin extends MiPanelGenerico {
 		return fieldName;
 	}
 	
-	void showUsers() {
-		List<Usuario> usuario = handler.traerTodos();
+	void showUsers(List<Usuario> usuario) {
 		Box tableLayout = Box.createHorizontalBox();
           
 		String col[] = {"DNI", "Password"};
