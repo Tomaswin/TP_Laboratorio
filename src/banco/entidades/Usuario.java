@@ -68,7 +68,7 @@ public class Usuario
         this.dni = dni;
     }
     
-    public int getCuenta()
+    public ArrayList<Cuenta> getCuenta()
     {
         return cuentas;
     }

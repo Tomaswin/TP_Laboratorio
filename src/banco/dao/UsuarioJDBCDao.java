@@ -121,7 +121,7 @@ public class UsuarioJDBCDao implements UsuarioDao {
 		    ResultSet rs = ps.executeQuery();
 			
 			while(rs.next()) {
-				Usuario user = new Usuario(rs.getString("nombre"), rs.getString("apellido"),  rs.getString("password"), rs.getInt("dni"));
+				Usuario user = new Usuario(rs.getString("nombre"), rs.getString("apellido"),  rs.getString("password"), rs.getInt("dni"),"AGREGAR ARRAY");
 				listaUsuarios.add(user);
 			}
 		} catch (SQLException e) {
