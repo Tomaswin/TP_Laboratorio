@@ -28,19 +28,18 @@ public class MiPanelTodos extends JPanel implements ActionListener {
                
                 Box tableLayout = Box.createHorizontalBox();
                 
-                String col[] = {"Nombre","Apellido","Email", "Password", "DNI", "Sexo"};
+                String col[] = {"Nombre","Apellido", "Password", "DNI"};
 
                 DefaultTableModel tableModel = new DefaultTableModel(col, 0);
                                                           
                 JTable table = new JTable(tableModel);
                 tableLayout.add(table);
                 
-                Object[] rowTittle = {"Nombre", "Apellido", "Email", "Password", "DNI", "Sexo"};
+                Object[] rowTittle = {"Nombre", "Apellido",  "Password", "DNI"};
                 tableModel.addRow(rowTittle);
                 
                 for(int i=0; i < usuarios.size(); i++) {
-                	Object[] data = { usuarios.get(i).getNombre().toString(), usuarios.get(i).getApellido().toString(), usuarios.get(i).getEmail().toString(),
-                			usuarios.get(i).getPassword().toString(), usuarios.get(i).getDni(), usuarios.get(i).getSexo().toString()};
+                	Object[] data = { usuarios.get(i).getNombre().toString(), usuarios.get(i).getApellido().toString(),usuarios.get(i).getPassword().toString(), usuarios.get(i).getDni()};
                 	
                     tableModel.addRow(data);
                 }

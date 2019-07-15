@@ -24,10 +24,8 @@ public class UsuarioJDBCDao implements UsuarioDao {
 			PreparedStatement ps = c.prepareStatement("INSERT INTO usuarios (nombre, apellido, email, password, dni, sexo) VALUES (?,?,?,?,?,?)");
 			ps.setString(1, user.getNombre());
 			ps.setString(2, user.getApellido());
-			ps.setString(3, user.getEmail());
 			ps.setString(4, user.getPassword());
 			ps.setInt(5, user.getDni());
-			ps.setString(6, user.getSexo());
 
 		    ps.executeUpdate();
 			c.commit();
@@ -58,11 +56,8 @@ public class UsuarioJDBCDao implements UsuarioDao {
 			PreparedStatement ps = c.prepareStatement("UPDATE usuarios set nombre = ? , apellido = ? , email = ? , password = ? , dni = ? , sexo = ? WHERE email = ?");
 			ps.setString(1, user.getNombre());
 			ps.setString(2, user.getApellido());
-			ps.setString(3, user.getEmail());
 			ps.setString(4, user.getPassword());
 			ps.setInt(5, user.getDni());
-			ps.setString(6, user.getSexo());
-		    ps.setString(7, user.getEmail());
 
 		    ps.executeUpdate();
 			c.commit();
@@ -91,7 +86,7 @@ public class UsuarioJDBCDao implements UsuarioDao {
 
 		try {
 			PreparedStatement ps = c.prepareStatement("DELETE FROM usuarios WHERE email = ?");
-		    ps.setString(1, user.getEmail());
+		    ps.setInt(1, user.getDni());
 
 		    ps.executeUpdate();
 			c.commit();
@@ -126,7 +121,7 @@ public class UsuarioJDBCDao implements UsuarioDao {
 		    ResultSet rs = ps.executeQuery();
 			
 			while(rs.next()) {
-				Usuario user = new Usuario(rs.getString("nombre"), rs.getString("apellido"), rs.getString("email"), rs.getString("password"), rs.getInt("dni"), rs.getString("sexo"));
+				Usuario user = new Usuario(rs.getString("nombre"), rs.getString("apellido"),  rs.getString("password"), rs.getInt("dni"));
 				listaUsuarios.add(user);
 			}
 		} catch (SQLException e) {

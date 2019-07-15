@@ -48,7 +48,12 @@ public class MiPanelLogin extends MiPanelGenerico {
 		return fieldName;
 	}
 	
+<<<<<<< HEAD
 	void showUsers(List<Usuario> usuario) {
+=======
+	void showUsers(	List<Usuario> usuario ) {
+	
+>>>>>>> 12390ee3c43295f6006e6ef7dd00bcf83f0febb0
 		Box tableLayout = Box.createHorizontalBox();
           
 		String col[] = {"DNI", "Password"};

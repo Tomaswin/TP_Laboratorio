@@ -26,7 +26,7 @@ public class MiPanelEliminar extends MiPanelGenerico {
 	
 	public void actionClick() {
 		if(nonEmptyField()) {
-			Usuario usuario	= new Usuario(field.get(0).getText());
+			Usuario usuario	= new Usuario(Integer.parseInt(field.get(0).getText()) );
 			handler.eliminarUsuario(usuario);
 			field.get(0).setText("");
 				
