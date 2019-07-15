@@ -4,24 +4,19 @@ public class Usuario
  {
     private String nombre;
     private String apellido;
-    private String email;
     private String password;
     private int dni;
-    private String sexo;
     
-    public Usuario(String nombre, String apellido, String email, String password, int dni, String sexo) {
+    public Usuario(String nombre, String apellido, String password, int dni) {
     	this.nombre = nombre;
     	this.apellido = apellido;
-    	this.email = email;
     	this.password = password;
     	this.dni = dni;
-    	this.sexo = sexo;
     }
     
-    public Usuario(String email) {
-    	this.email = email;
+    public Usuario(int dni) {
+    	this.dni=dni;
     }
- 
     
     public Usuario(int dni,String password) {
     	this.dni = dni;
@@ -48,15 +43,6 @@ public class Usuario
         this.apellido = apellido;
     }
 
-    public String getEmail()
-    {
-        return email;
-    }
-
-    public void setEmail(String email)
-    {
-        this.email = email;
-    }
 
     public String getPassword()
     {
@@ -78,20 +64,11 @@ public class Usuario
         this.dni = dni;
     }
     
-    public String getSexo()
-    {
-        return sexo;
-    }
-
-    public void setSexo(String sexo)
-    {
-        this.sexo = sexo;
-    }
 
     public String toString()
     {
-        return "Nombre: " + this.nombre + "Apellido: " + this.apellido + " Email: " + this.email + " Password: " + this.password + " Dni: "
-        		+ this.dni + " Sexo: " + this.sexo;
+        return "Nombre: " + this.nombre + "Apellido: " + this.apellido + " Email: " + " Password: " + this.password + " Dni: "
+        		+ this.dni;
     }
 
  }
