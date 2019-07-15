@@ -41,11 +41,6 @@ public class Handler {
 		try {
 			List<Usuario> usuarios = bo.traerTodos();
 			frame.cambiarPanel(new MiPanelLogin("", this, usuarios));
-		} catch (BancoException e) {
-			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-			e.printStackTrace();
-		}
-	}
 	
 	public void crearUsuario(Usuario user) {
 		try {

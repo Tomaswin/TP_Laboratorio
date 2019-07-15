@@ -153,8 +153,8 @@ public boolean usuarioExistente(Usuario user) throws BancoException{
 	Connection c = DBManager.connect();
 	Boolean exists = false;
 	try {
-		PreparedStatement ps = c.prepareStatement("SELECT * FROM usuarios WHERE email = ? and password = ?");
-	    ps.setString(1, user.getEmail());
+		PreparedStatement ps = c.prepareStatement("SELECT * FROM usuarios WHERE dni = ? and password = ?");
+	    ps.setInt(1, user.getDni());
 	    ps.setString(2, user.getPassword());
 
 	    // process the results

@@ -23,8 +23,8 @@ public class Usuario
     }
  
     
-    public Usuario(String email,String password) {
-    	this.email = email;
+    public Usuario(int dni,String password) {
+    	this.dni = dni;
     	this.password = password;
     }
 
