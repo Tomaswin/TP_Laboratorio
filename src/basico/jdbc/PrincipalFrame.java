@@ -73,14 +73,6 @@ public class PrincipalFrame extends JFrame implements ActionListener{
 			}
 		});
 		nombreBarra.add(opcion3);
-		JMenuItem opcion4 = new JMenuItem("Mostrar Usuarios");
-		opcion4.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				handler.mostrarTodo();
-			}
-		});
-		nombreBarra.add(opcion4);
 		setJMenuBar(barra);
 	}
 

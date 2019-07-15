@@ -38,15 +38,16 @@ public class Handler {
 		frame.cambiarPanel(new MiPanelEliminar("", this));
 	}
 	
-	public void mostrarTodo(){
+	
+	public List<Usuario> traerTodos(){
+		List<Usuario> usuarios = null;
 		try {
-			List<Usuario> usuarios = bo.traerTodos();
-            
-			frame.cambiarPanel(new MiPanelTodos("", usuarios));
+			usuarios = bo.traerTodos();
 		} catch (BancoException e) {
 			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 			e.printStackTrace();
 		}
+		return usuarios;
 	}
 	
 	public void crearUsuario(Usuario user) {
