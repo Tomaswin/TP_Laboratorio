@@ -11,8 +11,12 @@ public class Tarjeta  {
 	private ArrayList<Movimiento> movimiento;
 	
 	
-	public Tarjeta(int numero, String mes, int codigo, ArrayList<Movimiento> movimiento) {
-		
+	public Tarjeta(int numero, String mes, int codigo, int importeTotal, ArrayList<Movimiento> movimiento) {
+		this.numero = numero;
+		this.mes = mes;
+		this.codigo = codigo;
+		this.importeTotal = importeTotal;
+		this.movimiento = movimiento;
 	}
 
 

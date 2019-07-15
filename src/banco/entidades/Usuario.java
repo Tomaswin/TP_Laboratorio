@@ -1,17 +1,21 @@
 package banco.entidades;
 
+import java.util.ArrayList;
+
 public class Usuario
  {
     private String nombre;
     private String apellido;
     private String password;
     private int dni;
+    private ArrayList<Cuenta> cuentas;
     
-    public Usuario(String nombre, String apellido, String password, int dni) {
+    public Usuario(String nombre, String apellido, String password, int dni, ArrayList<Cuenta> Cuentas) {
     	this.nombre = nombre;
     	this.apellido = apellido;
     	this.password = password;
     	this.dni = dni;
+    	this.cuentas = Cuentas;
     }
     
     public Usuario(int dni) {
@@ -62,6 +66,16 @@ public class Usuario
     public void setDni(int dni)
     {
         this.dni = dni;
+    }
+    
+    public int getCuenta()
+    {
+        return cuentas;
+    }
+
+    public void setCuenta(ArrayList<Cuenta> Cuenta)
+    {
+        this.cuentas = Cuenta;
     }
     
 

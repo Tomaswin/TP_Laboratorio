@@ -4,16 +4,17 @@ public class Movimiento {
 	private int importe;
 	private String operacion;
 	
-	public Movimiento(int valor, String operacion){
-		
+	public Movimiento(int importe, String operacion){
+		this.importe = importe;
+		this.operacion = operacion;
 	}
 
-	public int getValor() {
+	public int getImporte() {
 		return importe;
 	}
 
-	public void setValor(int valor) {
-		this.importe = valor;
+	public void setImporte(int importe) {
+		this.importe = importe;
 	}
 
 	public String getOperacion() {
