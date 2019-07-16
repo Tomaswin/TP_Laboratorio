@@ -18,16 +18,16 @@ import banco.entidades.Usuario;
 import banco.ui.Handler;
  
 	
-public class MiPanelEliminar extends MiPanelGenerico {
+public class MiPanelExtraccion extends MiPanelGenerico {
 	JButton agregar;
 	
-	public MiPanelEliminar(String titulo, Handler handler) {
+	public MiPanelExtraccion(String titulo, Handler handler) {
 		super(handler);
 	}
 	
 	public void actionClick() {
 		if(nonEmptyField()) {
-			Usuario usuario	= new Usuario(Integer.parseInt(field.get(0).getText()) );
+			Usuario usuario	= new Usuario(Integer.parseInt(field.get(0).getText()),field.get(1).getText() );
 			handler.eliminarUsuario(usuario);
 			field.get(0).setText("");
 				
@@ -39,7 +39,7 @@ public class MiPanelEliminar extends MiPanelGenerico {
 	@Override
 	protected ArrayList<String> getButton() {
 		ArrayList<String> fieldName = new ArrayList<String>();
-		fieldName.add("Eliminar");
+		fieldName.add("Extraer");
 		return fieldName;
 	}
 
@@ -47,6 +47,9 @@ public class MiPanelEliminar extends MiPanelGenerico {
 	protected ArrayList<String> getField() {
 		ArrayList<String> fieldName = new ArrayList<String>();
 		fieldName.add("DNI");
+		fieldName.add("Password");
+		fieldName.add("Saldo:");
+		fieldName.add("Monto a Extraer");
 		return fieldName;
 		}
 	
