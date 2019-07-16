@@ -28,7 +28,7 @@ public class MiPanel extends MiPanelGenerico {
 		if(nonEmptyField()) {
 			int dniField = Integer.valueOf(field.get(4).getText());
 			ArrayList<Cuenta> cuenta = null;
-			Usuario usuario	= new Usuario(field.get(0).getText(), field.get(1).getText(), field.get(2).getText(), dniField, cuenta);
+			Usuario usuario	= new Usuario(field.get(0).getText(), field.get(1).getText(), field.get(2).getText(), dniField);
 			handler.crearUsuario(usuario);
 			
 			field.get(0).setText("");

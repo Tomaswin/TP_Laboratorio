@@ -46,7 +46,7 @@ public class MiPanelEliminar extends MiPanelGenerico {
 	@Override
 	protected ArrayList<String> getField() {
 		ArrayList<String> fieldName = new ArrayList<String>();
-		fieldName.add("Email");
+		fieldName.add("DNI");
 		return fieldName;
 		}
 	

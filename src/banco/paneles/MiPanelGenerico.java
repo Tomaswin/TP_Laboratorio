@@ -36,8 +36,23 @@ public abstract class MiPanelGenerico extends JPanel implements ActionListener{
                 JLabel tituloLabel = new JLabel(arrayField.get(i));
                 dato.add(tituloLabel);
                 dato.add(Box.createHorizontalStrut(10));
-                if (arrayField.get(i).equals("Password"))
-                {
+                if(arrayField.get(i).equals("Password")) {
+                	
+                	
+                }
+                if (arrayField.get(i).equals("Password")){
+				                	
+				                	
+				    }
+				if (arrayField.get(i).equals("Password")){
+				 	
+				 	
+				 }
+				if (arrayField.get(i).equals("Password")){
+				 	
+				 	
+				 }
+                if (arrayField.get(i).equals("Password")){
                 	 field.add(new JPasswordField(30));
                      dato.add(field.get(i));
                      vertical.add(dato);

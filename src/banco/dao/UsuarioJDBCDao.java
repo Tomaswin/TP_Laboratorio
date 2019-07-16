@@ -122,8 +122,7 @@ public class UsuarioJDBCDao implements UsuarioDao {
 		    ResultSet rs = ps.executeQuery();
 			
 			while(rs.next()) {
-				ArrayList<Cuenta> cuenta = null;
-				Usuario user = new Usuario(rs.getString("nombre"), rs.getString("apellido"),  rs.getString("password"), rs.getInt("dni"),cuenta);
+				Usuario user = new Usuario(rs.getString("nombre"), rs.getString("apellido"),  rs.getString("password"), rs.getInt("dni"));
 				listaUsuarios.add(user);
 			}
 		} catch (SQLException e) {
@@ -145,21 +144,19 @@ public class UsuarioJDBCDao implements UsuarioDao {
 	}
 	
 	@Override
-	public List<Cuenta> traerTodasLasCuentas(Cuenta cuenta) throws BancoException{
+	public List<Cuenta> traerTodasLasCuentas(Usuario usuario) throws BancoException{
 		List<Cuenta> listaCuenta = new ArrayList<Cuenta>(); //subtyping
 		DBManager.getInstance();
 		Connection c = DBManager.connect();
 		try {
 			PreparedStatement ps = c.prepareStatement("SELECT * FROM cuentas WHERE DNI = ?");
-		    ps.setInt(1, cuenta.getDNI());
+			ps.setInt(1, usuario.getDni());
 		    // process the results
 		    ResultSet rs = ps.executeQuery();
 			
 			while(rs.next()) {
-				Cuenta oCuenta = new Cuenta(rs.getInt("DNI"), rs.getInt("dinero"))
-				ArrayList<Cuenta> cuenta = new Arr;
-				Usuario user = new Usuario(rs.getString("nombre"), rs.getString("apellido"),  rs.getString("password"), rs.getInt("dni"),cuenta);
-				listaCuenta.add(user);
+				Cuenta oCuenta = new Cuenta(rs.getInt("dinero"), rs.getInt("DNI"), rs.getInt("numerocuenta"));
+				listaCuenta.add(oCuenta);
 			}
 		} catch (SQLException e) {
 			try {
@@ -179,39 +176,6 @@ public class UsuarioJDBCDao implements UsuarioDao {
 		return listaCuenta;
 	}
 	
-	@Override
-	public List<Usuario> traerTodosUsuarios() throws BancoException{
-		List<Usuario> listaUsuarios = new ArrayList<Usuario>(); //subtyping
-		DBManager.getInstance();
-		Connection c = DBManager.connect();
-		try {
-			PreparedStatement ps = c.prepareStatement("SELECT * FROM usuarios");
-
-		    // process the results
-		    ResultSet rs = ps.executeQuery();
-			
-			while(rs.next()) {
-				ArrayList<Cuenta> cuenta = null;
-				Usuario user = new Usuario(rs.getString("nombre"), rs.getString("apellido"),  rs.getString("password"), rs.getInt("dni"),cuenta);
-				listaUsuarios.add(user);
-			}
-		} catch (SQLException e) {
-			try {
-				c.rollback();
-				throw new BancoException("Problema al obtener todos los usuarios, volviendo atras...");
-			} catch (SQLException e1) {
-				throw new BancoException("Problema al obtener todos los usuarios, no se pudo volver atras");
-			}
-		} finally {
-			try {
-				c.close();
-			} catch (SQLException e1) {
-				throw new BancoException("Problema con SQL");
-			}
-		}
-		
-		return listaUsuarios;
-	}
 
 @Override
 public boolean usuarioExistente(Usuario user) throws BancoException{

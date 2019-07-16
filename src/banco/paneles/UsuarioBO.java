@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import banco.dao.*;
+import banco.entidades.Cuenta;
 import banco.entidades.Usuario;
 import banco.exceptions.BancoException;
 
 public class UsuarioBO {
 	private UsuarioJDBCDao userJDBC;
+	private Usuario logueado;
 
 	public void crearUsuario(Usuario user) throws BancoException {
 		if (!validarUsuario(user)) {
@@ -49,6 +51,14 @@ public class UsuarioBO {
 
 		return listaUsuarios;
 	}
+	
+	public List<Cuenta> traerTodasCuentas() throws BancoException {
+		
+		List<Cuenta> listaUsuarios = new ArrayList<Cuenta>();
+		listaUsuarios = userJDBC.traerTodasLasCuentas(logueado);
+
+		return listaUsuarios;
+	}
 
 	public boolean validarUsuario(Usuario user) throws BancoException {
 		boolean correcto;
@@ -59,6 +69,7 @@ public class UsuarioBO {
 	
 	public void login(Usuario user) throws BancoException {
 		if (validarUsuario(user)) {
+			logueado = user;
 		} else {
 			throw new BancoException("Usuario Inexistente");
 		}

@@ -16,13 +16,15 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
 import banco.entidades.Cuenta;
+import banco.entidades.Movimiento;
+import banco.entidades.Tarjeta;
 import banco.entidades.Usuario;
 import banco.ui.Handler;
  
-public class MiPanelEditar extends MiPanelGenerico {
+public class MiPanelMostrarTarjeta extends MiPanelGenerico {
 	JButton agregar;
 	
-	public MiPanelEditar(String titulo, Handler handler) {
+	public MiPanelMostrarTarjeta(String titulo, Handler handler) {
 		super(handler);
 	}
 	
@@ -30,8 +32,9 @@ public class MiPanelEditar extends MiPanelGenerico {
 		if(nonEmptyField()) {
 			ArrayList<Cuenta> cuenta = null;
 			int dniField = Integer.valueOf(field.get(4).getText());
-			Usuario usuario	= new Usuario(field.get(0).getText(), field.get(1).getText(), field.get(2).getText(),dniField);
-			handler.editarUsuario(usuario);
+			ArrayList<Movimiento> movimiento = new ArrayList<Movimiento>();
+			Tarjeta tarjeta	= new Tarjeta(Integer.parseInt(field.get(0).getText()) , field.get(1).getText(), Integer.parseInt(field.get(2).getText()),Integer.parseInt(field.get(3).getText()),movimiento);
+			handler.mostrarTarjeta(tarjeta);
 			
 			field.get(0).setText("");
 			field.get(1).setText("");
