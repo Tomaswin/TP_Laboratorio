@@ -8,14 +8,12 @@ public class Usuario
     private String apellido;
     private String password;
     private int dni;
-    private ArrayList<Cuenta> cuenta;
     
-    public Usuario(String nombre, String apellido, String password, int dni, ArrayList<Cuenta> Cuenta) {
+    public Usuario(String nombre, String apellido, String password, int dni) {
     	this.nombre = nombre;
     	this.apellido = apellido;
     	this.password = password;
     	this.dni = dni;
-    	this.cuenta = Cuenta;
     }
     
     public Usuario(int dni) {
@@ -68,21 +66,10 @@ public class Usuario
         this.dni = dni;
     }
     
-    public ArrayList<Cuenta> getCuenta()
-    {
-        return cuenta;
-    }
-
-    public void setCuenta(ArrayList<Cuenta> Cuenta)
-    {
-        this.cuenta = Cuenta;
-    }
-    
-
     public String toString()
     {
         return "Nombre: " + this.nombre + "Apellido: " + this.apellido + " Email: " + " Password: " + this.password + " Dni: "
-        		+ this.dni + this.cuenta ;
+        		+ this.dni;
     }
 
  }
