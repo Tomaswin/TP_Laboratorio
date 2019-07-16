@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import banco.database.DBManager;
+import banco.entidades.Cuenta;
 import banco.entidades.Usuario;
 import banco.exceptions.BancoException;
 
@@ -121,7 +122,8 @@ public class UsuarioJDBCDao implements UsuarioDao {
 		    ResultSet rs = ps.executeQuery();
 			
 			while(rs.next()) {
-				Usuario user = new Usuario(rs.getString("nombre"), rs.getString("apellido"),  rs.getString("password"), rs.getInt("dni"),"AGREGAR ARRAY");
+				ArrayList<Cuenta> cuenta = null;
+				Usuario user = new Usuario(rs.getString("nombre"), rs.getString("apellido"),  rs.getString("password"), rs.getInt("dni"),cuenta);
 				listaUsuarios.add(user);
 			}
 		} catch (SQLException e) {

@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
+import banco.entidades.Cuenta;
 import banco.entidades.Usuario;
 import banco.ui.Handler;
  
@@ -27,8 +28,9 @@ public class MiPanelEditar extends MiPanelGenerico {
 	
 	public void actionClick() {
 		if(nonEmptyField()) {
+			ArrayList<Cuenta> cuenta = null;
 			int dniField = Integer.valueOf(field.get(4).getText());
-			Usuario usuario	= new Usuario(field.get(0).getText(), field.get(1).getText(), field.get(2).getText(),dniField,"AGREGAR ARRAY");
+			Usuario usuario	= new Usuario(field.get(0).getText(), field.get(1).getText(), field.get(2).getText(),dniField,cuenta);
 			handler.editarUsuario(usuario);
 			
 			field.get(0).setText("");
