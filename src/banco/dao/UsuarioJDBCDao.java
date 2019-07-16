@@ -247,4 +247,10 @@ public boolean usuarioExistente(Usuario user) throws BancoException{
 	}
 	return exists;
 }
+
+
+public void realizarDeposito(Usuario user) {
+	// TODO Auto-generated method stub
+	
+}
 }

@@ -34,6 +34,15 @@ public class UsuarioBO {
 		}
 	}
 
+	public void realizarDeposito(Usuario user) throws BancoException {
+		if (validarUsuario(user)) {
+			userJDBC.realizarDeposito(user);
+		} else {
+			throw new BancoException("Usuario Inexistente");
+		}
+		
+	}
+	
 	public List<Usuario> traerTodos() throws BancoException {
 		List<Usuario> listaUsuarios = new ArrayList<Usuario>();
 		listaUsuarios = userJDBC.traerTodosUsuarios();
@@ -58,5 +67,7 @@ public class UsuarioBO {
 	public void setUserJDBC(UsuarioJDBCDao userJDBC) {
 		this.userJDBC = userJDBC;
 	}
+
+	
 
 }

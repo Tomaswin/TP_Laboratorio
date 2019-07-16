@@ -49,11 +49,11 @@ public class PrincipalFrame extends JFrame implements ActionListener{
 
 		JMenu nombreBarra = new JMenu("Opciones");
 		barra.add(nombreBarra);
-		JMenuItem opcion1 = new JMenuItem("Alta Usuario");
+		JMenuItem opcion1 = new JMenuItem("Deposito");
 		opcion1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				handler.mostrarAltaUsuario();
+				handler.mostrarDeposito();
 			}
 		});
 		nombreBarra.add(opcion1);

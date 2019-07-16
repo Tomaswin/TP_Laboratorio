@@ -36,6 +36,10 @@ public class Handler {
 	public void mostrarEliminarUsuario() {
 		frame.cambiarPanel(new MiPanelEliminar("", this));
 	}
+	public void mostrarDeposito() {
+		frame.cambiarPanel(new MiPanelDeposito("", this));
+	}
+	
 	
 	public void mostrarLoginUsuario(){
 		try {
@@ -85,6 +89,16 @@ public class Handler {
 			e.printStackTrace();
 		}
 	}
+
+	public void realizarDeposito(Usuario user) {
+		try {
+			bo.realizarDeposito(user);
+		} catch (BancoException e) {
+			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+		}
+	}
+
 	
 	
 }
