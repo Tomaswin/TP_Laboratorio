@@ -8,6 +8,7 @@ import banco.ui.Handler;
 public class Test{
 	
         public static void main(String[] args) {
+        	
         	new Handler().init();
       }
 }

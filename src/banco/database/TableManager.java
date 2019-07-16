@@ -10,7 +10,7 @@ public class TableManager {
 		ArrayList<String> sql = new ArrayList<String>();
 		
 		String usuarioSql = "CREATE TABLE usuarios ( id INTEGER IDENTITY, DNI INTEGER, nombre VARCHAR(256), apellido VARCHAR(10), password VARCHAR(256))";
-		String cuentaSql = "CREATE TABLE cuentas ( id INTEGER IDENTITY, nombre VARCHAR(256), dinero INTEGER, DNI INTEGER)";
+		String cuentaSql = "CREATE TABLE cuentas ( id INTEGER IDENTITY, dinero INTEGER, DNI INTEGER)";
 		String tarjetaSql = "CREATE TABLE tarjetas ( id INTEGER IDENTITY, numero INTEGER, mes VARCHAR(256), cod INTEGER, total INTEGER, cuenta INTEGER)";
 		String movimientoSql = "CREATE TABLE movimientos (id INTEGER IDENTITY, operacion VARCHAR(256), dinero INTEGER)";
 		
