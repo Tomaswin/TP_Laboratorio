@@ -72,7 +72,13 @@ public class PrincipalFrame extends JFrame implements ActionListener{
 				handler.mostrarEliminarUsuario();
 			}
 		});
-		nombreBarra.add(opcion3);
+		JMenuItem opcion4 = new JMenuItem("Mostrar cuentas");
+		opcion4.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				handler.mostrarTodasCuentas();			}
+		});
+		nombreBarra.add(opcion4);
 		setJMenuBar(barra);
 	}
 

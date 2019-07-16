@@ -28,8 +28,8 @@ public class MiPanelExtraccion extends MiPanelGenerico {
 	public void actionClick() {
 		if(nonEmptyField()) {
 			Usuario usuario	= new Usuario(Integer.parseInt(field.get(0).getText()),field.get(1).getText() );
-			handler.eliminarUsuario(usuario);
 			field.get(0).setText("");
+			field.get(1).setText("");
 				
 		}else {
 			JOptionPane.showMessageDialog(null, "Campos incompletos", "Error", JOptionPane.ERROR_MESSAGE);
@@ -48,7 +48,7 @@ public class MiPanelExtraccion extends MiPanelGenerico {
 		ArrayList<String> fieldName = new ArrayList<String>();
 		fieldName.add("DNI");
 		fieldName.add("Password");
-		fieldName.add("Saldo:");
+		fieldName.add(cuenta.getDinero());
 		fieldName.add("Monto a Extraer");
 		return fieldName;
 		}

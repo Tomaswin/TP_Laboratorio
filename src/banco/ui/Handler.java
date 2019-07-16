@@ -5,6 +5,8 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 import banco.dao.UsuarioJDBCDao;
+import banco.entidades.Cuenta;
+import banco.entidades.Tarjeta;
 import banco.entidades.Usuario;
 import banco.exceptions.BancoException;
 import banco.paneles.*;
@@ -84,6 +86,31 @@ public class Handler {
 			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 			e.printStackTrace();
 		}
+	}
+	
+	public void mostrarTodasCuentas(){
+		try {
+			List<Cuenta> usuarios = bo.traerTodasCuentas();
+			frame.cambiarPanel(new MiPanelMostrarCuenta("", usuarios));
+		} catch (BancoException e) {
+			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+		}
+	}
+
+	public void mostrarTarjeta(Tarjeta tarjeta) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void mostrarMovTarjeta(Usuario usuario) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void mostrarPanelExtraccion(Usuario usuario) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	

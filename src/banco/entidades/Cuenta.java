@@ -5,10 +5,12 @@ import java.util.ArrayList;
 public class Cuenta {
 	private int DNI;
 	private int dinero;
+	private int numeroCuenta;
 	
-	public Cuenta(int DNI, int Dinero) {
-		this.setDNI(DNI);
-		this.setDinero(Dinero);
+	public Cuenta(int DNI, int Dinero, int numeroCuenta) {
+		this.DNI = DNI;
+		this.dinero = dinero;
+		this.numeroCuenta = numeroCuenta;
 	}
 
 	public int getDNI() {
@@ -25,5 +27,13 @@ public class Cuenta {
 
 	public void setDinero(int Dinero) {
 		this.dinero = Dinero;
+	}
+
+	public int getNumeroCuenta() {
+		return numeroCuenta;
+	}
+
+	public void setNumeroCuenta(int numeroCuenta) {
+		this.numeroCuenta = numeroCuenta;
 	}
 }

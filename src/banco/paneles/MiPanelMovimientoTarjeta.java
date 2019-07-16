@@ -28,7 +28,7 @@ public class MiPanelMovimientoTarjeta extends MiPanelGenerico {
 	public void actionClick() {
 		if(nonEmptyField()) {
 			Usuario usuario	= new Usuario(Integer.parseInt(field.get(0).getText()),field.get(1).getText() );
-			handler.eliminarUsuario(usuario);
+			handler.mostrarMovTarjeta(usuario);
 			field.get(0).setText("");
 				
 		}else {
@@ -48,6 +48,7 @@ public class MiPanelMovimientoTarjeta extends MiPanelGenerico {
 		ArrayList<String> fieldName = new ArrayList<String>();
 		fieldName.add("Importe");
 		fieldName.add("Operacion");
+		fieldName.add("Total");
 		return fieldName;
 		}
 	
