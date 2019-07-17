@@ -75,4 +75,10 @@ public class MiPanelLogin extends MiPanelGenerico {
 		add(vertical);
 
 	}
+
+	@Override
+	protected void actionClickWithParams(String name) {
+		// TODO Auto-generated method stub
+		
+	}
 }

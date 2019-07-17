@@ -66,7 +66,7 @@ public class MiPanelMostrarTarjeta extends JPanel implements ActionListener {
                 Box botonera = Box.createHorizontalBox();
                 botonera.add(Box.createHorizontalGlue());
                 botonera.add(Box.createHorizontalStrut(10));
-                JButton cancel = new JButton("Cancel");
+                JButton cancel = new JButton("Volver");
                 cancel.addActionListener(this);
                 botonera.add(cancel);
                

@@ -54,13 +54,15 @@ public abstract class MiPanelGenerico extends JPanel implements ActionListener{
                     }
                      
                 }
-            
+             
             vertical.add(Box.createVerticalStrut(50));
         	Box botonera = Box.createHorizontalBox();
             botonera.add(Box.createHorizontalGlue());
-            JButton cancelButton = new JButton("Cancel");
-            cancelButton.addActionListener(this);
-            botonera.add(cancelButton);
+            if(!arrayField.contains("DNI") && !arrayButton.contains("Ver tarjetas")) {
+            	  JButton cancelButton = new JButton("Volver");
+                  cancelButton.addActionListener(this);
+                  botonera.add(cancelButton);	
+            }
             
             for(int i = 0; i < arrayButton.size(); i++)
             {                
