@@ -93,7 +93,7 @@ public class MiPanelMostrarCuenta extends MiPanelGenerico{
 								handler.mostrarPanelExtraccion(cuentaSeleccionada);
 								break;
 							case "Movimientos":
-								handler.mostrarMovTarjeta();
+								handler.mostrarMovimientos(cuentaSeleccionada);
 								break;
 							case "Ver tarjetas":
 								handler.mostrarTarjeta(cuentaSeleccionada);

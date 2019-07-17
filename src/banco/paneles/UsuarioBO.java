@@ -5,6 +5,7 @@ import java.util.List;
 
 import banco.dao.*;
 import banco.entidades.Cuenta;
+import banco.entidades.Movimiento;
 import banco.entidades.Tarjeta;
 import banco.entidades.Usuario;
 import banco.exceptions.BancoException;
@@ -35,15 +36,6 @@ public class UsuarioBO {
 		} else {
 			throw new BancoException("Usuario Inexistente");
 		}
-	}
-
-	public void realizarDeposito(Usuario user) throws BancoException {
-		if (validarUsuario(user)) {
-			userJDBC.realizarDeposito(user);
-		} else {
-			throw new BancoException("Usuario Inexistente");
-		}
-		
 	}
 	
 	public List<Usuario> traerTodos() throws BancoException {
@@ -113,6 +105,17 @@ public class UsuarioBO {
 		}else {
 			return true;
 		}
+	}
+
+	public void generarMovimiento(Cuenta cuenta, String operacion, int dinero) throws BancoException {
+		userJDBC.generarMovimiento(cuenta, operacion, dinero);
+	}
+	
+	public List<Movimiento> traerMovimientos(Cuenta cuenta) throws BancoException {
+		List<Movimiento> listMov = new ArrayList<Movimiento>();
+		listMov = userJDBC.traerTodosMovimientos(cuenta);
+
+		return listMov;
 	}
 
 	

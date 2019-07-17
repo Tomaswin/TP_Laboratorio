@@ -1,20 +1,22 @@
 package banco.entidades;
 
 public class Movimiento {
-	private int importe;
+	private int dinero;
+	private int numeroCuenta;
 	private String operacion;
 	
-	public Movimiento(int importe, String operacion){
-		this.importe = importe;
+	public Movimiento(int numeroCuenta, String operacion, int dinero){
+		this.setNumeroCuenta(numeroCuenta);
 		this.operacion = operacion;
+		this.dinero = dinero;
 	}
 
-	public int getImporte() {
-		return importe;
+	public int getDinero() {
+		return dinero;
 	}
 
-	public void setImporte(int importe) {
-		this.importe = importe;
+	public void setDinero(int dinero) {
+		this.dinero = dinero;
 	}
 
 	public String getOperacion() {
@@ -23,5 +25,13 @@ public class Movimiento {
 
 	public void setOperacion(String operacion) {
 		this.operacion = operacion;
+	}
+
+	public int getNumeroCuenta() {
+		return numeroCuenta;
+	}
+
+	public void setNumeroCuenta(int numeroCuenta) {
+		this.numeroCuenta = numeroCuenta;
 	}
 }

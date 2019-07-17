@@ -56,14 +56,14 @@ public class MiPanelDeposito extends MiPanelGenerico {
 	@Override
 	protected ArrayList<String> getButton() {
 		ArrayList<String> fieldName = new ArrayList<String>();
-		fieldName.add("Extraer");
+		fieldName.add("Deposito");
 		return fieldName;
 	}
 
 	@Override
 	protected ArrayList<String> getField() {
 		ArrayList<String> fieldName = new ArrayList<String>();
-		fieldName.add("Monto a Extraer");
+		fieldName.add("Monto a Depositar");
 		return fieldName;
 		}
 	

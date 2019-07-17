@@ -9,6 +9,7 @@ import java.util.List;
 
 import banco.database.DBManager;
 import banco.entidades.Cuenta;
+import banco.entidades.Movimiento;
 import banco.entidades.Tarjeta;
 import banco.entidades.Usuario;
 import banco.exceptions.BancoException;
@@ -26,8 +27,8 @@ public class UsuarioJDBCDao implements UsuarioDao {
 			PreparedStatement ps = c.prepareStatement("INSERT INTO usuarios (nombre, apellido, email, password, dni, sexo) VALUES (?,?,?,?,?,?)");
 			ps.setString(1, user.getNombre());
 			ps.setString(2, user.getApellido());
-			ps.setString(4, user.getPassword());
-			ps.setInt(5, user.getDni());
+			ps.setString(3, user.getPassword());
+			ps.setInt(4, user.getDni());
 
 		    ps.executeUpdate();
 			c.commit();
@@ -58,8 +59,8 @@ public class UsuarioJDBCDao implements UsuarioDao {
 			PreparedStatement ps = c.prepareStatement("UPDATE usuarios set nombre = ? , apellido = ? , email = ? , password = ? , dni = ? , sexo = ? WHERE email = ?");
 			ps.setString(1, user.getNombre());
 			ps.setString(2, user.getApellido());
-			ps.setString(4, user.getPassword());
-			ps.setInt(5, user.getDni());
+			ps.setString(3, user.getPassword());
+			ps.setInt(4, user.getDni());
 
 		    ps.executeUpdate();
 			c.commit();
@@ -340,5 +341,68 @@ public boolean usuarioExistente(Usuario user) throws BancoException{
 			}
 		}
 		throw new BancoException("Plata depositada correctamente");
+	}
+
+
+	public void generarMovimiento(Cuenta cuenta, String operacion, int dinero) throws BancoException {
+		DBManager.getInstance();
+		Connection c = DBManager.connect();
+
+		try {
+			PreparedStatement ps = c.prepareStatement("INSERT INTO movimientosCuenta (numerocuenta, operacion, dinero) VALUES (?,?,?)");
+			ps.setInt(1, cuenta.getNumeroCuenta());
+			ps.setString(2, operacion);
+			ps.setInt(3, dinero);
+
+		    ps.executeUpdate();
+			c.commit();
+			
+		} catch (SQLException e) {
+			try {
+				c.rollback();
+			} catch (SQLException e1) {
+				throw new BancoException("Problema al generar un movimiento nuevo, no se pudo volver atras");
+			}
+			throw new BancoException("Problema al generar un movimiento nuevo, volviendo atras...");
+		} finally {
+			try {
+				c.close();
+			} catch (SQLException e1) {
+				throw new BancoException("Problema con SQL");
+			}
+		}
+	}
+	
+	@Override
+	public List<Movimiento> traerTodosMovimientos(Cuenta cuenta) throws BancoException{
+		List<Movimiento> listMov = new ArrayList<Movimiento>(); //subtyping
+		DBManager.getInstance();
+		Connection c = DBManager.connect();
+		try {
+			PreparedStatement ps = c.prepareStatement("SELECT numerocuenta,operacion,dinero FROM movimientosCuenta WHERE numerocuenta = ?");
+			ps.setInt(1, cuenta.getNumeroCuenta());
+		    // process the results
+		    ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				Movimiento oMov = new Movimiento(rs.getInt("numerocuenta"), rs.getString("operacion"), rs.getInt("dinero"));
+				listMov.add(oMov);
+			}
+		} catch (SQLException e) {
+			try {
+				c.rollback();
+				throw new BancoException("Problema al obtener todos los movimientos, volviendo atras...");
+			} catch (SQLException e1) {
+				throw new BancoException("Problema al obtener todos los movimientos, no se pudo volver atras");
+			}
+		} finally {
+			try {
+				c.close();
+			} catch (SQLException e1) {
+				throw new BancoException("Problema con SQL");
+			}
+		}
+		
+		return listMov;
 	}
 }

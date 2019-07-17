@@ -13,7 +13,7 @@ public class TableManager {
 		String usuarioSql = "CREATE TABLE usuarios (DNI INTEGER IDENTITY, nombre VARCHAR(256), apellido VARCHAR(10), password VARCHAR(256))";
 		String cuentaSql = "CREATE TABLE cuentas (dinero DOUBLE, DNI INTEGER, numerocuenta INTEGER IDENTITY)";
 		String tarjetaSql = "CREATE TABLE tarjetas (numero INTEGER IDENTITY, mes VARCHAR(256), cod INTEGER, total INTEGER, cuenta INTEGER)";
-		String movimientoSql = "CREATE TABLE movimientos (id INTEGER IDENTITY, operacion VARCHAR(256), dinero INTEGER)";
+		String movimientoSql = "CREATE TABLE movimientosCuenta (id INTEGER IDENTITY, numerocuenta INTEGER,  operacion VARCHAR(256), dinero INTEGER)";
 		
 		sql.add(usuarioSql);
 		sql.add(cuentaSql);

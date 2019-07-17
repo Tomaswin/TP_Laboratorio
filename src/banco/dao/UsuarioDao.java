@@ -3,6 +3,7 @@ package banco.dao;
 import java.util.List;
 
 import banco.entidades.Cuenta;
+import banco.entidades.Movimiento;
 import banco.entidades.Tarjeta;
 import banco.entidades.Usuario;
 import banco.exceptions.BancoException;
@@ -19,5 +20,7 @@ public interface UsuarioDao {
 	public Cuenta obtenerDinero(Cuenta cuenta) throws BancoException;
 	public void realizarExtraccion(Cuenta cuenta, int extraccion) throws BancoException;
 	public void realizarDeposito(Cuenta cuenta, int extraccion) throws BancoException;
+	public void generarMovimiento(Cuenta cuenta, String operacion, int dinero) throws BancoException;
+	List<Movimiento> traerTodosMovimientos(Cuenta cuenta) throws BancoException;
 	
 }
