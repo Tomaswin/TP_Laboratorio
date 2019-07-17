@@ -68,6 +68,11 @@ public class UsuarioBO {
 
 		return listaTarjetas;
 	}
+	
+	public Cuenta obtenerDinero(Cuenta cuenta) throws BancoException{
+		Cuenta oCuenta = userJDBC.obtenerDinero(cuenta);
+		return oCuenta;
+	}
 
 	public boolean validarUsuario(Usuario user) throws BancoException {
 		boolean correcto;

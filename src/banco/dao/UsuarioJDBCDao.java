@@ -250,4 +250,38 @@ public boolean usuarioExistente(Usuario user) throws BancoException{
 	// TODO Auto-generated method stub
 	
 	}
+
+
+	@Override
+	public Cuenta obtenerDinero(Cuenta cuenta) throws BancoException {
+		Cuenta cuentaRes = null;
+		DBManager.getInstance();
+		Connection c = DBManager.connect();
+		try {
+			PreparedStatement ps = c.prepareStatement("SELECT dinero,DNI,numerocuenta FROM cuentas WHERE numerocuenta = ?");
+			ps.setInt(1, cuenta.getNumeroCuenta());
+		    // process the results
+		    ResultSet rs = ps.executeQuery();
+			
+			if(rs.next())
+			{
+				cuentaRes = new Cuenta( (int) rs.getDouble("dinero"), rs.getInt("DNI"),rs.getInt("numerocuenta"));
+			}
+			
+		} catch (SQLException e) {
+			try {
+				c.rollback();
+				throw new BancoException("Problema con SQL, volviendo atras...");
+			} catch (SQLException e1) {
+				throw new BancoException("Problema con SQL, no se pudo volver atras");
+			}
+		} finally {
+			try {
+				c.close();
+			} catch (SQLException e1) {
+				throw new BancoException("Problema con SQL");
+			}
+		}
+		return cuentaRes;
+	}
 }

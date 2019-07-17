@@ -39,47 +39,7 @@ public class PrincipalFrame extends JFrame implements ActionListener{
 	
 	public void loginSuccess() {
 		setSize(800, 500);
-		addMenuBar();
-	}
-
-	
-	
-	private void addMenuBar() {
-		JMenuBar barra = new JMenuBar();
-
-		JMenu nombreBarra = new JMenu("Opciones");
-		barra.add(nombreBarra);
-		JMenuItem opcion1 = new JMenuItem("Deposito");
-		opcion1.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				handler.mostrarDeposito();
-			}
-		});
-		nombreBarra.add(opcion1);
-		JMenuItem opcion2 = new JMenuItem("Editar Usuario");
-		opcion2.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				handler.mostrarEditarUsuario();
-			}
-		});
-		nombreBarra.add(opcion2);
-		JMenuItem opcion3 = new JMenuItem("Eliminar Usuario");
-		opcion3.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				handler.mostrarEliminarUsuario();
-			}
-		});
-		JMenuItem opcion4 = new JMenuItem("Mostrar cuentas");
-		opcion4.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				handler.mostrarTodasCuentas();			}
-		});
-		nombreBarra.add(opcion4);
-		setJMenuBar(barra);
+		handler.mostrarTodasCuentas();
 	}
 
 	@Override

@@ -39,7 +39,7 @@ public class Handler {
 		frame.cambiarPanel(new MiPanelEliminar("", this));
 	}
 	public void mostrarDeposito() {
-		frame.cambiarPanel(new MiPanelDeposito("", this));
+		frame.cambiarPanel(new MiPanelDeposito("",this));
 	}
 	
 	
@@ -92,7 +92,7 @@ public class Handler {
 		}
 	}
 
-	public void realizarDeposito(Usuario user) {
+	public void realizarDeposito(Cuenta cuenta) {
 		try {
 			bo.realizarDeposito(user);
 		} catch (BancoException e) {
@@ -122,13 +122,19 @@ public class Handler {
 		}
 	}
 
-	public void mostrarMovTarjeta(Usuario usuario) {
+	public void mostrarMovTarjeta() {
 		// TODO Auto-generated method stub
 		
 	}
 
-	public void mostrarPanelExtraccion(Usuario usuario) {
-		// TODO Auto-generated method stub
+	public void mostrarPanelExtraccion(Cuenta cuenta) {
+		try {
+			Cuenta oCuenta = bo.obtenerDinero(cuenta);
+			frame.cambiarPanel(new MiPanelExtraccion("", this, oCuenta));
+		} catch (BancoException e) {
+			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+		}
 		
 	}
 	

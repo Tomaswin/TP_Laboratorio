@@ -8,8 +8,8 @@ public class Cuenta {
 	private int numeroCuenta;
 	
 	public Cuenta(int dinero, int DNI, int numeroCuenta) {
-		this.DNI = DNI;
 		this.dinero = dinero;
+		this.DNI = DNI;
 		this.numeroCuenta = numeroCuenta;
 	}
 

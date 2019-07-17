@@ -36,36 +36,24 @@ public abstract class MiPanelGenerico extends JPanel implements ActionListener{
                 JLabel tituloLabel = new JLabel(arrayField.get(i));
                 dato.add(tituloLabel);
                 dato.add(Box.createHorizontalStrut(10));
-                if(arrayField.get(i).equals("Password")) {
-                	
-                	
+
+                switch (arrayField.get(i)){
+                	case "Password":
+                		field.add(new JPasswordField(30));
+                		dato.add(field.get(i));
+                		vertical.add(dato);
+                		vertical.add(Box.createVerticalStrut(20));
+                		break;
+                 
+                	default:
+                		field.add(new JTextField(30));
+                		dato.add(field.get(i));
+                		vertical.add(dato);
+                		vertical.add(Box.createVerticalStrut(20));
+                		break;
+                    }
+                     
                 }
-                if (arrayField.get(i).equals("Password")){
-				                	
-				                	
-				    }
-				if (arrayField.get(i).equals("Password")){
-				 	
-				 	
-				 }
-				if (arrayField.get(i).equals("Password")){
-				 	
-				 	
-				 }
-                if (arrayField.get(i).equals("Password")){
-                	 field.add(new JPasswordField(30));
-                     dato.add(field.get(i));
-                     vertical.add(dato);
-                     vertical.add(Box.createVerticalStrut(20));
-                }else {
-                	 field.add(new JTextField(30));
-                     dato.add(field.get(i));
-                     vertical.add(dato);
-                     vertical.add(Box.createVerticalStrut(20));
-                }
-                
-               
-            }
             
             vertical.add(Box.createVerticalStrut(50));
         	Box botonera = Box.createHorizontalBox();
@@ -80,7 +68,11 @@ public abstract class MiPanelGenerico extends JPanel implements ActionListener{
         		button.addActionListener(new ActionListener() {
         			@Override
         			public void actionPerformed(ActionEvent e) {
+        				if(arrayButton.size() > 1) {
+        					actionClickWithParams(button.getLabel());
+        				}else {
         					actionClick();
+        				}	
         				}
         			});
         		botonera.add(button);
@@ -92,11 +84,13 @@ public abstract class MiPanelGenerico extends JPanel implements ActionListener{
     }
 
 	protected abstract ArrayList<String> getButton();
-
+	
 	protected abstract ArrayList<String> getField();
 
 	protected abstract void actionClick();
-
+	
+	protected abstract void actionClickWithParams(String name);
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		setVisible(false);
