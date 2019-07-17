@@ -19,6 +19,85 @@ import banco.ui.Handler;
 public class Test{
 	
         public static void main(String[] args) {
+        	//TableManager.dropUserTable();
+        	//TableManager.createTables();
+        	
+        	DBManager.getInstance();
+    		Connection c = DBManager.connect();
+    		
+    		try {
+    			PreparedStatement ps = c.prepareStatement("INSERT INTO cuentas (dinero, DNI, numerocuenta) VALUES (?,?,?)");
+    			ps.setInt(1, 50000);
+    			ps.setInt(2,421322);
+    			ps.setInt(3, 2);
+
+    		    ps.executeUpdate();
+    			c.commit();
+    			
+    		} catch (SQLException e) {
+    			try {
+    				c.rollback();
+    			} catch (SQLException e1) {
+    			}
+    		} finally {
+    			try {
+    				c.close();
+    			} catch (SQLException e1) {
+    			}
+    		}
+    		/*
+
+    		try {
+    			PreparedStatement ps = c.prepareStatement("INSERT INTO usuarios (DNI, nombre, apellido, password) VALUES (?,?,?,?)");
+    			ps.setInt(1, 421322);
+    			ps.setString(2,"Tomas");
+    			ps.setString(3, "Winicki");
+    			ps.setString(4, "tomas");
+
+    		    ps.executeUpdate();
+    			c.commit();
+    			
+    		} catch (SQLException e) {
+    			try {
+    				c.rollback();
+    			} catch (SQLException e1) {
+    			}
+    		} finally {
+    			try {
+    				c.close();
+    			} catch (SQLException e1) {
+    			}
+    		}
+    		
+    		 c = DBManager.connect();
+
+    		
+    		
+    		 c = DBManager.connect();
+
+    		try {
+    			PreparedStatement ps = c.prepareStatement("INSERT INTO tarjetas (numero, mes, cod, total, cuenta) VALUES (?,?,?,?,?)");
+    			ps.setInt(1, 1232345364);
+    			ps.setString(2,"Junio");
+    			ps.setInt(3, 123);
+    			ps.setInt(4, 12000);
+    			ps.setInt(5, 0001);
+
+    		    ps.executeUpdate();
+    			c.commit();
+    			
+    		} catch (SQLException e) {
+    			try {
+    				c.rollback();
+    			} catch (SQLException e1) {
+    			}
+    		} finally {
+    			try {
+    				c.close();
+    			} catch (SQLException e1) {
+    			}
+    		}*/
+    		
         	new Handler().init();
       }
 }

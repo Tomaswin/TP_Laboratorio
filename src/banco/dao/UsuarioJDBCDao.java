@@ -149,13 +149,13 @@ public class UsuarioJDBCDao implements UsuarioDao {
 		DBManager.getInstance();
 		Connection c = DBManager.connect();
 		try {
-			PreparedStatement ps = c.prepareStatement("SELECT * FROM cuentas WHERE DNI = ?");
+			PreparedStatement ps = c.prepareStatement("SELECT dinero,DNI,numerocuenta FROM cuentas WHERE DNI = ?");
 			ps.setInt(1, usuario.getDni());
 		    // process the results
 		    ResultSet rs = ps.executeQuery();
 			
 			while(rs.next()) {
-				Cuenta oCuenta = new Cuenta(rs.getInt("dinero"), rs.getInt("DNI"), rs.getInt("numerocuenta"));
+				Cuenta oCuenta = new Cuenta((int) rs.getDouble("dinero"), rs.getInt("DNI"), rs.getInt("numerocuenta"));
 				listaCuenta.add(oCuenta);
 			}
 		} catch (SQLException e) {

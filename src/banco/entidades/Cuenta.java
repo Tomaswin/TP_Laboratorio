@@ -7,7 +7,7 @@ public class Cuenta {
 	private int dinero;
 	private int numeroCuenta;
 	
-	public Cuenta(int DNI, int Dinero, int numeroCuenta) {
+	public Cuenta(int dinero, int DNI, int numeroCuenta) {
 		this.DNI = DNI;
 		this.dinero = dinero;
 		this.numeroCuenta = numeroCuenta;

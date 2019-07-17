@@ -17,11 +17,11 @@ import banco.exceptions.BancoException;
 public class MiPanelMostrarCuenta extends JPanel implements ActionListener {
 		 //ESTE ES EL ALTA USUARIO
 			
-			public MiPanelMostrarCuenta(String titulo, List<Cuenta> usuarios) throws BancoException {
-		                initUI(titulo, usuarios);
+			public MiPanelMostrarCuenta(String titulo, List<Cuenta> cuenta) throws BancoException {
+		                initUI(titulo, cuenta);
 		        }
 		 
-		        private void initUI(String titulo, List<Cuenta> usuarios) throws BancoException {
+		        private void initUI(String titulo, List<Cuenta> cuenta) throws BancoException {
 		                setLayout(new BorderLayout());
 		               
 		                Box tableLayout = Box.createHorizontalBox();
@@ -36,8 +36,8 @@ public class MiPanelMostrarCuenta extends JPanel implements ActionListener {
 		                Object[] rowTittle = {"Dinero","DNI", "numeroCuenta"};
 		                tableModel.addRow(rowTittle);
 		                
-		                for(int i=0; i < usuarios.size(); i++) {
-		                	Object[] data = { usuarios.get(i).getDinero(), usuarios.get(i).getDNI(),usuarios.get(i).getNumeroCuenta()};
+		                for(int i=0; i < cuenta.size(); i++) {
+		                	Object[] data = { cuenta.get(i).getDinero(), cuenta.get(i).getDNI(),cuenta.get(i).getNumeroCuenta()};
 		                	
 		                    tableModel.addRow(data);
 		                }
