@@ -26,9 +26,10 @@ import banco.ui.Handler;
 
 	
 public class MiPanelExtraccion extends MiPanelGenerico {
-	
+	private Cuenta cuenta;
 	public MiPanelExtraccion(String titulo, Handler handler, Cuenta cuenta) throws BancoException {
 		super(handler);
+		this.cuenta = cuenta;
 		initUI(titulo, cuenta);
     }
 
@@ -48,9 +49,9 @@ public class MiPanelExtraccion extends MiPanelGenerico {
 	
 	public void actionClick() {
 		if(nonEmptyField()) {
-			Usuario usuario	= new Usuario(Integer.parseInt(field.get(0).getText()),field.get(1).getText() );
+			int extraccion = Integer.parseInt(field.get(0).getText());
 			field.get(0).setText("");
-			field.get(1).setText("");
+			handler.realizarExtraccion(cuenta, extraccion);
 				
 		}else {
 			JOptionPane.showMessageDialog(null, "Campos incompletos", "Error", JOptionPane.ERROR_MESSAGE);

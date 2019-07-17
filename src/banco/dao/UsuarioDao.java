@@ -17,4 +17,7 @@ public interface UsuarioDao {
 	public List<Cuenta> traerTodasLasCuentas(Usuario usuario) throws BancoException;
 	public List<Tarjeta> traerTodasTarjetas(Cuenta cuenta) throws BancoException;
 	public Cuenta obtenerDinero(Cuenta cuenta) throws BancoException;
+	public void realizarExtraccion(Cuenta cuenta, int extraccion) throws BancoException;
+	public void realizarDeposito(Cuenta cuenta, int extraccion) throws BancoException;
+	
 }

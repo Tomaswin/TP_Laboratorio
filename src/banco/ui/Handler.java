@@ -38,9 +38,6 @@ public class Handler {
 	public void mostrarEliminarUsuario() {
 		frame.cambiarPanel(new MiPanelEliminar("", this));
 	}
-	public void mostrarDeposito() {
-		frame.cambiarPanel(new MiPanelDeposito("",this));
-	}
 	
 	
 	public void mostrarLoginUsuario(){
@@ -92,9 +89,18 @@ public class Handler {
 		}
 	}
 
-	public void realizarDeposito(Cuenta cuenta) {
+	public void realizarExtraccion(Cuenta cuenta, int extraccion) {
 		try {
-			bo.realizarDeposito(user);
+			bo.realizarExtraccion(cuenta, extraccion);
+		} catch (BancoException e) {
+			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+		}
+	}
+	
+	public void realizarDeposito(Cuenta cuenta, int extraccion) {
+		try {
+			bo.realizarDeposito(cuenta, extraccion);
 		} catch (BancoException e) {
 			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 			e.printStackTrace();
@@ -131,6 +137,17 @@ public class Handler {
 		try {
 			Cuenta oCuenta = bo.obtenerDinero(cuenta);
 			frame.cambiarPanel(new MiPanelExtraccion("", this, oCuenta));
+		} catch (BancoException e) {
+			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public void mostrarPanelDeposito(Cuenta cuenta) {
+		try {
+			Cuenta oCuenta = bo.obtenerDinero(cuenta);
+			frame.cambiarPanel(new MiPanelDeposito("", this, oCuenta));
 		} catch (BancoException e) {
 			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 			e.printStackTrace();

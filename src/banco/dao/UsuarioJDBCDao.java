@@ -284,4 +284,61 @@ public boolean usuarioExistente(Usuario user) throws BancoException{
 		}
 		return cuentaRes;
 	}
+
+
+	@Override
+	public void realizarExtraccion(Cuenta cuenta, int extraccion) throws BancoException {
+		DBManager.getInstance();
+		Connection c = DBManager.connect();
+		try {
+			PreparedStatement ps = c.prepareStatement("UPDATE cuentas set dinero = ? WHERE numerocuenta = ?");
+			ps.setInt(1, cuenta.getDinero() - extraccion);
+			ps.setInt(2, cuenta.getNumeroCuenta());
+
+		    ps.executeUpdate();
+			c.commit();
+		} catch (SQLException e) {
+			try {
+				c.rollback();
+				throw new BancoException("Problema al extraer, volviendo atras...");
+			} catch (SQLException e1) {
+				throw new BancoException("Problema al extraer, no se pudo volver atras");
+			}
+		} finally {
+			try {
+				c.close();
+			} catch (SQLException e1) {
+				throw new BancoException("Problema con SQL");
+			}
+		}
+		throw new BancoException("Plata extraida correctamente");
+	}
+	
+	@Override
+	public void realizarDeposito(Cuenta cuenta, int deposito) throws BancoException {
+		DBManager.getInstance();
+		Connection c = DBManager.connect();
+		try {
+			PreparedStatement ps = c.prepareStatement("UPDATE cuentas set dinero = ? WHERE numerocuenta = ?");
+			ps.setInt(1, cuenta.getDinero() + deposito);
+			ps.setInt(2, cuenta.getNumeroCuenta());
+
+		    ps.executeUpdate();
+			c.commit();
+		} catch (SQLException e) {
+			try {
+				c.rollback();
+				throw new BancoException("Problema al depositar, volviendo atras...");
+			} catch (SQLException e1) {
+				throw new BancoException("Problema al depositar, no se pudo volver atras");
+			}
+		} finally {
+			try {
+				c.close();
+			} catch (SQLException e1) {
+				throw new BancoException("Problema con SQL");
+			}
+		}
+		throw new BancoException("Plata depositada correctamente");
+	}
 }

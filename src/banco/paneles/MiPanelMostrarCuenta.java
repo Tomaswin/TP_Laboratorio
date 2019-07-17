@@ -87,7 +87,7 @@ public class MiPanelMostrarCuenta extends MiPanelGenerico{
 					if(cuentaSeleccionada != null) {
 						switch (name) {
 							case "Deposito":
-								handler.mostrarPanelExtraccion(cuentaSeleccionada);
+								handler.mostrarPanelDeposito(cuentaSeleccionada);
 								break;
 							case "Extraer":
 								handler.mostrarPanelExtraccion(cuentaSeleccionada);

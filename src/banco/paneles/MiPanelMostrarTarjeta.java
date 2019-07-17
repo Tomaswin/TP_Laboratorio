@@ -80,7 +80,7 @@ public class MiPanelMostrarTarjeta extends JPanel implements ActionListener {
         
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			setVisible(false); //you can't see me!
+			handler.mostrarTodasCuentas();
 		}
 
 		

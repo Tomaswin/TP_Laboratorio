@@ -73,7 +73,21 @@ public class UsuarioBO {
 		Cuenta oCuenta = userJDBC.obtenerDinero(cuenta);
 		return oCuenta;
 	}
+	
+	public void realizarExtraccion(Cuenta cuenta, int extraccion) throws BancoException{
+		if(validarExtraccion(cuenta, extraccion)) {
+			userJDBC.realizarExtraccion(cuenta, extraccion);
+		}
+		else {
+			throw new BancoException("No se puede extraer plata que no tenes");
+		}
+	}
 
+	public void realizarDeposito(Cuenta cuenta, int deposito) throws BancoException{
+		userJDBC.realizarDeposito(cuenta, deposito);
+	}
+
+	
 	public boolean validarUsuario(Usuario user) throws BancoException {
 		boolean correcto;
 		correcto = userJDBC.usuarioExistente(user);
@@ -91,6 +105,14 @@ public class UsuarioBO {
 
 	public void setUserJDBC(UsuarioJDBCDao userJDBC) {
 		this.userJDBC = userJDBC;
+	}
+	
+	public boolean validarExtraccion(Cuenta cuenta, int extraccion) {
+		if(cuenta.getDinero() < extraccion) {
+			return false;
+		}else {
+			return true;
+		}
 	}
 
 	

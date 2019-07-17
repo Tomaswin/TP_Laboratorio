@@ -93,7 +93,7 @@ public abstract class MiPanelGenerico extends JPanel implements ActionListener{
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		setVisible(false);
+		handler.mostrarTodasCuentas();
 	}
 	
 	protected boolean nonEmptyField() {
