@@ -8,15 +8,12 @@ public class Tarjeta  {
 	private String mes;
 	private int codigo;
 	private int importeTotal;
-	private ArrayList<Movimiento> movimiento;
 	
-	
-	public Tarjeta(int numero, String mes, int codigo, int importeTotal, ArrayList<Movimiento> movimiento) {
+	public Tarjeta(int numero, String mes, int codigo, int importeTotal) {
 		this.numero = numero;
 		this.mes = mes;
 		this.codigo = codigo;
 		this.importeTotal = importeTotal;
-		this.movimiento = movimiento;
 	}
 
 
@@ -48,17 +45,6 @@ public class Tarjeta  {
 	public void setCodigo(int codigo) {
 		this.codigo = codigo;
 	}
-
-
-	public ArrayList<Movimiento> getMovimiento() {
-		return movimiento;
-	}
-
-
-	public void setMovimiento(ArrayList<Movimiento> movimiento) {
-		this.movimiento = movimiento;
-	}
-
 
 	public int getImporteTotal() {
 		return importeTotal;

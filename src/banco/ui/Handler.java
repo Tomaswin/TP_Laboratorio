@@ -104,17 +104,22 @@ public class Handler {
 	
 	public void mostrarTodasCuentas(){
 		try {
-			List<Cuenta> usuarios = bo.traerTodasCuentas();
-			frame.cambiarPanel(new MiPanelMostrarCuenta("", usuarios));
+			List<Cuenta> cuentas = bo.traerTodasCuentas();
+			frame.cambiarPanel(new MiPanelMostrarCuenta("", this ,cuentas));
 		} catch (BancoException e) {
 			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 			e.printStackTrace();
 		}
 	}
 
-	public void mostrarTarjeta(Tarjeta tarjeta) {
-		// TODO Auto-generated method stub
-		
+	public void mostrarTarjeta(Cuenta cuenta) {
+		try {
+			List<Tarjeta> tarjetas = bo.traerTodasTarjetas(cuenta);
+			frame.cambiarPanel(new MiPanelMostrarTarjeta("", this ,tarjetas));
+		} catch (BancoException e) {
+			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+		}
 	}
 
 	public void mostrarMovTarjeta(Usuario usuario) {

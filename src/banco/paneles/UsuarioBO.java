@@ -5,6 +5,7 @@ import java.util.List;
 
 import banco.dao.*;
 import banco.entidades.Cuenta;
+import banco.entidades.Tarjeta;
 import banco.entidades.Usuario;
 import banco.exceptions.BancoException;
 
@@ -58,6 +59,14 @@ public class UsuarioBO {
 		listaUsuarios = userJDBC.traerTodasLasCuentas(logueado);
 
 		return listaUsuarios;
+	}
+
+	public List<Tarjeta> traerTodasTarjetas(Cuenta cuenta) throws BancoException {
+		
+		List<Tarjeta> listaTarjetas = new ArrayList<Tarjeta>();
+		listaTarjetas = userJDBC.traerTodasTarjetas(cuenta);
+
+		return listaTarjetas;
 	}
 
 	public boolean validarUsuario(Usuario user) throws BancoException {

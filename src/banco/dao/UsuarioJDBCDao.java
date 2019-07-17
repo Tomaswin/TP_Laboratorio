@@ -9,6 +9,7 @@ import java.util.List;
 
 import banco.database.DBManager;
 import banco.entidades.Cuenta;
+import banco.entidades.Tarjeta;
 import banco.entidades.Usuario;
 import banco.exceptions.BancoException;
 
@@ -176,6 +177,38 @@ public class UsuarioJDBCDao implements UsuarioDao {
 		return listaCuenta;
 	}
 	
+	
+	public List<Tarjeta> traerTodasTarjetas(Cuenta cuenta) throws BancoException {
+		List<Tarjeta> listTarjeta = new ArrayList<Tarjeta>(); //subtyping
+		DBManager.getInstance();
+		Connection c = DBManager.connect();
+		try {
+			PreparedStatement ps = c.prepareStatement("SELECT * FROM tarjetas WHERE cuenta = ?");
+			ps.setInt(1, cuenta.getNumeroCuenta());
+		    // process the results
+		    ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				Tarjeta oTarjeta = new Tarjeta(rs.getInt("numero"), rs.getString("mes"), rs.getInt("cod"), rs.getInt("total"));
+				listTarjeta.add(oTarjeta);
+			}
+		} catch (SQLException e) {
+			try {
+				c.rollback();
+				throw new BancoException("Problema al obtener todos los usuarios, volviendo atras...");
+			} catch (SQLException e1) {
+				throw new BancoException("Problema al obtener todos los usuarios, no se pudo volver atras");
+			}
+		} finally {
+			try {
+				c.close();
+			} catch (SQLException e1) {
+				throw new BancoException("Problema con SQL");
+			}
+		}
+		
+		return listTarjeta;
+	}
 
 @Override
 public boolean usuarioExistente(Usuario user) throws BancoException{
@@ -213,8 +246,8 @@ public boolean usuarioExistente(Usuario user) throws BancoException{
 }
 
 
-public void realizarDeposito(Usuario user) {
+	public void realizarDeposito(Usuario user) {
 	// TODO Auto-generated method stub
 	
-}
+	}
 }

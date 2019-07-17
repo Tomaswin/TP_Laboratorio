@@ -24,7 +24,30 @@ public class Test{
         	
         	DBManager.getInstance();
     		Connection c = DBManager.connect();
+    		try {
+    			PreparedStatement ps = c.prepareStatement("INSERT INTO tarjetas (numero, mes, cod, total, cuenta) VALUES (?,?,?,?,?)");
+    			ps.setInt(1, 45264545);
+    			ps.setString(2,"Junio");
+    			ps.setInt(3, 123);
+    			ps.setInt(4, 12000);
+    			ps.setInt(5, 1);
+
+    		    ps.executeUpdate();
+    			c.commit();
+    			
+    		} catch (SQLException e) {
+    			try {
+    				c.rollback();
+    			} catch (SQLException e1) {
+    			}
+    		} finally {
+    			try {
+    				c.close();
+    			} catch (SQLException e1) {
+    			}
+    		}
     		
+    		/*
     		try {
     			PreparedStatement ps = c.prepareStatement("INSERT INTO cuentas (dinero, DNI, numerocuenta) VALUES (?,?,?)");
     			ps.setInt(1, 50000);
@@ -45,7 +68,7 @@ public class Test{
     			} catch (SQLException e1) {
     			}
     		}
-    		/*
+    		
 
     		try {
     			PreparedStatement ps = c.prepareStatement("INSERT INTO usuarios (DNI, nombre, apellido, password) VALUES (?,?,?,?)");
@@ -75,28 +98,7 @@ public class Test{
     		
     		 c = DBManager.connect();
 
-    		try {
-    			PreparedStatement ps = c.prepareStatement("INSERT INTO tarjetas (numero, mes, cod, total, cuenta) VALUES (?,?,?,?,?)");
-    			ps.setInt(1, 1232345364);
-    			ps.setString(2,"Junio");
-    			ps.setInt(3, 123);
-    			ps.setInt(4, 12000);
-    			ps.setInt(5, 0001);
-
-    		    ps.executeUpdate();
-    			c.commit();
-    			
-    		} catch (SQLException e) {
-    			try {
-    				c.rollback();
-    			} catch (SQLException e1) {
-    			}
-    		} finally {
-    			try {
-    				c.close();
-    			} catch (SQLException e1) {
-    			}
-    		}*/
+    		*/
     		
         	new Handler().init();
       }

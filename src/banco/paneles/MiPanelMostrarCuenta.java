@@ -7,18 +7,24 @@ import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 import banco.entidades.Cuenta;
+import banco.entidades.Usuario;
 import banco.exceptions.BancoException;
+import banco.ui.Handler;
 
 public class MiPanelMostrarCuenta extends JPanel implements ActionListener {
-		 //ESTE ES EL ALTA USUARIO
+			Handler handler;
 			
-			public MiPanelMostrarCuenta(String titulo, List<Cuenta> cuenta) throws BancoException {
-		                initUI(titulo, cuenta);
+			public MiPanelMostrarCuenta(String titulo, Handler handler, List<Cuenta> cuenta) throws BancoException {
+				this.handler = handler;		  
+				initUI(titulo, cuenta);
 		        }
 		 
 		        private void initUI(String titulo, List<Cuenta> cuenta) throws BancoException {
@@ -37,10 +43,16 @@ public class MiPanelMostrarCuenta extends JPanel implements ActionListener {
 		                tableModel.addRow(rowTittle);
 		                
 		                for(int i=0; i < cuenta.size(); i++) {
-		                	Object[] data = { cuenta.get(i).getDinero(), cuenta.get(i).getDNI(),cuenta.get(i).getNumeroCuenta()};
+		                	Object[] data = { "$" + cuenta.get(i).getDinero(), cuenta.get(i).getDNI(),cuenta.get(i).getNumeroCuenta()};
 		                	
 		                    tableModel.addRow(data);
 		                }
+		                
+		                table.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
+		                    public void valueChanged(ListSelectionEvent event) {
+		                    	handler.mostrarTarjeta(cuenta.get(table.getSelectedRow() -1));
+		                    }
+		                });
 		     
 		                Box botonera = Box.createHorizontalBox();
 		                botonera.add(Box.createHorizontalGlue());
@@ -54,11 +66,9 @@ public class MiPanelMostrarCuenta extends JPanel implements ActionListener {
 		                vertical.add(tableLayout);
 		                vertical.add(botonera);
 		               
-		                add(vertical);
-		               
-		                                                            
+		                add(vertical);                                       
 		        }
-
+		        
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					setVisible(false); //you can't see me!
