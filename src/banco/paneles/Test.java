@@ -22,7 +22,9 @@ public class Test{
         	//TableManager.dropUserTable();
         	//TableManager.createTables();
         	
-        	DBManager.getInstance();
+        	
+    		/*
+    		DBManager.getInstance();
     		Connection c = DBManager.connect();
     		try {
     			PreparedStatement ps = c.prepareStatement("INSERT INTO tarjetas (numero, mes, cod, total, cuenta) VALUES (?,?,?,?,?)");
@@ -47,7 +49,7 @@ public class Test{
     			}
     		}
     		
-    		/*
+    		 
     		try {
     			PreparedStatement ps = c.prepareStatement("INSERT INTO cuentas (dinero, DNI, numerocuenta) VALUES (?,?,?)");
     			ps.setInt(1, 50000);

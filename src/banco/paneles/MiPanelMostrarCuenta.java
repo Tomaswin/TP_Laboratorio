@@ -21,7 +21,8 @@ import banco.ui.Handler;
 
 public class MiPanelMostrarCuenta extends JPanel implements ActionListener {
 			Handler handler;
-			
+			//Modificar esta vista y la de la tarjeta para que sean genericas que ademas que muestren la tabla tengan botones para deposito/extraccion/ver tarjetas y lo mismo en tarjeta + ver movimientos
+			//Ademas cambiar la funcion de getSelectionModel por que el usuario apreta una y un actionclick del boton mostrar tarjeta + excepciones
 			public MiPanelMostrarCuenta(String titulo, Handler handler, List<Cuenta> cuenta) throws BancoException {
 				this.handler = handler;		  
 				initUI(titulo, cuenta);
