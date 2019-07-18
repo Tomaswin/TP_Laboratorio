@@ -74,7 +74,6 @@ public class Test{
     		}
     		
     		
-    		*/
     		c = DBManager.connect();
     		
     		try {
@@ -124,7 +123,7 @@ public class Test{
     			} catch (SQLException e1) {
     			}
     		}
-    		
+    		*/
 
         	new Handler().init();
       }
