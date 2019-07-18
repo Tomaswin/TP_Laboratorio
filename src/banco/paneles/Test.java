@@ -23,9 +23,9 @@ public class Test{
         	
         	
     		
-    		DBManager.getInstance();
+    		//DBManager.getInstance();
     		
-    		Connection c = DBManager.connect();
+    		//Connection c = DBManager.connect();
     		/*
     		try {
     			PreparedStatement ps = c.prepareStatement("INSERT INTO usuario (DNI, nombre, apellido, password) VALUES (?,?,?,?)");

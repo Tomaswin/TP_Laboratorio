@@ -50,7 +50,11 @@ public class BancoBO {
 	
 	public void realizarExtraccion(Cuenta cuenta, int extraccion) throws BancoException{
 		if(validarExtraccion(cuenta, extraccion)) {
-			bancoJDBC.realizarExtraccion(cuenta, extraccion);
+			if(mayorCero(extraccion)) {
+				bancoJDBC.realizarExtraccion(cuenta, extraccion);
+			}else {
+				throw new BancoException("No se puede extraer plata negativa");
+			}
 		}
 		else {
 			throw new BancoException("No se puede extraer plata que no tenes");
@@ -58,7 +62,12 @@ public class BancoBO {
 	}
 
 	public void realizarDeposito(Cuenta cuenta, int deposito) throws BancoException{
-		bancoJDBC.realizarDeposito(cuenta, deposito);
+		if(mayorCero(deposito)) {
+			bancoJDBC.realizarDeposito(cuenta, deposito);
+		}else {
+			throw new BancoException("No se puede depositar plata negativa");
+		}
+		
 	}
 
 	
@@ -109,6 +118,15 @@ public class BancoBO {
 
 	public void setLogueado(Usuario logueado){
 	   this.logueado = logueado;
+	}
+	
+	public boolean mayorCero(double dinero) {
+		if(dinero <= 0) {
+			return false;
+		}else {
+			return true;
+		}
+		
 	}
 
 	
