@@ -1,4 +1,4 @@
-package banco.paneles;
+package banco.bo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,41 +6,23 @@ import java.util.List;
 import banco.dao.*;
 import banco.entidades.Cuenta;
 import banco.entidades.Movimiento;
+import banco.entidades.MovimientoCuenta;
+import banco.entidades.MovimientoTarjeta;
 import banco.entidades.Tarjeta;
 import banco.entidades.Usuario;
 import banco.exceptions.BancoException;
 
-public class UsuarioBO {
-	private UsuarioJDBCDao userJDBC;
+public class BancoBO {
+	private BancoJDBCDao bancoJDBC;
 	private Usuario logueado;
-
-	public void crearUsuario(Usuario user) throws BancoException {
-		if (!validarUsuario(user)) {
-			userJDBC.crearUsuario(user);
-		} else {
-			throw new BancoException("Usuario Existente");
-		}
-	}
-
-	public void modificarUsuario(Usuario user) throws BancoException {
-		if (validarUsuario(user)) {
-			userJDBC.modificarUsuario(user);
-		} else {
-			throw new BancoException("Usuario Inexistente");
-		}
-	}
-
-	public void eliminarUsuario(Usuario user) throws BancoException {
-		if (validarUsuario(user)) {
-			userJDBC.eliminarUsuario(user);
-		} else {
-			throw new BancoException("Usuario Inexistente");
-		}
+	
+	public void setBancoJDBC(BancoJDBCDao bancoJDBC) {
+		this.bancoJDBC = bancoJDBC;
 	}
 	
 	public List<Usuario> traerTodos() throws BancoException {
 		List<Usuario> listaUsuarios = new ArrayList<Usuario>();
-		listaUsuarios = userJDBC.traerTodosUsuarios();
+		listaUsuarios = bancoJDBC.traerTodosUsuarios();
 
 		return listaUsuarios;
 	}
@@ -48,7 +30,7 @@ public class UsuarioBO {
 	public List<Cuenta> traerTodasCuentas() throws BancoException {
 		
 		List<Cuenta> listaUsuarios = new ArrayList<Cuenta>();
-		listaUsuarios = userJDBC.traerTodasLasCuentas(logueado);
+		listaUsuarios = bancoJDBC.traerTodasLasCuentas(getLogueado());
 
 		return listaUsuarios;
 	}
@@ -56,19 +38,19 @@ public class UsuarioBO {
 	public List<Tarjeta> traerTodasTarjetas(Cuenta cuenta) throws BancoException {
 		
 		List<Tarjeta> listaTarjetas = new ArrayList<Tarjeta>();
-		listaTarjetas = userJDBC.traerTodasTarjetas(cuenta);
+		listaTarjetas = bancoJDBC.traerTodasTarjetas(cuenta);
 
 		return listaTarjetas;
 	}
 	
 	public Cuenta obtenerDinero(Cuenta cuenta) throws BancoException{
-		Cuenta oCuenta = userJDBC.obtenerDinero(cuenta);
+		Cuenta oCuenta = bancoJDBC.obtenerDinero(cuenta);
 		return oCuenta;
 	}
 	
 	public void realizarExtraccion(Cuenta cuenta, int extraccion) throws BancoException{
 		if(validarExtraccion(cuenta, extraccion)) {
-			userJDBC.realizarExtraccion(cuenta, extraccion);
+			bancoJDBC.realizarExtraccion(cuenta, extraccion);
 		}
 		else {
 			throw new BancoException("No se puede extraer plata que no tenes");
@@ -76,27 +58,23 @@ public class UsuarioBO {
 	}
 
 	public void realizarDeposito(Cuenta cuenta, int deposito) throws BancoException{
-		userJDBC.realizarDeposito(cuenta, deposito);
+		bancoJDBC.realizarDeposito(cuenta, deposito);
 	}
 
 	
 	public boolean validarUsuario(Usuario user) throws BancoException {
 		boolean correcto;
-		correcto = userJDBC.usuarioExistente(user);
+		correcto = bancoJDBC.usuarioExistente(user);
 
 		return correcto;
 	}
 	
 	public void login(Usuario user) throws BancoException {
 		if (validarUsuario(user)) {
-			logueado = user;
+			setLogueado(user);
 		} else {
 			throw new BancoException("Usuario Inexistente");
 		}
-	}
-
-	public void setUserJDBC(UsuarioJDBCDao userJDBC) {
-		this.userJDBC = userJDBC;
 	}
 	
 	public boolean validarExtraccion(Cuenta cuenta, int extraccion) {
@@ -108,14 +86,29 @@ public class UsuarioBO {
 	}
 
 	public void generarMovimiento(Cuenta cuenta, String operacion, int dinero) throws BancoException {
-		userJDBC.generarMovimiento(cuenta, operacion, dinero);
+		bancoJDBC.generarMovimientoCuenta(cuenta, operacion, dinero);
 	}
 	
-	public List<Movimiento> traerMovimientos(Cuenta cuenta) throws BancoException {
-		List<Movimiento> listMov = new ArrayList<Movimiento>();
-		listMov = userJDBC.traerTodosMovimientos(cuenta);
+	public List<MovimientoCuenta> traerMovimientoCuenta(Cuenta cuenta) throws BancoException {
+		List<MovimientoCuenta> listMov = new ArrayList<MovimientoCuenta>();
+		listMov = bancoJDBC.traerTodosMovimientosCuenta(cuenta);
 
 		return listMov;
+	}
+	
+	public List<MovimientoTarjeta> traerMovimientoTarjeta(Tarjeta tarjeta) throws BancoException {
+		List<MovimientoTarjeta> listMov = new ArrayList<MovimientoTarjeta>();
+		listMov = bancoJDBC.traerTodosMovimientosTarjeta(tarjeta);
+
+		return listMov;
+	}
+	
+	public Usuario getLogueado(){
+	   return logueado;
+	}
+
+	public void setLogueado(Usuario logueado){
+	   this.logueado = logueado;
 	}
 
 	

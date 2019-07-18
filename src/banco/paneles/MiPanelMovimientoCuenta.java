@@ -12,32 +12,32 @@ import javax.swing.table.DefaultTableModel;
 
 import banco.entidades.Cuenta;
 import banco.entidades.Movimiento;
+import banco.entidades.MovimientoCuenta;
 import banco.exceptions.BancoException;
 import banco.ui.Handler;
 
 public class MiPanelMovimientoCuenta extends MiPanelGenerico{
-	//Modificar esta vista y la de la tarjeta para que sean genericas que ademas que muestren la tabla tengan botones para deposito/extraccion/ver tarjetas y lo mismo en tarjeta + ver movimientos
-	//Ademas cambiar la funcion de getSelectionModel por que el usuario apreta una y un actionclick del boton mostrar tarjeta + excepciones
-	public MiPanelMovimientoCuenta(String titulo, Handler handler, List<Movimiento> movimiento) throws BancoException {
+	
+	public MiPanelMovimientoCuenta(String titulo, Handler handler, List<MovimientoCuenta> movimiento) throws BancoException {
 		super(handler);		  
 		initUI(titulo, movimiento);
         }
  
-        private void initUI(String titulo, List<Movimiento> movimiento) throws BancoException {		               
+        private void initUI(String titulo, List<MovimientoCuenta> movimiento) throws BancoException {		               
                 Box tableLayout = Box.createHorizontalBox();
                 
-                String col[] = {"Numero cuenta","Operacion", "Dinero"};
+                String col[] = {"Tipo de cuenta", "Numero de cuenta","Operacion", "Dinero"};
 
                 DefaultTableModel tableModel = new DefaultTableModel(col, 0);
                                                           
                 JTable table = new JTable(tableModel);
                 tableLayout.add(table);
                 
-                Object[] rowTittle = {"Numero cuenta","Operacion", "Dinero"};
+                Object[] rowTittle = {"Tipo de cuenta", "Numero de cuenta","Operacion", "Dinero"};
                 tableModel.addRow(rowTittle);
                 
                 for(int i=0; i < movimiento.size(); i++) {
-                	Object[] data = {movimiento.get(i).getNumeroCuenta(), movimiento.get(i).getOperacion(), "$" + movimiento.get(i).getDinero()};
+                	Object[] data = {movimiento.get(i).getTipo(), movimiento.get(i).getNumeroCuenta(), movimiento.get(i).getOperacion(), "$" + movimiento.get(i).getDinero()};
                 	
                     tableModel.addRow(data);
                 }

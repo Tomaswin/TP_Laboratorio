@@ -22,8 +22,7 @@ import banco.ui.Handler;
 
 public class MiPanelMostrarCuenta extends MiPanelGenerico{
 			Cuenta cuentaSeleccionada;
-			//Modificar esta vista y la de la tarjeta para que sean genericas que ademas que muestren la tabla tengan botones para deposito/extraccion/ver tarjetas y lo mismo en tarjeta + ver movimientos
-			//Ademas cambiar la funcion de getSelectionModel por que el usuario apreta una y un actionclick del boton mostrar tarjeta + excepciones
+
 			public MiPanelMostrarCuenta(String titulo, Handler handler, List<Cuenta> cuenta) throws BancoException {
 				super(handler);		  
 				initUI(titulo, cuenta);
@@ -32,18 +31,18 @@ public class MiPanelMostrarCuenta extends MiPanelGenerico{
 		        private void initUI(String titulo, List<Cuenta> cuenta) throws BancoException {		               
 		                Box tableLayout = Box.createHorizontalBox();
 		                
-		                String col[] = {"Dinero","DNI", "numeroCuenta"};
+		                String col[] = {"Tipo", "Numero cuenta","DNI", "Dinero"};
 
 		                DefaultTableModel tableModel = new DefaultTableModel(col, 0);
 		                                                          
 		                JTable table = new JTable(tableModel);
 		                tableLayout.add(table);
 		                
-		                Object[] rowTittle = {"Dinero","DNI", "numeroCuenta"};
+		                Object[] rowTittle = {"Tipo", "Numero cuenta","DNI", "Dinero"};
 		                tableModel.addRow(rowTittle);
 		                
 		                for(int i=0; i < cuenta.size(); i++) {
-		                	Object[] data = { "$" + cuenta.get(i).getDinero(), cuenta.get(i).getDNI(),cuenta.get(i).getNumeroCuenta()};
+		                	Object[] data = { cuenta.get(i).getTipo(), cuenta.get(i).getNumeroCuenta(), cuenta.get(i).getDNI(), "$" + cuenta.get(i).getDinero()};
 		                	
 		                    tableModel.addRow(data);
 		                }
@@ -93,7 +92,7 @@ public class MiPanelMostrarCuenta extends MiPanelGenerico{
 								handler.mostrarPanelExtraccion(cuentaSeleccionada);
 								break;
 							case "Movimientos":
-								handler.mostrarMovimientos(cuentaSeleccionada);
+								handler.mostrarMovimientosCuenta(cuentaSeleccionada);
 								break;
 							case "Ver tarjetas":
 								handler.mostrarTarjeta(cuentaSeleccionada);

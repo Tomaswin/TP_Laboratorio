@@ -7,5 +7,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="C:/Users/Octavio/Desktop/tpLab/TP_Laboratorio/hsqldb.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Tomas Winicki/Desktop/TP_Laboratorio/hsqldb.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

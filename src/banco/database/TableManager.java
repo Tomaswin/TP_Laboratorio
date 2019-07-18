@@ -10,15 +10,18 @@ public class TableManager {
 	public static void createTables() {		
 		ArrayList<String> sql = new ArrayList<String>();
 		
-		String usuarioSql = "CREATE TABLE usuarios (DNI INTEGER IDENTITY, nombre VARCHAR(256), apellido VARCHAR(10), password VARCHAR(256))";
-		String cuentaSql = "CREATE TABLE cuentas (dinero DOUBLE, DNI INTEGER, numerocuenta INTEGER IDENTITY)";
-		String tarjetaSql = "CREATE TABLE tarjetas (numero INTEGER IDENTITY, mes VARCHAR(256), cod INTEGER, total INTEGER, cuenta INTEGER)";
-		String movimientoSql = "CREATE TABLE movimientosCuenta (id INTEGER IDENTITY, numerocuenta INTEGER,  operacion VARCHAR(256), dinero INTEGER)";
+		String usuarioSql = "CREATE TABLE usuario (DNI INTEGER IDENTITY, nombre VARCHAR(256), apellido VARCHAR(10), password VARCHAR(256))";
+		String cuentaSql = "CREATE TABLE cuenta (tipo VARCHAR(256), dinero DOUBLE, DNI INTEGER, numerocuenta INTEGER IDENTITY)";
+		String tarjetaSql = "CREATE TABLE tarjeta (tipo VARCHAR(256), numero INTEGER IDENTITY, mes VARCHAR(256), cod INTEGER, total INTEGER, cuenta INTEGER)";
+		String movimientoCuentaSql = "CREATE TABLE movimientoCuenta (id INTEGER IDENTITY, tipo VARCHAR(256), numerocuenta INTEGER,  operacion VARCHAR(256), dinero INTEGER)";
+		String movimientoTarjetaSql = "CREATE TABLE movimientoTarjeta (id INTEGER IDENTITY, tipo VARCHAR(256), numero INTEGER, operacion VARCHAR(256), dinero INTEGER)";
 		
 		sql.add(usuarioSql);
 		sql.add(cuentaSql);
 		sql.add(tarjetaSql);
-		sql.add(movimientoSql);
+		sql.add(movimientoCuentaSql);
+		sql.add(movimientoTarjetaSql);
+
 		
 		for(int i = 0; i < sql.size(); i++) {
 			generateTable(sql.get(i));
@@ -31,7 +34,7 @@ public class TableManager {
 
 		Connection c = DBManager.connect();
 		
-		String sql = "DROP TABLE usuarios";
+		String sql = "DROP TABLE usuario";
 		
 		try {
 			Statement s = c.createStatement();

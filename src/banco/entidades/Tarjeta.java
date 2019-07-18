@@ -3,13 +3,14 @@ package banco.entidades;
 import java.util.ArrayList;
 
 public class Tarjeta  {
-
+	private String tipo;
 	private int numero;
 	private String mes;
 	private int codigo;
 	private int importeTotal;
 	
-	public Tarjeta(int numero, String mes, int codigo, int importeTotal) {
+	public Tarjeta(String tipo, int numero, String mes, int codigo, int importeTotal) {
+		this.tipo = tipo;
 		this.numero = numero;
 		this.mes = mes;
 		this.codigo = codigo;
@@ -53,6 +54,14 @@ public class Tarjeta  {
 
 	public void setImporteTotal(int importeTotal) {
 		this.importeTotal = importeTotal;
+	}
+	
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
 	}
 	
 }

@@ -1,12 +1,12 @@
 package banco.entidades;
 
 public class Movimiento {
+	private String tipo;
 	private int dinero;
-	private int numeroCuenta;
 	private String operacion;
 	
-	public Movimiento(int numeroCuenta, String operacion, int dinero){
-		this.setNumeroCuenta(numeroCuenta);
+	public Movimiento(String tipo, String operacion, int dinero){
+		this.tipo = tipo;
 		this.operacion = operacion;
 		this.dinero = dinero;
 	}
@@ -27,11 +27,11 @@ public class Movimiento {
 		this.operacion = operacion;
 	}
 
-	public int getNumeroCuenta() {
-		return numeroCuenta;
+	public String getTipo() {
+		return tipo;
 	}
 
-	public void setNumeroCuenta(int numeroCuenta) {
-		this.numeroCuenta = numeroCuenta;
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
 	}
 }

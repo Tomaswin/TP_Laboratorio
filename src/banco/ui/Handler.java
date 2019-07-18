@@ -4,9 +4,12 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
-import banco.dao.UsuarioJDBCDao;
+import banco.bo.BancoBO;
+import banco.dao.BancoJDBCDao;
 import banco.entidades.Cuenta;
 import banco.entidades.Movimiento;
+import banco.entidades.MovimientoCuenta;
+import banco.entidades.MovimientoTarjeta;
 import banco.entidades.Tarjeta;
 import banco.entidades.Usuario;
 import banco.exceptions.BancoException;
@@ -14,33 +17,20 @@ import banco.paneles.*;
 
 public class Handler {
 
-	private UsuarioBO bo;
+	private BancoBO bo;
 	private PrincipalFrame frame;
 
 	public Handler() {
 		frame = new PrincipalFrame(this);
-		bo = new UsuarioBO();
-		bo.setUserJDBC(new UsuarioJDBCDao());
+		bo = new BancoBO();
+		bo.setBancoJDBC(new BancoJDBCDao());
 	}
 
 	public void init() {
 		frame.setVisible(true);
 		mostrarLoginUsuario();
 	}
-
-	public void mostrarAltaUsuario() {
-		frame.cambiarPanel(new MiPanel("", this));
-	}
-	
-	public void mostrarEditarUsuario() {
-		frame.cambiarPanel(new MiPanelEditar("", this));
-	}
-	
-	public void mostrarEliminarUsuario() {
-		frame.cambiarPanel(new MiPanelEliminar("", this));
-	}
-	
-	
+		
 	public void mostrarLoginUsuario(){
 		try {
 			List<Usuario> usuarios = bo.traerTodos();
@@ -51,77 +41,6 @@ public class Handler {
 		}
 	}
 	
-	public void crearUsuario(Usuario user) {
-		try {
-			bo.crearUsuario(user);
-		} catch (BancoException e) {
-			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-			e.printStackTrace();
-		}
-	}
-	
-	public void editarUsuario(Usuario user) {
-		try {
-			bo.modificarUsuario(user);
-		} catch (BancoException e) {
-			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-			e.printStackTrace();
-		}
-	}
-	
-	public void eliminarUsuario(Usuario user) {
-		try {
-			bo.eliminarUsuario(user);
-		} catch (BancoException e) {
-			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-			e.printStackTrace();
-		}
-	}
-
-	
-	
-	public void login(Usuario user) {
-		try {
-			bo.login(user);
-			frame.loginSuccess();
-		} catch (BancoException e) {
-			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-			e.printStackTrace();
-		}
-	}
-
-	public void realizarExtraccion(Cuenta cuenta, int extraccion) {
-		try {
-			bo.realizarExtraccion(cuenta, extraccion);
-		} catch (BancoException e) {
-			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-			e.printStackTrace();
-		}
-		
-		try {
-			bo.generarMovimiento(cuenta, "Extraccion", extraccion);
-		} catch (BancoException e) {
-			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-			e.printStackTrace();
-		}
-	}
-	
-	public void realizarDeposito(Cuenta cuenta, int deposito) {
-		try {
-			bo.realizarDeposito(cuenta, deposito);
-		} catch (BancoException e) {
-			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-			e.printStackTrace();
-		}
-		
-		try {
-			bo.generarMovimiento(cuenta, "Deposito", deposito);
-		} catch (BancoException e) {
-			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-			e.printStackTrace();
-		}
-	}
-
 	
 	public void mostrarTodasCuentas(){
 		try {
@@ -143,21 +62,26 @@ public class Handler {
 		}
 	}
 	
-	public void mostrarMovimientos(Cuenta cuenta) {
+	public void mostrarMovimientosCuenta(Cuenta cuenta) {
 		try {
-			List<Movimiento> mov = bo.traerMovimientos(cuenta);
+			List<MovimientoCuenta> mov = bo.traerMovimientoCuenta(cuenta);
 			frame.cambiarPanel(new MiPanelMovimientoCuenta("", this, mov));
 		} catch (BancoException e) {
 			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 			e.printStackTrace();
 		}
 	}
-
-	public void mostrarMovTarjeta() {
-		// TODO Auto-generated method stub
-		
+	
+	public void mostrarMovimientoTarjeta(Tarjeta tarjeta) {
+		try {
+			List<MovimientoTarjeta> mov = bo.traerMovimientoTarjeta(tarjeta);
+			frame.cambiarPanel(new MiPanelMovimientoTarjeta("", this, mov));
+		} catch (BancoException e) {
+			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+		}
 	}
-
+	
 	public void mostrarPanelExtraccion(Cuenta cuenta) {
 		try {
 			Cuenta oCuenta = bo.obtenerDinero(cuenta);
@@ -180,5 +104,42 @@ public class Handler {
 		
 	}
 	
+	public void login(Usuario user) {
+		try {
+			bo.login(user);
+			frame.loginSuccess();
+		} catch (BancoException e) {
+			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+		}
+	}
+
+	public void realizarExtraccion(Cuenta cuenta, int extraccion) {
+		try {
+			bo.realizarExtraccion(cuenta, extraccion);
+		} catch (BancoException e) {
+			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+		}
+		generarMovimientoCuenta(cuenta, "Extraccion", extraccion);
+	}
 	
+	public void realizarDeposito(Cuenta cuenta, int deposito) {
+		try {
+			bo.realizarDeposito(cuenta, deposito);
+		} catch (BancoException e) {
+			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+		}
+		generarMovimientoCuenta(cuenta, "Deposito", deposito);
+	}
+	
+	public void generarMovimientoCuenta(Cuenta cuenta, String nombreOperacion, int dinero) {
+		try {
+			bo.generarMovimiento(cuenta, nombreOperacion, dinero);
+		} catch (BancoException e) {
+			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+		}
+	}
 }

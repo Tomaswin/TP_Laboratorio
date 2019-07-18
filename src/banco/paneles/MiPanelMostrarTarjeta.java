@@ -27,61 +27,72 @@ import banco.entidades.Usuario;
 import banco.exceptions.BancoException;
 import banco.ui.Handler;
  
-public class MiPanelMostrarTarjeta extends JPanel implements ActionListener {
-	Handler handler;
-	
+public class MiPanelMostrarTarjeta extends MiPanelGenerico{
+	Tarjeta tarjetaSeleccionada;
+
 	public MiPanelMostrarTarjeta(String titulo, Handler handler, List<Tarjeta> tarjeta) throws BancoException {
-		this.handler = handler;		  
+		super(handler);		  
 		initUI(titulo, tarjeta);
         }
  
-        private void initUI(String titulo, List<Tarjeta> tarjeta) throws BancoException {
-                setLayout(new BorderLayout());
-               
+        private void initUI(String titulo, List<Tarjeta> tarjeta) throws BancoException {		               
                 Box tableLayout = Box.createHorizontalBox();
                 
-                String col[] = {"Numero","Mes", "Codigo", "Total"};
+                String col[] = {"Tipo", "Numero", "Mes", "Codigo", "Importe total"};
 
                 DefaultTableModel tableModel = new DefaultTableModel(col, 0);
                                                           
                 JTable table = new JTable(tableModel);
                 tableLayout.add(table);
                 
-                Object[] rowTittle = {"Numero","Mes", "Codigo", "Total"};
+                Object[] rowTittle = {"Tipo", "Numero", "Mes", "Codigo", "Importe total"};
                 tableModel.addRow(rowTittle);
                 
                 for(int i=0; i < tarjeta.size(); i++) {
-                	Object[] data = {tarjeta.get(i).getNumero(), tarjeta.get(i).getMes(),tarjeta.get(i).getCodigo(),
-                			 "$" + tarjeta.get(i).getImporteTotal()};
+                	Object[] data = {tarjeta.get(i).getTipo(), tarjeta.get(i).getNumero(), tarjeta.get(i).getMes(), tarjeta.get(i).getCodigo(), "$" + tarjeta.get(i).getImporteTotal()};
                 	
                     tableModel.addRow(data);
                 }
                 
                 table.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
                     public void valueChanged(ListSelectionEvent event) {
-                    	//handler.mostrarTarjeta(tarjeta.get(table.getSelectedRow() -1));
+                    	if(table.getSelectedRow() - 1 >= 0) {
+                    		tarjetaSeleccionada = tarjeta.get(table.getSelectedRow() -1);
+                    	}else {
+                    		tarjetaSeleccionada = null;
+                    	}
                     }
                 });
-     
-                Box botonera = Box.createHorizontalBox();
-                botonera.add(Box.createHorizontalGlue());
-                botonera.add(Box.createHorizontalStrut(10));
-                JButton cancel = new JButton("Volver");
-                cancel.addActionListener(this);
-                botonera.add(cancel);
                
                 Box vertical = Box.createVerticalBox();
                 vertical.add(Box.createVerticalStrut(50));
                 vertical.add(tableLayout);
-                vertical.add(botonera);
                
                 add(vertical);                                       
         }
-        
+
 		@Override
-		public void actionPerformed(ActionEvent e) {
-			handler.mostrarTodasCuentas();
+		protected ArrayList<String> getButton() {
+			ArrayList<String> fieldName = new ArrayList<String>();
+			fieldName.add("Ver movimientos");
+			return fieldName;
 		}
 
-		
+		@Override
+		protected ArrayList<String> getField() {
+			ArrayList<String> fieldName = new ArrayList<String>();
+			return fieldName;
+			}
+
+
+		@Override
+		protected void actionClickWithParams(String name) {
+			// TODO Auto-generated method stub
+		}
+
+		@Override
+		protected void actionClick() {
+			handler.mostrarMovimientoTarjeta(tarjetaSeleccionada);
+		}
 }
+       
